@@ -1,0 +1,56 @@
+{
+  "description": "Pairs of transactions sharing the SAME decline_reason but different customer_history, used to demonstrate that the reasoning path's output diverges based on context — the specific, checkable claim made in docs/POSITIONING.md, item #1. A pure rules engine (matching decline code -> fixed action) would produce the SAME action for both transactions in each pair. This project's reasoning path is expected to diverge. See tests/integration/test_context_divergence.py for the test that exercises this against the real Claude API.",
+  "pairs": [
+    {
+      "pair_id": "insufficient_funds_isolated_vs_repeat",
+      "shared_decline_reason": "insufficient_funds",
+      "case_a": {
+        "label": "isolated_instance_clean_customer",
+        "customer_history": {
+          "prior_transaction_count": 11,
+          "prior_success_rate": 0.95,
+          "most_recent_decline_reason": null,
+          "account_age_days": 420
+        },
+        "expected_action_class": "retry (same or alt rail)"
+      },
+      "case_b": {
+        "label": "repeat_pattern_same_customer",
+        "customer_history": {
+          "prior_transaction_count": 4,
+          "prior_success_rate": 0.3,
+          "most_recent_decline_reason": "insufficient_funds",
+          "account_age_days": 60
+        },
+        "expected_action_class": "escalate_to_dunning (not a timing issue)"
+      },
+      "why_a_rules_engine_cannot_distinguish_these": "A code-only lookup table keys purely off 'insufficient_funds' and would apply the same fixed rule (e.g. 'wait 3 days, retry once') to both cases, per GR4VY's own documented rule-table behavior. This system is expected to differentiate them using the customer_history field, which no rules-engine lookup considers."
+    },
+    {
+      "pair_id": "bank_timeout_daytime_vs_known_outage_window",
+      "shared_decline_reason": "bank_timeout",
+      "case_a": {
+        "label": "isolated_timeout_normal_hours",
+        "customer_history": {
+          "prior_transaction_count": 6,
+          "prior_success_rate": 1.0,
+          "most_recent_decline_reason": null,
+          "account_age_days": 200
+        },
+        "expected_action_class": "retry_same_rail, short delay"
+      },
+      "case_b": {
+        "label": "timeout_during_suspected_issuer_outage",
+        "customer_history": {
+          "prior_transaction_count": 6,
+          "prior_success_rate": 1.0,
+          "most_recent_decline_reason": null,
+          "account_age_days": 200
+        },
+        "expected_action_class": "retry_alt_rail or delayed batch retry, not immediate same-rail",
+        "note": "This case is distinguished by timing context (failed_at) rather than customer_history alone. See app/agent/prompts/triage_system_prompt.md for how timing is included in the reasoning path's input."
+      },
+      "why_a_rules_engine_cannot_distinguish_these": "A static rule for 'bank_timeout' applies uniformly regardless of whether this specific failure correlates with other recent failures. This system's reasoning path is expected to use timing context to differentiate."
+    }
+  ]
+}

@@ -1,0 +1,4022 @@
+[
+  {
+    "id": "c9d6a63b-ca3c-6f5f-5bb5-c40c03cde2e3",
+    "amount_inr": 11660.43,
+    "decline_reason_raw": "Card Reported Lost Or Stolen",
+    "decline_reason": "card_reported_lost_or_stolen",
+    "customer_id": "synthetic_cust_3ce915e7",
+    "customer_history": {
+      "prior_transaction_count": 0,
+      "prior_success_rate": null,
+      "most_recent_decline_reason": null,
+      "account_age_days": 2,
+      "last_successful_rail": null,
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-26T10:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "hold_for_review",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11660.43,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 50.0,
+        "net_recovered_inr": -58.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.0174,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11427.22,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 50.0,
+        "net_recovered_inr": -60.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.3101,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 10494.39,
+        "recovered_amount_inr": 10494.39,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": 10486.39
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2393,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 9561.55,
+        "recovered_amount_inr": 9561.55,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 9557.55
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "f3f8dea4-7f14-eafa-29f0-ef7c02e7df89",
+    "amount_inr": 1475.04,
+    "decline_reason_raw": "Card Reported Lost Or Stolen",
+    "decline_reason": "card_reported_lost_or_stolen",
+    "customer_id": "synthetic_cust_58c1aad6",
+    "customer_history": {
+      "prior_transaction_count": 7,
+      "prior_success_rate": 0.97,
+      "most_recent_decline_reason": null,
+      "account_age_days": 304,
+      "last_successful_rail": "card",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-19T12:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "hold_for_review",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0539,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 1475.04,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 50.0,
+        "net_recovered_inr": -58.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1066,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 1445.54,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 50.0,
+        "net_recovered_inr": -60.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.289,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 1327.54,
+        "recovered_amount_inr": 1327.54,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 1321.54
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2115,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 1209.53,
+        "recovered_amount_inr": 1209.53,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 1205.53
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "3c9ad14c-ee0c-aeb5-ecfe-db992790cebd",
+    "amount_inr": 4761.53,
+    "decline_reason_raw": "Bank Timeout",
+    "decline_reason": "bank_timeout",
+    "customer_id": "synthetic_cust_dd56cc94",
+    "customer_history": {
+      "prior_transaction_count": 1,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 840,
+      "last_successful_rail": "card",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-02T16:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_same_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.5079,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 4761.53,
+        "recovered_amount_inr": 4761.53,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 4753.53
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.3799,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 4666.3,
+        "recovered_amount_inr": 4666.3,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 4656.3
+      },
+      "hold_for_review": {
+        "success_probability": 0.1536,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 4285.38,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0988,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 3904.45,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "9c07a751-1437-4509-2cd1-586a2b840c67",
+    "amount_inr": 10470.91,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_deef580f",
+    "customer_history": {
+      "prior_transaction_count": 15,
+      "prior_success_rate": 0.96,
+      "most_recent_decline_reason": null,
+      "account_age_days": 162,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-02T05:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.3455,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10470.91,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2752,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10261.49,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.0775,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9423.82,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2379,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8586.15,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "1b2ededb-8fc8-5fc0-83d5-bceb5edbb8ee",
+    "amount_inr": 6350.62,
+    "decline_reason_raw": "Issuer Unavailable",
+    "decline_reason": "issuer_unavailable",
+    "customer_id": "synthetic_cust_51b1943c",
+    "customer_history": {
+      "prior_transaction_count": 5,
+      "prior_success_rate": 0.22,
+      "most_recent_decline_reason": "insufficient_funds",
+      "account_age_days": 25,
+      "last_successful_rail": "card",
+      "recent_retry_count": 2
+    },
+    "failed_at": "2026-08-20T19:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0745,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 6350.62,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 5.0,
+        "net_recovered_inr": -13.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1475,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 6223.61,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.2381,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5715.56,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.107,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5207.51,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "9c4ffb46-71b7-01aa-f836-f5713ccec76c",
+    "amount_inr": 9038.84,
+    "decline_reason_raw": "Card Expired",
+    "decline_reason": "card_expired",
+    "customer_id": "synthetic_cust_48f1096d",
+    "customer_history": {
+      "prior_transaction_count": 1,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 1077,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-07T13:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0695,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9038.84,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.3125,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8858.06,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1699,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8134.96,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.4193,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 7411.85,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "44709848-929e-cc92-4a11-be444aea1b8f",
+    "amount_inr": 2655.69,
+    "decline_reason_raw": "Account Closed",
+    "decline_reason": "account_closed",
+    "customer_id": "synthetic_cust_f3d04ffb",
+    "customer_history": {
+      "prior_transaction_count": 15,
+      "prior_success_rate": 0.98,
+      "most_recent_decline_reason": null,
+      "account_age_days": 274,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-06T22:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.1342,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2655.69,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2167,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2602.58,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2390.12,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0502,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2177.67,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "f0b5156b-b82c-9074-afd5-dea589d7fd6c",
+    "amount_inr": 11838.92,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_bdf070aa",
+    "customer_history": {
+      "prior_transaction_count": 2,
+      "prior_success_rate": 0.23,
+      "most_recent_decline_reason": "insufficient_funds",
+      "account_age_days": 121,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 3
+    },
+    "failed_at": "2026-08-19T14:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11838.92,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 5.0,
+        "net_recovered_inr": -13.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1662,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11602.14,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1406,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10655.03,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2002,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9707.91,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "518b2f21-9cf2-0859-ee6e-2e7253f591dc",
+    "amount_inr": 9116.05,
+    "decline_reason_raw": "Invalid Card Number",
+    "decline_reason": "invalid_card_number",
+    "customer_id": "synthetic_cust_2999bbef",
+    "customer_history": {
+      "prior_transaction_count": 0,
+      "prior_success_rate": null,
+      "most_recent_decline_reason": null,
+      "account_age_days": 1,
+      "last_successful_rail": null,
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-18T03:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9116.05,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8933.73,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1868,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8204.44,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0528,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 7475.16,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "272a6d8e-b512-2df8-75b1-7a55d4262982",
+    "amount_inr": 8084.16,
+    "decline_reason_raw": "Card Expired",
+    "decline_reason": "card_expired",
+    "customer_id": "synthetic_cust_6f7c15ea",
+    "customer_history": {
+      "prior_transaction_count": 1,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 979,
+      "last_successful_rail": "card",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-29T05:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "hold_for_review",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0945,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8084.16,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1809,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 7922.48,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1987,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 7275.74,
+        "recovered_amount_inr": 7275.74,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": 7267.74
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.4853,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 6629.01,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "63725424-82c5-6b21-2430-12dab1850eb8",
+    "amount_inr": 2752.58,
+    "decline_reason_raw": "Bank Timeout",
+    "decline_reason": "bank_timeout",
+    "customer_id": "synthetic_cust_6b11b7cb",
+    "customer_history": {
+      "prior_transaction_count": 16,
+      "prior_success_rate": 0.71,
+      "most_recent_decline_reason": "authentication_failed",
+      "account_age_days": 390,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 2
+    },
+    "failed_at": "2026-08-29T17:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_alt_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.2847,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2752.58,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 5.0,
+        "net_recovered_inr": -13.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.4037,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 2697.53,
+        "recovered_amount_inr": 2697.53,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 2687.53
+      },
+      "hold_for_review": {
+        "success_probability": 0.0761,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2477.32,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0366,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2257.12,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "501ba851-5ee6-8495-3400-29c3ea11905b",
+    "amount_inr": 7099.97,
+    "decline_reason_raw": "Invalid Card Number",
+    "decline_reason": "invalid_card_number",
+    "customer_id": "synthetic_cust_69f753f1",
+    "customer_history": {
+      "prior_transaction_count": 2,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 1194,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-28T16:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0831,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 7099.97,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2115,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 6957.97,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1918,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 6389.97,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0863,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5821.98,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "f512c4c3-b253-d218-6c4a-37ea490617f2",
+    "amount_inr": 2660.57,
+    "decline_reason_raw": "Authentication Failed",
+    "decline_reason": "authentication_failed",
+    "customer_id": "synthetic_cust_bb026576",
+    "customer_history": {
+      "prior_transaction_count": 13,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 75,
+      "last_successful_rail": "card",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-21T17:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_alt_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.2578,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2660.57,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.3983,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 2607.36,
+        "recovered_amount_inr": 2607.36,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 2597.36
+      },
+      "hold_for_review": {
+        "success_probability": 0.2203,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2394.51,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2012,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2181.67,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "532401fc-f758-dce2-0556-daea67b03283",
+    "amount_inr": 6076.05,
+    "decline_reason_raw": "Card Expired",
+    "decline_reason": "card_expired",
+    "customer_id": "synthetic_cust_2bffe17b",
+    "customer_history": {
+      "prior_transaction_count": 3,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 1084,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-02T19:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "escalate_to_dunning",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.1023,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 6076.05,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2293,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5954.53,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.2015,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5468.45,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.4468,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 4982.36,
+        "recovered_amount_inr": 4982.36,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 4978.36
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "7a89cbeb-b807-d78a-b788-f5d1ffe575f6",
+    "amount_inr": 3702.93,
+    "decline_reason_raw": "Card Expired",
+    "decline_reason": "card_expired",
+    "customer_id": "synthetic_cust_8693fd9d",
+    "customer_history": {
+      "prior_transaction_count": 1,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 524,
+      "last_successful_rail": "card",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-22T01:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "escalate_to_dunning",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0532,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 3702.93,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1843,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 3628.87,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.0962,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 3332.64,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.3803,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 3036.4,
+        "recovered_amount_inr": 3036.4,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 3032.4
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "ce000af0-3eb0-5181-7ba2-45884d560a3d",
+    "amount_inr": 14238.44,
+    "decline_reason_raw": "Issuer Unavailable",
+    "decline_reason": "issuer_unavailable",
+    "customer_id": "synthetic_cust_ceae71cf",
+    "customer_history": {
+      "prior_transaction_count": 1,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 429,
+      "last_successful_rail": "card",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-25T14:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_same_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.3818,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 14238.44,
+        "recovered_amount_inr": 14238.44,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 14230.44
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.3787,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 13953.67,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1536,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 12814.6,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.1055,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11675.52,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "c1581092-f335-cba3-513a-7052986f9025",
+    "amount_inr": 2802.3,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_e4347d51",
+    "customer_history": {
+      "prior_transaction_count": 15,
+      "prior_success_rate": 0.99,
+      "most_recent_decline_reason": null,
+      "account_age_days": 169,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-30T16:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_same_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.4022,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 2802.3,
+        "recovered_amount_inr": 2802.3,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 2794.3
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2699,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2746.25,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.0948,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2522.07,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2501,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2297.89,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "797ebe87-98cf-1188-06d2-5913a1173719",
+    "amount_inr": 10689.06,
+    "decline_reason_raw": "Bank Timeout",
+    "decline_reason": "bank_timeout",
+    "customer_id": "synthetic_cust_43f9cd6b",
+    "customer_history": {
+      "prior_transaction_count": 3,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 706,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-13T18:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_same_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.457,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 10689.06,
+        "recovered_amount_inr": 10689.06,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 10681.06
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.4697,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 10475.28,
+        "recovered_amount_inr": 10475.28,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 10465.28
+      },
+      "hold_for_review": {
+        "success_probability": 0.18,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9620.15,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.1579,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8765.03,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "59450186-da01-8d29-6060-b1ebe53e5f4c",
+    "amount_inr": 13690.34,
+    "decline_reason_raw": "Issuer Unavailable",
+    "decline_reason": "issuer_unavailable",
+    "customer_id": "synthetic_cust_7580e4e9",
+    "customer_history": {
+      "prior_transaction_count": 1,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 1199,
+      "last_successful_rail": "card",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-28T14:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.3708,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 13690.34,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.3369,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 13416.53,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.2632,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 12321.31,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.1251,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11226.08,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "812faa38-96f6-1c09-059c-1ba0bbec721d",
+    "amount_inr": 5271.79,
+    "decline_reason_raw": "Card Expired",
+    "decline_reason": "card_expired",
+    "customer_id": "synthetic_cust_2b429596",
+    "customer_history": {
+      "prior_transaction_count": 3,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 745,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-21T21:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "escalate_to_dunning",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0931,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5271.79,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.3338,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5166.35,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1984,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 4744.61,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.4573,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 4322.87,
+        "recovered_amount_inr": 4322.87,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 4318.87
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "22bf18f5-1f65-2a87-333e-e3447dbf4bc1",
+    "amount_inr": 2952.7,
+    "decline_reason_raw": "Bank Timeout",
+    "decline_reason": "bank_timeout",
+    "customer_id": "synthetic_cust_da52d2ee",
+    "customer_history": {
+      "prior_transaction_count": 7,
+      "prior_success_rate": 0.28,
+      "most_recent_decline_reason": "insufficient_funds",
+      "account_age_days": 39,
+      "last_successful_rail": "card",
+      "recent_retry_count": 3
+    },
+    "failed_at": "2026-08-23T02:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.2164,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2952.7,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 5.0,
+        "net_recovered_inr": -13.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1814,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2893.65,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.0636,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2657.43,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0343,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2421.21,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "34ec5264-ad7d-6f81-39a0-f145a5bab050",
+    "amount_inr": 2619.17,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_44e2a94b",
+    "customer_history": {
+      "prior_transaction_count": 18,
+      "prior_success_rate": 0.56,
+      "most_recent_decline_reason": "authentication_failed",
+      "account_age_days": 594,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-12T00:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.3299,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2619.17,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1742,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2566.79,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.0095,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2357.25,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2358,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2147.72,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "4ebfa5c3-cae9-b4a7-2a79-ea680f44704f",
+    "amount_inr": 11859.64,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_9854ce4e",
+    "customer_history": {
+      "prior_transaction_count": 0,
+      "prior_success_rate": null,
+      "most_recent_decline_reason": null,
+      "account_age_days": 2,
+      "last_successful_rail": null,
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-27T16:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "escalate_to_dunning",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.3108,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11859.64,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.0837,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11622.45,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.137,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10673.68,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.1519,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 9724.9,
+        "recovered_amount_inr": 9724.9,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 9720.9
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "084a3c4b-9146-8cdc-f716-4b73c55523ed",
+    "amount_inr": 10049.53,
+    "decline_reason_raw": "Authentication Failed",
+    "decline_reason": "authentication_failed",
+    "customer_id": "synthetic_cust_2e9ce8ff",
+    "customer_history": {
+      "prior_transaction_count": 3,
+      "prior_success_rate": 0.41,
+      "most_recent_decline_reason": "insufficient_funds",
+      "account_age_days": 153,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-08T11:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_alt_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.1454,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10049.53,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.3053,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 9848.54,
+        "recovered_amount_inr": 9848.54,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 9838.54
+      },
+      "hold_for_review": {
+        "success_probability": 0.2902,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9044.58,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.1087,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8240.61,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "a3404f08-b341-91b8-ed65-22b4b5a5f8e6",
+    "amount_inr": 14959.48,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_2c913a7c",
+    "customer_history": {
+      "prior_transaction_count": 0,
+      "prior_success_rate": null,
+      "most_recent_decline_reason": null,
+      "account_age_days": 3,
+      "last_successful_rail": null,
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-30T02:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.3561,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 14959.48,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1401,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 14660.29,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.126,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 13463.53,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.156,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 12266.77,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "c34e9baf-8f1c-b2cc-ceef-9fa8b9a5d4d0",
+    "amount_inr": 13616.5,
+    "decline_reason_raw": "Bank Timeout",
+    "decline_reason": "bank_timeout",
+    "customer_id": "synthetic_cust_e9a1c6d5",
+    "customer_history": {
+      "prior_transaction_count": 0,
+      "prior_success_rate": null,
+      "most_recent_decline_reason": null,
+      "account_age_days": 3,
+      "last_successful_rail": null,
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-29T15:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_same_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.343,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 13616.5,
+        "recovered_amount_inr": 13616.5,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 13608.5
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2704,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 13344.17,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.197,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 12254.85,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0565,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11165.53,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "f63fce41-3a9a-ca5e-1761-32ed069f14f1",
+    "amount_inr": 10392.12,
+    "decline_reason_raw": "Card Expired",
+    "decline_reason": "card_expired",
+    "customer_id": "synthetic_cust_ac9ed156",
+    "customer_history": {
+      "prior_transaction_count": 2,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 849,
+      "last_successful_rail": "card",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-30T20:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0983,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10392.12,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2048,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10184.28,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.2218,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9352.91,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.4581,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8521.54,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "ec1b8ca1-f91e-1d4c-1ff4-9b7889463e85",
+    "amount_inr": 4311.77,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_60e7a113",
+    "customer_history": {
+      "prior_transaction_count": 15,
+      "prior_success_rate": 0.98,
+      "most_recent_decline_reason": null,
+      "account_age_days": 774,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-10T04:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_same_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.4549,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 4311.77,
+        "recovered_amount_inr": 4311.77,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 4303.77
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2511,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 4225.53,
+        "recovered_amount_inr": 4225.53,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 4215.53
+      },
+      "hold_for_review": {
+        "success_probability": 0.0917,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 3880.59,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2669,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 3535.65,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "a56895c6-812a-1f9b-1596-9802b6dd6257",
+    "amount_inr": 6855.51,
+    "decline_reason_raw": "Compliance Block",
+    "decline_reason": "compliance_block",
+    "customer_id": "synthetic_cust_2c2cd22b",
+    "customer_history": {
+      "prior_transaction_count": 12,
+      "prior_success_rate": 0.96,
+      "most_recent_decline_reason": null,
+      "account_age_days": 453,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-25T09:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_alt_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.1182,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 6855.51,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 50.0,
+        "net_recovered_inr": -58.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1771,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 6718.4,
+        "recovered_amount_inr": 6718.4,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 50.0,
+        "net_recovered_inr": 6658.4
+      },
+      "hold_for_review": {
+        "success_probability": 0.2574,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 6169.96,
+        "recovered_amount_inr": 6169.96,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": 6161.96
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0979,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5621.52,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "431e930f-0387-f74d-1149-d096965d744f",
+    "amount_inr": 14022.02,
+    "decline_reason_raw": "Authentication Failed",
+    "decline_reason": "authentication_failed",
+    "customer_id": "synthetic_cust_373aedf8",
+    "customer_history": {
+      "prior_transaction_count": 1,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 940,
+      "last_successful_rail": "card",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-06T15:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "escalate_to_dunning",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.2464,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 14022.02,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.3405,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 13741.58,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.3107,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 12619.82,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2085,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 11498.06,
+        "recovered_amount_inr": 11498.06,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 11494.06
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "f7c0d5f7-69a5-3b4f-8ff8-869d0ec0713d",
+    "amount_inr": 6361.02,
+    "decline_reason_raw": "Issuer Unavailable",
+    "decline_reason": "issuer_unavailable",
+    "customer_id": "synthetic_cust_6aa0426d",
+    "customer_history": {
+      "prior_transaction_count": 19,
+      "prior_success_rate": 0.52,
+      "most_recent_decline_reason": "authentication_failed",
+      "account_age_days": 420,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 2
+    },
+    "failed_at": "2026-08-07T08:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_same_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.186,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 6361.02,
+        "recovered_amount_inr": 6361.02,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 5.0,
+        "net_recovered_inr": 6348.02
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.3546,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 6233.8,
+        "recovered_amount_inr": 6233.8,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 6223.8
+      },
+      "hold_for_review": {
+        "success_probability": 0.177,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5724.92,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0073,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5216.04,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "8b621d41-5e09-a9ee-af88-bdecfb1e143b",
+    "amount_inr": 9892.5,
+    "decline_reason_raw": "Bank Timeout",
+    "decline_reason": "bank_timeout",
+    "customer_id": "synthetic_cust_e6d5901d",
+    "customer_history": {
+      "prior_transaction_count": 2,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 1001,
+      "last_successful_rail": "card",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-21T21:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.4739,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9892.5,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.3836,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9694.65,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1561,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8903.25,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0783,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8111.85,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "14f573d0-c991-2032-df85-c77798874bfe",
+    "amount_inr": 2466.3,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_86879aa9",
+    "customer_history": {
+      "prior_transaction_count": 4,
+      "prior_success_rate": 0.38,
+      "most_recent_decline_reason": "insufficient_funds",
+      "account_age_days": 66,
+      "last_successful_rail": "card",
+      "recent_retry_count": 2
+    },
+    "failed_at": "2026-08-26T20:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0448,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2466.3,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 5.0,
+        "net_recovered_inr": -13.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2495,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2416.97,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1362,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2219.67,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2914,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2022.37,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "4d15f7d8-0261-c87a-a15c-159aaf8ca888",
+    "amount_inr": 9996.82,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_6bbe3b5a",
+    "customer_history": {
+      "prior_transaction_count": 9,
+      "prior_success_rate": 0.99,
+      "most_recent_decline_reason": null,
+      "account_age_days": 321,
+      "last_successful_rail": "card",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-28T21:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_same_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.4403,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 9996.82,
+        "recovered_amount_inr": 9996.82,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 9988.82
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1739,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9796.88,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1248,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8997.14,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2542,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 8197.39,
+        "recovered_amount_inr": 8197.39,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 8193.39
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "2167c35e-ce73-34f2-3393-2b6c9d37efb6",
+    "amount_inr": 12582.95,
+    "decline_reason_raw": "Authentication Failed",
+    "decline_reason": "authentication_failed",
+    "customer_id": "synthetic_cust_573bfc17",
+    "customer_history": {
+      "prior_transaction_count": 0,
+      "prior_success_rate": null,
+      "most_recent_decline_reason": null,
+      "account_age_days": 1,
+      "last_successful_rail": null,
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-22T00:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_alt_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.1651,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 12582.95,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1946,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 12331.29,
+        "recovered_amount_inr": 12331.29,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 12321.29
+      },
+      "hold_for_review": {
+        "success_probability": 0.3122,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 11324.66,
+        "recovered_amount_inr": 11324.66,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": 11316.66
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0974,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10318.02,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "5876fd09-f1fa-f665-7115-33f312e89d10",
+    "amount_inr": 13709.78,
+    "decline_reason_raw": "Bank Timeout",
+    "decline_reason": "bank_timeout",
+    "customer_id": "synthetic_cust_fcd6bdca",
+    "customer_history": {
+      "prior_transaction_count": 0,
+      "prior_success_rate": null,
+      "most_recent_decline_reason": null,
+      "account_age_days": 3,
+      "last_successful_rail": null,
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-07T02:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.3979,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 13709.78,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.3051,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 13435.58,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1879,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 12338.8,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0345,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11242.02,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "37c3b3c9-65d0-b517-88d0-0abdcbb18c79",
+    "amount_inr": 14263.71,
+    "decline_reason_raw": "Bank Timeout",
+    "decline_reason": "bank_timeout",
+    "customer_id": "synthetic_cust_f7d7465d",
+    "customer_history": {
+      "prior_transaction_count": 9,
+      "prior_success_rate": 0.95,
+      "most_recent_decline_reason": null,
+      "account_age_days": 344,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-14T23:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_alt_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.5398,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 14263.71,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.5317,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 13978.44,
+        "recovered_amount_inr": 13978.44,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 13968.44
+      },
+      "hold_for_review": {
+        "success_probability": 0.1967,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 12837.34,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.1337,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11696.24,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "9ce7eed1-fcdf-e961-e45e-2ad08eefa5dd",
+    "amount_inr": 7882.19,
+    "decline_reason_raw": "Bank Timeout",
+    "decline_reason": "bank_timeout",
+    "customer_id": "synthetic_cust_0df80b89",
+    "customer_history": {
+      "prior_transaction_count": 3,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 990,
+      "last_successful_rail": "card",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-30T08:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_same_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.4841,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 7882.19,
+        "recovered_amount_inr": 7882.19,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 7874.19
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.4294,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 7724.55,
+        "recovered_amount_inr": 7724.55,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 7714.55
+      },
+      "hold_for_review": {
+        "success_probability": 0.1715,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 7093.97,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0962,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 6463.4,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "b6ca1127-e9f8-7970-cd98-f9e28d888beb",
+    "amount_inr": 11163.28,
+    "decline_reason_raw": "Card Expired",
+    "decline_reason": "card_expired",
+    "customer_id": "synthetic_cust_bd9c4693",
+    "customer_history": {
+      "prior_transaction_count": 3,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 1140,
+      "last_successful_rail": "card",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-01T02:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0553,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11163.28,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1693,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10940.01,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.146,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10046.95,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.4817,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9153.89,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "f6ee5cdb-2d79-a2d1-506e-50c77aa061e9",
+    "amount_inr": 5821.75,
+    "decline_reason_raw": "Issuer Unavailable",
+    "decline_reason": "issuer_unavailable",
+    "customer_id": "synthetic_cust_65f30779",
+    "customer_history": {
+      "prior_transaction_count": 7,
+      "prior_success_rate": 0.55,
+      "most_recent_decline_reason": "bank_timeout",
+      "account_age_days": 435,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 2
+    },
+    "failed_at": "2026-08-15T01:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.2728,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5821.75,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 5.0,
+        "net_recovered_inr": -13.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.3888,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5705.31,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1713,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5239.57,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0624,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 4773.84,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "75424646-4d37-a539-857d-d3b3a8addf36",
+    "amount_inr": 11235.59,
+    "decline_reason_raw": "Authentication Failed",
+    "decline_reason": "authentication_failed",
+    "customer_id": "synthetic_cust_a4b1f991",
+    "customer_history": {
+      "prior_transaction_count": 5,
+      "prior_success_rate": 0.93,
+      "most_recent_decline_reason": null,
+      "account_age_days": 189,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-21T07:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.2538,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11235.59,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.4412,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11010.88,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.3166,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10112.03,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.1773,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9213.18,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "637e4b01-22ba-e10e-899c-a782e3236d1a",
+    "amount_inr": 1134.68,
+    "decline_reason_raw": "Issuer Unavailable",
+    "decline_reason": "issuer_unavailable",
+    "customer_id": "synthetic_cust_7421ff46",
+    "customer_history": {
+      "prior_transaction_count": 4,
+      "prior_success_rate": 0.72,
+      "most_recent_decline_reason": null,
+      "account_age_days": 365,
+      "last_successful_rail": "card",
+      "recent_retry_count": 2
+    },
+    "failed_at": "2026-08-20T19:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_alt_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.2591,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 1134.68,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 5.0,
+        "net_recovered_inr": -13.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.259,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 1111.99,
+        "recovered_amount_inr": 1111.99,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 1101.99
+      },
+      "hold_for_review": {
+        "success_probability": 0.1936,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 1021.21,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0491,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 930.44,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "7e8f8095-624c-69b6-b244-45a7b7e58481",
+    "amount_inr": 3523.91,
+    "decline_reason_raw": "Authentication Failed",
+    "decline_reason": "authentication_failed",
+    "customer_id": "synthetic_cust_664fa663",
+    "customer_history": {
+      "prior_transaction_count": 2,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 495,
+      "last_successful_rail": "card",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-09T11:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_same_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.2177,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 3523.91,
+        "recovered_amount_inr": 3523.91,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 3515.91
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.4081,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 3453.43,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.3122,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 3171.52,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.1963,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2889.61,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "885f6e66-c2b6-d2c5-fa5d-310011b7e948",
+    "amount_inr": 487.28,
+    "decline_reason_raw": "Card Expired",
+    "decline_reason": "card_expired",
+    "customer_id": "synthetic_cust_c40db9b4",
+    "customer_history": {
+      "prior_transaction_count": 1,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 1013,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-16T11:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_alt_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.1554,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 487.28,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2569,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 477.53,
+        "recovered_amount_inr": 477.53,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 467.53
+      },
+      "hold_for_review": {
+        "success_probability": 0.1054,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 438.55,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.3803,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 399.57,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "8dcdcd03-969b-6662-0562-8059568cc69b",
+    "amount_inr": 11377.68,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_3ae8cc93",
+    "customer_history": {
+      "prior_transaction_count": 9,
+      "prior_success_rate": 0.59,
+      "most_recent_decline_reason": null,
+      "account_age_days": 463,
+      "last_successful_rail": "card",
+      "recent_retry_count": 2
+    },
+    "failed_at": "2026-08-30T10:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.1641,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11377.68,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 5.0,
+        "net_recovered_inr": -13.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1794,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11150.13,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1626,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10239.91,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.1345,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9329.7,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "0e3e25f2-cf06-71c7-720b-274b82a7f586",
+    "amount_inr": 13562.65,
+    "decline_reason_raw": "Bank Timeout",
+    "decline_reason": "bank_timeout",
+    "customer_id": "synthetic_cust_741423b5",
+    "customer_history": {
+      "prior_transaction_count": 2,
+      "prior_success_rate": 0.48,
+      "most_recent_decline_reason": "insufficient_funds",
+      "account_age_days": 38,
+      "last_successful_rail": "card",
+      "recent_retry_count": 3
+    },
+    "failed_at": "2026-08-09T15:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_same_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.2687,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 13562.65,
+        "recovered_amount_inr": 13562.65,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 5.0,
+        "net_recovered_inr": 13549.65
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2894,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 13291.4,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1439,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 12206.39,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.07,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11121.37,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "a2611b8d-9620-bee6-6406-face53a5e850",
+    "amount_inr": 10586.5,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_c362a810",
+    "customer_history": {
+      "prior_transaction_count": 15,
+      "prior_success_rate": 0.94,
+      "most_recent_decline_reason": null,
+      "account_age_days": 353,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-04T12:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_alt_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.4169,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10586.5,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2583,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 10374.77,
+        "recovered_amount_inr": 10374.77,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 10364.77
+      },
+      "hold_for_review": {
+        "success_probability": 0.1195,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9527.85,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2869,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 8680.93,
+        "recovered_amount_inr": 8680.93,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 8676.93
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "15b52908-a8aa-7158-2b70-e525bc67f831",
+    "amount_inr": 4445.61,
+    "decline_reason_raw": "Bank Timeout",
+    "decline_reason": "bank_timeout",
+    "customer_id": "synthetic_cust_48a639d0",
+    "customer_history": {
+      "prior_transaction_count": 9,
+      "prior_success_rate": 0.72,
+      "most_recent_decline_reason": "authentication_failed",
+      "account_age_days": 445,
+      "last_successful_rail": "card",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-19T08:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.3943,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 4445.61,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2887,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 4356.7,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1411,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 4001.05,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0952,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 3645.4,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "c4134dc2-c5c5-ae8a-be15-ad1290ce77e9",
+    "amount_inr": 12630.24,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_7eccdaf4",
+    "customer_history": {
+      "prior_transaction_count": 20,
+      "prior_success_rate": 0.73,
+      "most_recent_decline_reason": "authentication_failed",
+      "account_age_days": 533,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 2
+    },
+    "failed_at": "2026-08-21T20:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_alt_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.1601,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 12630.24,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 5.0,
+        "net_recovered_inr": -13.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2355,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 12377.64,
+        "recovered_amount_inr": 12377.64,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 12367.64
+      },
+      "hold_for_review": {
+        "success_probability": 0.1139,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11367.22,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.1546,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10356.8,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "6334fa2a-8b4b-d7e7-a451-5ae01754bf08",
+    "amount_inr": 1634.5,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_2f546033",
+    "customer_history": {
+      "prior_transaction_count": 2,
+      "prior_success_rate": 0.33,
+      "most_recent_decline_reason": "insufficient_funds",
+      "account_age_days": 85,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-09T19:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0205,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 1634.5,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 5.0,
+        "net_recovered_inr": -13.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1298,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 1601.81,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.077,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 1471.05,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2587,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 1340.29,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "05000bc6-b20d-cb6e-f231-1f1795863a76",
+    "amount_inr": 5868.31,
+    "decline_reason_raw": "Bank Timeout",
+    "decline_reason": "bank_timeout",
+    "customer_id": "synthetic_cust_db52ca58",
+    "customer_history": {
+      "prior_transaction_count": 1,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 541,
+      "last_successful_rail": "card",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-07T12:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_same_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.4848,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 5868.31,
+        "recovered_amount_inr": 5868.31,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 5860.31
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.3989,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5750.94,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1799,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 5281.48,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.1004,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 4812.01,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "09a85dc5-0131-ff3b-6221-06707a36e788",
+    "amount_inr": 11465.42,
+    "decline_reason_raw": "Some Unmapped Bank Specific Code 47B",
+    "decline_reason": "some_unmapped_bank_specific_code_47B",
+    "customer_id": "synthetic_cust_88a5fa0d",
+    "customer_history": {
+      "prior_transaction_count": 7,
+      "prior_success_rate": 0.22,
+      "most_recent_decline_reason": "insufficient_funds",
+      "account_age_days": 125,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-08T04:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11465.42,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1142,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 11236.11,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.2855,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10318.88,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0615,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9401.64,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "88bd13d1-b540-b30e-039f-3a254d6168bd",
+    "amount_inr": 3401.71,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_2067bdac",
+    "customer_history": {
+      "prior_transaction_count": 14,
+      "prior_success_rate": 0.95,
+      "most_recent_decline_reason": null,
+      "account_age_days": 766,
+      "last_successful_rail": "card",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-21T15:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.3732,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 3401.71,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2512,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 3333.68,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1577,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 3061.54,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2055,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 2789.4,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "961d33ba-3508-43f0-8de0-8fc2c3e15a85",
+    "amount_inr": 1555.86,
+    "decline_reason_raw": "Compliance Block",
+    "decline_reason": "compliance_block",
+    "customer_id": "synthetic_cust_3748967f",
+    "customer_history": {
+      "prior_transaction_count": 2,
+      "prior_success_rate": 0.32,
+      "most_recent_decline_reason": "insufficient_funds",
+      "account_age_days": 58,
+      "last_successful_rail": "card",
+      "recent_retry_count": 2
+    },
+    "failed_at": "2026-08-10T01:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "hold_for_review",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 1555.86,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 50.0,
+        "net_recovered_inr": -58.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 1524.74,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 50.0,
+        "net_recovered_inr": -60.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1592,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 1400.27,
+        "recovered_amount_inr": 1400.27,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 1394.27
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0077,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 1275.81,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "5a057c11-4ffc-a6b1-99b4-79d449a214ae",
+    "amount_inr": 8879.27,
+    "decline_reason_raw": "Card Reported Lost Or Stolen",
+    "decline_reason": "card_reported_lost_or_stolen",
+    "customer_id": "synthetic_cust_1a85910d",
+    "customer_history": {
+      "prior_transaction_count": 9,
+      "prior_success_rate": 0.91,
+      "most_recent_decline_reason": null,
+      "account_age_days": 441,
+      "last_successful_rail": "card",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-24T23:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "escalate_to_dunning",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.1074,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8879.27,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 50.0,
+        "net_recovered_inr": -58.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1493,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8701.68,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 50.0,
+        "net_recovered_inr": -60.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.3429,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 7991.34,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.3199,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 7281.0,
+        "recovered_amount_inr": 7281.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 7277.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "a508dc95-13a4-a492-497d-e16dd4ea120a",
+    "amount_inr": 6707.93,
+    "decline_reason_raw": "Account Closed",
+    "decline_reason": "account_closed",
+    "customer_id": "synthetic_cust_dd3f7d7e",
+    "customer_history": {
+      "prior_transaction_count": 2,
+      "prior_success_rate": 1.0,
+      "most_recent_decline_reason": null,
+      "account_age_days": 1042,
+      "last_successful_rail": "upi",
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-21T00:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_alt_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.0931,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 6707.93,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.153,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 6573.77,
+        "recovered_amount_inr": 6573.77,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 6563.77
+      },
+      "hold_for_review": {
+        "success_probability": 0.0509,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 6037.14,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0842,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 5500.5,
+        "recovered_amount_inr": 5500.5,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 5496.5
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "4a73b0bf-f2ce-7eeb-4c56-fb8f0bb432b3",
+    "amount_inr": 10215.55,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_74b79620",
+    "customer_history": {
+      "prior_transaction_count": 2,
+      "prior_success_rate": 0.47,
+      "most_recent_decline_reason": "insufficient_funds",
+      "account_age_days": 145,
+      "last_successful_rail": "card",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-27T17:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "escalate_to_dunning",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.188,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10215.55,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 5.0,
+        "net_recovered_inr": -13.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2452,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 10011.24,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.1223,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 9193.99,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2367,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 8376.75,
+        "recovered_amount_inr": 8376.75,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 8372.75
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "8a14be62-295b-4715-c333-e8615fb8d16c",
+    "amount_inr": 247.03,
+    "decline_reason_raw": "Bank Timeout",
+    "decline_reason": "bank_timeout",
+    "customer_id": "synthetic_cust_f4188f3f",
+    "customer_history": {
+      "prior_transaction_count": 0,
+      "prior_success_rate": null,
+      "most_recent_decline_reason": null,
+      "account_age_days": 3,
+      "last_successful_rail": null,
+      "recent_retry_count": 0
+    },
+    "failed_at": "2026-08-12T05:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "retry_alt_rail",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.4866,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 247.03,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.3109,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 242.09,
+        "recovered_amount_inr": 242.09,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 232.09
+      },
+      "hold_for_review": {
+        "success_probability": 0.005,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 222.33,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0609,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 202.56,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "473bd358-610e-6a64-e130-1617c2dff335",
+    "amount_inr": 8959.6,
+    "decline_reason_raw": "Issuer Unavailable",
+    "decline_reason": "issuer_unavailable",
+    "customer_id": "synthetic_cust_c083b73a",
+    "customer_history": {
+      "prior_transaction_count": 9,
+      "prior_success_rate": 0.79,
+      "most_recent_decline_reason": "bank_timeout",
+      "account_age_days": 576,
+      "last_successful_rail": "card",
+      "recent_retry_count": 1
+    },
+    "failed_at": "2026-08-29T06:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "no_action",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.2533,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8959.6,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -8.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.2263,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8780.41,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.156,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 8063.64,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 2.0,
+        "net_recovered_inr": -8.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.0654,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 7346.87,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -4.0
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  },
+  {
+    "id": "cb7b0b3a-8b2d-158a-cd5a-e324fe7c80e9",
+    "amount_inr": 4566.85,
+    "decline_reason_raw": "Insufficient Funds",
+    "decline_reason": "insufficient_funds",
+    "customer_id": "synthetic_cust_04ffeab2",
+    "customer_history": {
+      "prior_transaction_count": 5,
+      "prior_success_rate": 0.47,
+      "most_recent_decline_reason": "insufficient_funds",
+      "account_age_days": 18,
+      "last_successful_rail": "card",
+      "recent_retry_count": 3
+    },
+    "failed_at": "2026-08-18T13:00:00",
+    "is_synthetic": true,
+    "ground_truth_label": "escalate_to_dunning",
+    "action_outcomes": {
+      "retry_same_rail": {
+        "success_probability": 0.1059,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 4566.85,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 8.0,
+        "risk_penalty_inr": 5.0,
+        "net_recovered_inr": -13.0
+      },
+      "retry_alt_rail": {
+        "success_probability": 0.1505,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 4475.51,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 10.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -10.0
+      },
+      "hold_for_review": {
+        "success_probability": 0.0903,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 4110.17,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 6.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": -6.0
+      },
+      "escalate_to_dunning": {
+        "success_probability": 0.2957,
+        "recovered": true,
+        "recovery_amount_if_success_inr": 3744.82,
+        "recovered_amount_inr": 3744.82,
+        "action_cost_inr": 4.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 3740.82
+      },
+      "no_action": {
+        "success_probability": 0.0,
+        "recovered": false,
+        "recovery_amount_if_success_inr": 0.0,
+        "recovered_amount_inr": 0.0,
+        "action_cost_inr": 0.0,
+        "risk_penalty_inr": 0.0,
+        "net_recovered_inr": 0.0
+      }
+    },
+    "generator_seed": 42,
+    "data_split": "holdout"
+  }
+]

@@ -1,0 +1,773 @@
+{
+  "generated_at": "2026-09-04T15:43:31.025599",
+  "evaluation_version": "comparable_action_economics_v3",
+  "canonical_seed": 42,
+  "holdout_set_size": 60,
+  "policy_definitions": {
+    "retry_all_same_rail": "Retries every holdout payment on the same rail.",
+    "fixed_rule_policy": "Uses FAST_PATH_TABLE where defined; otherwise retries same rail.",
+    "recovr": "Existing calibrated economics scoring selects an allowed action; no hidden outcome is supplied."
+  },
+  "methodology": {
+    "unconstrained": "No spend budget override.",
+    "constrained": "Every policy is processed in the identical holdout order under the same action-cost budget. Over-budget actions become hold_for_review.",
+    "expected_regret": "Best hidden conditional expected net value minus the selected action's hidden conditional expected net value. Realized regret remains separate and uses sampled realized net values."
+  },
+  "unconstrained": {
+    "retry_all_same_rail": {
+      "transaction_count": 60,
+      "total_amount_at_risk_inr": 462701.13,
+      "gross_recovered_inr": 97614.5,
+      "recovery_rate_by_inr": 0.211,
+      "recovery_rate_by_transaction": 0.2,
+      "action_cost_inr": 480.0,
+      "risk_penalty_inr": 320.0,
+      "net_recovery_inr": 96814.5,
+      "true_expected_net_value_inr": 111171.82,
+      "model_expected_net_value_inr": 0,
+      "expected_regret_inr": 43600.71,
+      "realized_regret_inr": 153268.45,
+      "opportunity_loss_inr": 153268.45,
+      "unnecessary_retry_count": 48,
+      "missed_recovery_value_inr": 153268.45,
+      "held_count": 0,
+      "action_distribution": {
+        "retry_same_rail": 60,
+        "retry_alt_rail": 0,
+        "hold_for_review": 0,
+        "escalate_to_dunning": 0,
+        "no_action": 0
+      }
+    },
+    "fixed_rule_policy": {
+      "transaction_count": 60,
+      "total_amount_at_risk_inr": 462701.13,
+      "gross_recovered_inr": 135578.44,
+      "recovery_rate_by_inr": 0.293,
+      "recovery_rate_by_transaction": 0.3333,
+      "action_cost_inr": 400.0,
+      "risk_penalty_inr": 72.0,
+      "net_recovery_inr": 135106.44,
+      "true_expected_net_value_inr": 130501.16,
+      "model_expected_net_value_inr": 0,
+      "expected_regret_inr": 24271.37,
+      "realized_regret_inr": 114976.51,
+      "opportunity_loss_inr": 114976.51,
+      "unnecessary_retry_count": 31,
+      "missed_recovery_value_inr": 114976.51,
+      "held_count": 0,
+      "action_distribution": {
+        "retry_same_rail": 43,
+        "retry_alt_rail": 0,
+        "hold_for_review": 2,
+        "escalate_to_dunning": 11,
+        "no_action": 4
+      }
+    },
+    "recovr": {
+      "transaction_count": 60,
+      "total_amount_at_risk_inr": 462701.13,
+      "gross_recovered_inr": 156659.86,
+      "recovery_rate_by_inr": 0.3386,
+      "recovery_rate_by_transaction": 0.4,
+      "action_cost_inr": 462.0,
+      "risk_penalty_inr": 14.0,
+      "net_recovery_inr": 156183.86,
+      "true_expected_net_value_inr": 143820.18,
+      "model_expected_net_value_inr": 153607.36,
+      "expected_regret_inr": 10952.35,
+      "realized_regret_inr": 93899.09,
+      "opportunity_loss_inr": 93899.09,
+      "unnecessary_retry_count": 23,
+      "missed_recovery_value_inr": 93899.09,
+      "held_count": 0,
+      "action_distribution": {
+        "retry_same_rail": 14,
+        "retry_alt_rail": 25,
+        "hold_for_review": 8,
+        "escalate_to_dunning": 13,
+        "no_action": 0
+      }
+    }
+  },
+  "constrained": {
+    "retry_all_same_rail": {
+      "transaction_count": 60,
+      "total_amount_at_risk_inr": 462701.13,
+      "gross_recovered_inr": 97614.5,
+      "recovery_rate_by_inr": 0.211,
+      "recovery_rate_by_transaction": 0.2,
+      "action_cost_inr": 480.0,
+      "risk_penalty_inr": 320.0,
+      "net_recovery_inr": 96814.5,
+      "true_expected_net_value_inr": 111171.82,
+      "model_expected_net_value_inr": 0,
+      "expected_regret_inr": 43600.71,
+      "realized_regret_inr": 153268.45,
+      "opportunity_loss_inr": 153268.45,
+      "unnecessary_retry_count": 48,
+      "missed_recovery_value_inr": 153268.45,
+      "held_count": 0,
+      "action_distribution": {
+        "retry_same_rail": 60,
+        "retry_alt_rail": 0,
+        "hold_for_review": 0,
+        "escalate_to_dunning": 0,
+        "no_action": 0
+      }
+    },
+    "fixed_rule_policy": {
+      "transaction_count": 60,
+      "total_amount_at_risk_inr": 462701.13,
+      "gross_recovered_inr": 135578.44,
+      "recovery_rate_by_inr": 0.293,
+      "recovery_rate_by_transaction": 0.3333,
+      "action_cost_inr": 400.0,
+      "risk_penalty_inr": 72.0,
+      "net_recovery_inr": 135106.44,
+      "true_expected_net_value_inr": 130501.16,
+      "model_expected_net_value_inr": 0,
+      "expected_regret_inr": 24271.37,
+      "realized_regret_inr": 114976.51,
+      "opportunity_loss_inr": 114976.51,
+      "unnecessary_retry_count": 31,
+      "missed_recovery_value_inr": 114976.51,
+      "held_count": 0,
+      "action_distribution": {
+        "retry_same_rail": 43,
+        "retry_alt_rail": 0,
+        "hold_for_review": 2,
+        "escalate_to_dunning": 11,
+        "no_action": 4
+      }
+    },
+    "recovr": {
+      "transaction_count": 60,
+      "total_amount_at_risk_inr": 462701.13,
+      "gross_recovered_inr": 156659.86,
+      "recovery_rate_by_inr": 0.3386,
+      "recovery_rate_by_transaction": 0.4,
+      "action_cost_inr": 462.0,
+      "risk_penalty_inr": 14.0,
+      "net_recovery_inr": 156183.86,
+      "true_expected_net_value_inr": 143820.18,
+      "model_expected_net_value_inr": 153607.36,
+      "expected_regret_inr": 10952.35,
+      "realized_regret_inr": 93899.09,
+      "opportunity_loss_inr": 93899.09,
+      "unnecessary_retry_count": 23,
+      "missed_recovery_value_inr": 93899.09,
+      "held_count": 0,
+      "action_distribution": {
+        "retry_same_rail": 14,
+        "retry_alt_rail": 25,
+        "hold_for_review": 8,
+        "escalate_to_dunning": 13,
+        "no_action": 0
+      }
+    }
+  },
+  "incremental_net_recovery": {
+    "unconstrained": {
+      "vs_retry_all": {
+        "inr": 59369.36,
+        "percent_vs_baseline": 61.32
+      },
+      "vs_fixed_rule": {
+        "inr": 21077.42,
+        "percent_vs_baseline": 15.6
+      }
+    },
+    "constrained": {
+      "vs_retry_all": {
+        "inr": 59369.36,
+        "percent_vs_baseline": 61.32
+      },
+      "vs_fixed_rule": {
+        "inr": 21077.42,
+        "percent_vs_baseline": 15.6
+      }
+    }
+  },
+  "multi_seed_robustness": {
+    "retry_all_same_rail": {
+      "seeds": [
+        42,
+        7,
+        19,
+        73,
+        101
+      ],
+      "mean_net_recovery_inr": 94164.8,
+      "stddev_net_recovery_inr": 11914.28,
+      "mean_expected_regret_inr": 48001.9,
+      "stddev_expected_regret_inr": 7426.67,
+      "mean_recovery_rate_by_inr": 0.2132,
+      "per_seed": [
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 462701.13,
+          "gross_recovered_inr": 97614.5,
+          "recovery_rate_by_inr": 0.211,
+          "recovery_rate_by_transaction": 0.2,
+          "action_cost_inr": 480.0,
+          "risk_penalty_inr": 320.0,
+          "net_recovery_inr": 96814.5,
+          "true_expected_net_value_inr": 111171.82,
+          "model_expected_net_value_inr": 0,
+          "expected_regret_inr": 43600.71,
+          "realized_regret_inr": 153268.45,
+          "opportunity_loss_inr": 153268.45,
+          "unnecessary_retry_count": 48,
+          "missed_recovery_value_inr": 153268.45,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 60,
+            "retry_alt_rail": 0,
+            "hold_for_review": 0,
+            "escalate_to_dunning": 0,
+            "no_action": 0
+          }
+        },
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 465786.36,
+          "gross_recovered_inr": 79691.51,
+          "recovery_rate_by_inr": 0.1711,
+          "recovery_rate_by_transaction": 0.1833,
+          "action_cost_inr": 480.0,
+          "risk_penalty_inr": 275.0,
+          "net_recovery_inr": 78936.51,
+          "true_expected_net_value_inr": 85990.27,
+          "model_expected_net_value_inr": 0,
+          "expected_regret_inr": 59773.31,
+          "realized_regret_inr": 180936.22,
+          "opportunity_loss_inr": 180936.22,
+          "unnecessary_retry_count": 49,
+          "missed_recovery_value_inr": 180936.22,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 60,
+            "retry_alt_rail": 0,
+            "hold_for_review": 0,
+            "escalate_to_dunning": 0,
+            "no_action": 0
+          }
+        },
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 420217.04,
+          "gross_recovered_inr": 94640.78,
+          "recovery_rate_by_inr": 0.2252,
+          "recovery_rate_by_transaction": 0.25,
+          "action_cost_inr": 480.0,
+          "risk_penalty_inr": 255.0,
+          "net_recovery_inr": 93905.78,
+          "true_expected_net_value_inr": 92315.91,
+          "model_expected_net_value_inr": 0,
+          "expected_regret_inr": 41913.7,
+          "realized_regret_inr": 106131.46,
+          "opportunity_loss_inr": 106131.46,
+          "unnecessary_retry_count": 45,
+          "missed_recovery_value_inr": 106131.46,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 60,
+            "retry_alt_rail": 0,
+            "hold_for_review": 0,
+            "escalate_to_dunning": 0,
+            "no_action": 0
+          }
+        },
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 439949.98,
+          "gross_recovered_inr": 87298.75,
+          "recovery_rate_by_inr": 0.1984,
+          "recovery_rate_by_transaction": 0.1833,
+          "action_cost_inr": 480.0,
+          "risk_penalty_inr": 170.0,
+          "net_recovery_inr": 86648.75,
+          "true_expected_net_value_inr": 84284.99,
+          "model_expected_net_value_inr": 0,
+          "expected_regret_inr": 53683.58,
+          "realized_regret_inr": 138521.56,
+          "opportunity_loss_inr": 138521.56,
+          "unnecessary_retry_count": 49,
+          "missed_recovery_value_inr": 138521.56,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 60,
+            "retry_alt_rail": 0,
+            "hold_for_review": 0,
+            "escalate_to_dunning": 0,
+            "no_action": 0
+          }
+        },
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 442583.33,
+          "gross_recovered_inr": 115208.44,
+          "recovery_rate_by_inr": 0.2603,
+          "recovery_rate_by_transaction": 0.2667,
+          "action_cost_inr": 480.0,
+          "risk_penalty_inr": 210.0,
+          "net_recovery_inr": 114518.44,
+          "true_expected_net_value_inr": 100108.5,
+          "model_expected_net_value_inr": 0,
+          "expected_regret_inr": 41038.21,
+          "realized_regret_inr": 152981.85,
+          "opportunity_loss_inr": 152981.85,
+          "unnecessary_retry_count": 44,
+          "missed_recovery_value_inr": 152981.85,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 60,
+            "retry_alt_rail": 0,
+            "hold_for_review": 0,
+            "escalate_to_dunning": 0,
+            "no_action": 0
+          }
+        }
+      ]
+    },
+    "fixed_rule_policy": {
+      "seeds": [
+        42,
+        7,
+        19,
+        73,
+        101
+      ],
+      "mean_net_recovery_inr": 105752.61,
+      "stddev_net_recovery_inr": 21991.55,
+      "mean_expected_regret_inr": 29881.72,
+      "stddev_expected_regret_inr": 3411.2,
+      "mean_recovery_rate_by_inr": 0.237,
+      "per_seed": [
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 462701.13,
+          "gross_recovered_inr": 135578.44,
+          "recovery_rate_by_inr": 0.293,
+          "recovery_rate_by_transaction": 0.3333,
+          "action_cost_inr": 400.0,
+          "risk_penalty_inr": 72.0,
+          "net_recovery_inr": 135106.44,
+          "true_expected_net_value_inr": 130501.16,
+          "model_expected_net_value_inr": 0,
+          "expected_regret_inr": 24271.37,
+          "realized_regret_inr": 114976.51,
+          "opportunity_loss_inr": 114976.51,
+          "unnecessary_retry_count": 31,
+          "missed_recovery_value_inr": 114976.51,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 43,
+            "retry_alt_rail": 0,
+            "hold_for_review": 2,
+            "escalate_to_dunning": 11,
+            "no_action": 4
+          }
+        },
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 465786.36,
+          "gross_recovered_inr": 106640.29,
+          "recovery_rate_by_inr": 0.2289,
+          "recovery_rate_by_transaction": 0.25,
+          "action_cost_inr": 382.0,
+          "risk_penalty_inr": 66.0,
+          "net_recovery_inr": 106192.29,
+          "true_expected_net_value_inr": 115001.26,
+          "model_expected_net_value_inr": 0,
+          "expected_regret_inr": 30762.32,
+          "realized_regret_inr": 153680.44,
+          "opportunity_loss_inr": 153680.44,
+          "unnecessary_retry_count": 32,
+          "missed_recovery_value_inr": 153680.44,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 41,
+            "retry_alt_rail": 0,
+            "hold_for_review": 3,
+            "escalate_to_dunning": 9,
+            "no_action": 7
+          }
+        },
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 420217.04,
+          "gross_recovered_inr": 79321.31,
+          "recovery_rate_by_inr": 0.1888,
+          "recovery_rate_by_transaction": 0.2167,
+          "action_cost_inr": 388.0,
+          "risk_penalty_inr": 47.0,
+          "net_recovery_inr": 78886.31,
+          "true_expected_net_value_inr": 105459.73,
+          "model_expected_net_value_inr": 0,
+          "expected_regret_inr": 28769.88,
+          "realized_regret_inr": 121150.93,
+          "opportunity_loss_inr": 121150.93,
+          "unnecessary_retry_count": 33,
+          "missed_recovery_value_inr": 121150.93,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 43,
+            "retry_alt_rail": 0,
+            "hold_for_review": 2,
+            "escalate_to_dunning": 8,
+            "no_action": 7
+          }
+        },
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 439949.98,
+          "gross_recovered_inr": 84340.76,
+          "recovery_rate_by_inr": 0.1917,
+          "recovery_rate_by_transaction": 0.1833,
+          "action_cost_inr": 376.0,
+          "risk_penalty_inr": 50.0,
+          "net_recovery_inr": 83914.76,
+          "true_expected_net_value_inr": 103212.62,
+          "model_expected_net_value_inr": 0,
+          "expected_regret_inr": 34755.95,
+          "realized_regret_inr": 141255.55,
+          "opportunity_loss_inr": 141255.55,
+          "unnecessary_retry_count": 32,
+          "missed_recovery_value_inr": 141255.55,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 42,
+            "retry_alt_rail": 0,
+            "hold_for_review": 0,
+            "escalate_to_dunning": 10,
+            "no_action": 8
+          }
+        },
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 442583.33,
+          "gross_recovered_inr": 125074.23,
+          "recovery_rate_by_inr": 0.2826,
+          "recovery_rate_by_transaction": 0.2833,
+          "action_cost_inr": 374.0,
+          "risk_penalty_inr": 37.0,
+          "net_recovery_inr": 124663.23,
+          "true_expected_net_value_inr": 110297.64,
+          "model_expected_net_value_inr": 0,
+          "expected_regret_inr": 30849.07,
+          "realized_regret_inr": 142837.06,
+          "opportunity_loss_inr": 142837.06,
+          "unnecessary_retry_count": 29,
+          "missed_recovery_value_inr": 142837.06,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 44,
+            "retry_alt_rail": 0,
+            "hold_for_review": 1,
+            "escalate_to_dunning": 4,
+            "no_action": 11
+          }
+        }
+      ]
+    },
+    "recovr": {
+      "seeds": [
+        42,
+        7,
+        19,
+        73,
+        101
+      ],
+      "mean_net_recovery_inr": 139695.12,
+      "stddev_net_recovery_inr": 42844.39,
+      "mean_expected_regret_inr": 6694.05,
+      "stddev_expected_regret_inr": 2236.34,
+      "mean_recovery_rate_by_inr": 0.3114,
+      "per_seed": [
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 462701.13,
+          "gross_recovered_inr": 156659.86,
+          "recovery_rate_by_inr": 0.3386,
+          "recovery_rate_by_transaction": 0.4,
+          "action_cost_inr": 462.0,
+          "risk_penalty_inr": 14.0,
+          "net_recovery_inr": 156183.86,
+          "true_expected_net_value_inr": 143820.18,
+          "model_expected_net_value_inr": 153607.36,
+          "expected_regret_inr": 10952.35,
+          "realized_regret_inr": 93899.09,
+          "opportunity_loss_inr": 93899.09,
+          "unnecessary_retry_count": 23,
+          "missed_recovery_value_inr": 93899.09,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 14,
+            "retry_alt_rail": 25,
+            "hold_for_review": 8,
+            "escalate_to_dunning": 13,
+            "no_action": 0
+          }
+        },
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 465786.36,
+          "gross_recovered_inr": 190315.95,
+          "recovery_rate_by_inr": 0.4086,
+          "recovery_rate_by_transaction": 0.4,
+          "action_cost_inr": 442.0,
+          "risk_penalty_inr": 21.0,
+          "net_recovery_inr": 189852.95,
+          "true_expected_net_value_inr": 140883.24,
+          "model_expected_net_value_inr": 146963.53,
+          "expected_regret_inr": 4880.34,
+          "realized_regret_inr": 70019.78,
+          "opportunity_loss_inr": 70019.78,
+          "unnecessary_retry_count": 24,
+          "missed_recovery_value_inr": 70019.78,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 21,
+            "retry_alt_rail": 16,
+            "hold_for_review": 11,
+            "escalate_to_dunning": 12,
+            "no_action": 0
+          }
+        },
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 420217.04,
+          "gross_recovered_inr": 71199.04,
+          "recovery_rate_by_inr": 0.1694,
+          "recovery_rate_by_transaction": 0.2,
+          "action_cost_inr": 444.0,
+          "risk_penalty_inr": 24.0,
+          "net_recovery_inr": 70731.04,
+          "true_expected_net_value_inr": 127440.41,
+          "model_expected_net_value_inr": 135474.19,
+          "expected_regret_inr": 6789.2,
+          "realized_regret_inr": 129306.2,
+          "opportunity_loss_inr": 129306.2,
+          "unnecessary_retry_count": 28,
+          "missed_recovery_value_inr": 129306.2,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 21,
+            "retry_alt_rail": 15,
+            "hold_for_review": 15,
+            "escalate_to_dunning": 9,
+            "no_action": 0
+          }
+        },
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 439949.98,
+          "gross_recovered_inr": 112778.98,
+          "recovery_rate_by_inr": 0.2563,
+          "recovery_rate_by_transaction": 0.25,
+          "action_cost_inr": 460.0,
+          "risk_penalty_inr": 29.0,
+          "net_recovery_inr": 112289.98,
+          "true_expected_net_value_inr": 132962.26,
+          "model_expected_net_value_inr": 139026.8,
+          "expected_regret_inr": 5006.31,
+          "realized_regret_inr": 112880.33,
+          "opportunity_loss_inr": 112880.33,
+          "unnecessary_retry_count": 28,
+          "missed_recovery_value_inr": 112880.33,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 17,
+            "retry_alt_rail": 21,
+            "hold_for_review": 13,
+            "escalate_to_dunning": 9,
+            "no_action": 0
+          }
+        },
+        {
+          "transaction_count": 60,
+          "total_amount_at_risk_inr": 442583.33,
+          "gross_recovered_inr": 169922.77,
+          "recovery_rate_by_inr": 0.3839,
+          "recovery_rate_by_transaction": 0.35,
+          "action_cost_inr": 476.0,
+          "risk_penalty_inr": 29.0,
+          "net_recovery_inr": 169417.77,
+          "true_expected_net_value_inr": 135304.65,
+          "model_expected_net_value_inr": 141941.39,
+          "expected_regret_inr": 5842.06,
+          "realized_regret_inr": 98082.52,
+          "opportunity_loss_inr": 98082.52,
+          "unnecessary_retry_count": 23,
+          "missed_recovery_value_inr": 98082.52,
+          "held_count": 0,
+          "action_distribution": {
+            "retry_same_rail": 20,
+            "retry_alt_rail": 21,
+            "hold_for_review": 15,
+            "escalate_to_dunning": 4,
+            "no_action": 0
+          }
+        }
+      ]
+    }
+  },
+  "multi_seed_consistency": {
+    "net_recovery_winner_by_seed": {
+      "42": "recovr",
+      "7": "recovr",
+      "19": "retry_all_same_rail",
+      "73": "recovr",
+      "101": "recovr"
+    },
+    "recovr_wins_every_seed": false
+  },
+  "evaluation_views": {
+    "unconstrained_decision_quality": {
+      "transaction_count": 60,
+      "total_amount_at_risk_inr": 462701.13,
+      "gross_recovered_inr": 156659.86,
+      "recovery_rate_by_inr": 0.3386,
+      "recovery_rate_by_transaction": 0.4,
+      "action_cost_inr": 462.0,
+      "risk_penalty_inr": 14.0,
+      "net_recovery_inr": 156183.86,
+      "true_expected_net_value_inr": 143820.18,
+      "model_expected_net_value_inr": 153607.36,
+      "expected_regret_inr": 10952.35,
+      "realized_regret_inr": 93899.09,
+      "opportunity_loss_inr": 93899.09,
+      "unnecessary_retry_count": 23,
+      "missed_recovery_value_inr": 93899.09,
+      "held_count": 0,
+      "action_distribution": {
+        "retry_same_rail": 14,
+        "retry_alt_rail": 25,
+        "hold_for_review": 8,
+        "escalate_to_dunning": 13,
+        "no_action": 0
+      }
+    },
+    "constrained_execution_quality": {
+      "transaction_count": 60,
+      "total_amount_at_risk_inr": 462701.13,
+      "gross_recovered_inr": 156659.86,
+      "recovery_rate_by_inr": 0.3386,
+      "recovery_rate_by_transaction": 0.4,
+      "action_cost_inr": 462.0,
+      "risk_penalty_inr": 14.0,
+      "net_recovery_inr": 156183.86,
+      "true_expected_net_value_inr": 143820.18,
+      "model_expected_net_value_inr": 153607.36,
+      "expected_regret_inr": 10952.35,
+      "realized_regret_inr": 93899.09,
+      "opportunity_loss_inr": 93899.09,
+      "unnecessary_retry_count": 23,
+      "missed_recovery_value_inr": 93899.09,
+      "held_count": 0,
+      "action_distribution": {
+        "retry_same_rail": 14,
+        "retry_alt_rail": 25,
+        "hold_for_review": 8,
+        "escalate_to_dunning": 13,
+        "no_action": 0
+      }
+    },
+    "cap_induced_execution_overrides": 0
+  },
+  "secondary_binary_retry_diagnostics": {
+    "confusion_matrix": {
+      "true_positive_count": 26,
+      "false_positive_count": 13,
+      "false_negative_count": 10,
+      "true_negative_count": 11
+    },
+    "precision": 0.6666666666666666,
+    "recall": 0.7222222222222222,
+    "false_positive_transaction_ids": [
+      "9c07a751-1437-4509-2cd1-586a2b840c67",
+      "9c4ffb46-71b7-01aa-f836-f5713ccec76c",
+      "59450186-da01-8d29-6060-b1ebe53e5f4c",
+      "22bf18f5-1f65-2a87-333e-e3447dbf4bc1",
+      "34ec5264-ad7d-6f81-39a0-f145a5bab050",
+      "a3404f08-b341-91b8-ed65-22b4b5a5f8e6",
+      "8b621d41-5e09-a9ee-af88-bdecfb1e143b",
+      "5876fd09-f1fa-f665-7115-33f312e89d10",
+      "f6ee5cdb-2d79-a2d1-506e-50c77aa061e9",
+      "75424646-4d37-a539-857d-d3b3a8addf36",
+      "15b52908-a8aa-7158-2b70-e525bc67f831",
+      "88bd13d1-b540-b30e-039f-3a254d6168bd",
+      "473bd358-610e-6a64-e130-1617c2dff335"
+    ],
+    "false_negative_transaction_ids": [
+      "c9d6a63b-ca3c-6f5f-5bb5-c40c03cde2e3",
+      "f3f8dea4-7f14-eafa-29f0-ef7c02e7df89",
+      "272a6d8e-b512-2df8-75b1-7a55d4262982",
+      "7a89cbeb-b807-d78a-b788-f5d1ffe575f6",
+      "a56895c6-812a-1f9b-1596-9802b6dd6257",
+      "961d33ba-3508-43f0-8de0-8fc2c3e15a85",
+      "5a057c11-4ffc-a6b1-99b4-79d449a214ae",
+      "a508dc95-13a4-a492-497d-e16dd4ea120a",
+      "4a73b0bf-f2ce-7eeb-4c56-fb8f0bb432b3",
+      "cb7b0b3a-8b2d-158a-cd5a-e324fe7c80e9"
+    ],
+    "note": "Legacy binary diagnostics are secondary; action economics and expected regret are primary."
+  },
+  "confusion_matrix": {
+    "true_positive_count": 26,
+    "false_positive_count": 13,
+    "false_negative_count": 10,
+    "true_negative_count": 11
+  },
+  "precision": 0.6666666666666666,
+  "recall": 0.7222222222222222,
+  "false_positive_transaction_ids": [
+    "9c07a751-1437-4509-2cd1-586a2b840c67",
+    "9c4ffb46-71b7-01aa-f836-f5713ccec76c",
+    "59450186-da01-8d29-6060-b1ebe53e5f4c",
+    "22bf18f5-1f65-2a87-333e-e3447dbf4bc1",
+    "34ec5264-ad7d-6f81-39a0-f145a5bab050",
+    "a3404f08-b341-91b8-ed65-22b4b5a5f8e6",
+    "8b621d41-5e09-a9ee-af88-bdecfb1e143b",
+    "5876fd09-f1fa-f665-7115-33f312e89d10",
+    "f6ee5cdb-2d79-a2d1-506e-50c77aa061e9",
+    "75424646-4d37-a539-857d-d3b3a8addf36",
+    "15b52908-a8aa-7158-2b70-e525bc67f831",
+    "88bd13d1-b540-b30e-039f-3a254d6168bd",
+    "473bd358-610e-6a64-e130-1617c2dff335"
+  ],
+  "false_negative_transaction_ids": [
+    "c9d6a63b-ca3c-6f5f-5bb5-c40c03cde2e3",
+    "f3f8dea4-7f14-eafa-29f0-ef7c02e7df89",
+    "272a6d8e-b512-2df8-75b1-7a55d4262982",
+    "7a89cbeb-b807-d78a-b788-f5d1ffe575f6",
+    "a56895c6-812a-1f9b-1596-9802b6dd6257",
+    "961d33ba-3508-43f0-8de0-8fc2c3e15a85",
+    "5a057c11-4ffc-a6b1-99b4-79d449a214ae",
+    "a508dc95-13a4-a492-497d-e16dd4ea120a",
+    "4a73b0bf-f2ce-7eeb-4c56-fb8f0bb432b3",
+    "cb7b0b3a-8b2d-158a-cd5a-e324fe7c80e9"
+  ],
+  "money": {
+    "total_at_risk_inr": 462701.13,
+    "recovered_inr": 156659.86,
+    "missed_recovery_inr": 93899.09,
+    "false_positive_cost_inr": 14.0,
+    "net_recovered_inr": 156183.86
+  },
+  "economic_evaluation": {
+    "total_at_risk_inr": 462701.13,
+    "total_expected_recovery_inr": 153607.36,
+    "total_actual_recovered_inr": 156659.86,
+    "expected_vs_actual_variance_inr": 2576.5,
+    "average_expected_value_per_decision_inr": 2560.12,
+    "average_realized_value_per_decision_inr": 2603.06,
+    "recovery_rate": 0.3386,
+    "wasted_retry_cost_inr": 462.0,
+    "missed_recovery_inr": 93899.09,
+    "amount_band_breakdown": []
+  },
+  "note": "Comparable action-level views are primary; legacy binary fields are secondary."
+}
