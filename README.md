@@ -114,7 +114,7 @@ same way here: as a real account, not a staged one.
 
 ## Project status
 
-Built solo, in one week, for the Razorpay AI Buildathon. See
+Built solo, in one week, for the Razorpay AI Buildathon. The frontend is styled using Razorpay's real published design tokens (extracted from Blade). See
 [`docs/decisions/`](docs/decisions/) for the architecture decision records
 explaining the calls made along the way (why FastAPI, why the two-path
 agent, and why SQLite).

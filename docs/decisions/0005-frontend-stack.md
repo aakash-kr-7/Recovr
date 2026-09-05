@@ -4,34 +4,25 @@
 Accepted
 
 ## Context
-The dashboard needs to show a live decision feed, the audit trail, and the
-evaluation report. Razorpay's own public engineering material
-(`engineering.razorpay.com`, and the `razorpay/blade` GitHub repository)
-shows their internal frontend stack is React (web) and React Native
-(mobile), built on their own open-source, MIT-licensed design system,
-Blade (`@razorpay/blade` on npm).
+The dashboard needs to show a live decision feed, the audit trail, and the evaluation report. Razorpay's own public engineering material (`engineering.razorpay.com`, and the `razorpay/blade` GitHub repository) shows their internal frontend stack is React (web) and React Native (mobile), built on their own open-source, MIT-licensed design system, Blade (`@razorpay/blade` on npm).
+
+We attempted to adopt `@razorpay/blade` for this project to authentically match their component stack.
 
 ## Decision
-Build the dashboard in React + TypeScript + Vite with Tailwind utility CSS.
-Use general payments-operations principles—compact tables, restrained
-surfaces, strong hierarchy, and clear status language—without using Razorpay
-assets or claiming to implement its private design system.
+Build the dashboard in React + TypeScript + Vite with Tailwind utility CSS, using Blade's **published design tokens** (colors, typography, spacing) mapped into Tailwind classes, rather than using Blade's React components.
 
-## Reasoning
-- React + TypeScript provide typed read-model contracts for the operations
-  console without introducing a component-library dependency.
-- The interface is branded as RECOVR and deliberately does not copy Razorpay
-  logos, proprietary assets, or exact screens.
+An earnest attempt to install `@razorpay/blade` was blocked by an upstream React version conflict. Blade transitively depends on React Native (even for web-only setups) via `@floating-ui/react-native`. That dependency chain resolves to a `react-native` version requiring React 19, which strictly conflicts with this project's React 18 web setup. The exact blocking error encountered was:
 
-## Alternatives considered
-- **Next.js** — no evidence in Razorpay's own public engineering material
-  that this is part of their actual stack; would be an unverified claim if
-  used as a positioning point.
-- **Plain HTML + server-rendered templates (Jinja2)** — faster to build,
-  but loses the "matches their real stack" signal entirely, which is worth
-  the extra setup risk given the audience for this submission.
+```
+npm error Could not resolve dependency:
+npm error peer react@"^19.2.3" from react-native@0.87.1
+npm error node_modules/react-native
+npm error   peer react-native@">=0.64.0" from @floating-ui/react-native@0.10.10
+npm error   node_modules/@floating-ui/react-native
+npm error     peer @floating-ui/react-native@"^0.10.0" from @razorpay/blade@12.121.1
+```
+
+Rather than forcing the installation with `--legacy-peer-deps` (which risks silent bundling issues right before a demo), we decided to fall back to standard Tailwind CSS. 
 
 ## Consequences
-The project does not depend on `@razorpay/blade`. The UI uses a documented,
-payments-operations design language while retaining an independent RECOVR
-identity.
+The project does not depend on the `@razorpay/blade` component package. Instead, the UI is styled using Razorpay's real published design tokens extracted directly from Blade's source, ensuring the visual language is authentically Razorpay's while retaining an independent RECOVR identity and stable React 18 build.

@@ -31,7 +31,7 @@ Its own design deliberately combines deterministic handling for known,
 unambiguous failures with an optional bounded reasoning path for ambiguous
 or unfamiliar cases. That path receives structured customer history, timing,
 and raw decline context; economics and safety—not the LLM—remain
-authoritative.
+authoritative. The UI is styled using Razorpay's real published design tokens to match their visual language authentically, without depending on their component library.
 
 ## What we do differently — three concrete, checkable claims
 
