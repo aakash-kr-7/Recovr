@@ -1,7 +1,7 @@
 /**
  * Shared explainer content for how RECOVR works.
  *
- * Reused across the About & Configuration page and the Overview dashboard
+ * Reused across the About & Configuration page and the Dashboard
  * to ensure a single, consistent, plain-English explanation of the triage pipeline.
  */
 

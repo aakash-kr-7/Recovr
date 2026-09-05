@@ -17,7 +17,7 @@ import { LoginPage } from "@/pages/LoginPage";
 import type { LiveModeStatus } from "@/types/api";
 
 const links = [
-  { to: "/", label: "Overview", end: true },
+  { to: "/", label: "Dashboard", end: true },
   { to: "/live", label: "Live Mode" },
   { to: "/recoveries", label: "Recoveries" },
   { to: "/transactions", label: "Transactions" },
@@ -81,13 +81,22 @@ export function App() {
     }
   };
 
+  const getMerchantInitials = (name: string): string => {
+    const parts = name.trim().split(/\s+/).filter(Boolean);
+    if (parts.length === 0) return "OP";
+    if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+    return (parts[0][0] + parts[1][0]).toUpperCase();
+  };
+
   let liveStatusText = "";
   if (!liveMode || (liveMode.current_step === 0 && !liveMode.is_running)) {
     liveStatusText = "Live Mode: ready";
   } else if (liveMode.is_running) {
     liveStatusText = `Live Mode running — step ${Math.max(1, liveMode.current_step)} of ${liveMode.sequence_length}`;
-  } else {
+  } else if (liveMode.current_step >= liveMode.sequence_length) {
     liveStatusText = `Live Mode complete — ${liveMode.sequence_length} scenarios run`;
+  } else {
+    liveStatusText = `Live Mode paused — step ${liveMode.current_step} of ${liveMode.sequence_length}`;
   }
 
   if (!merchantName) {
@@ -186,9 +195,12 @@ export function App() {
               <span className="w-1.5 h-1.5 rounded-round bg-brand inline-block" />
               TEST MODE
             </span>
-            <span className="avatar" aria-live="polite" aria-label={`Current operator: ${merchantName}`}>
-              {merchantName ? merchantName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'OP'}
-            </span>
+            <div className="operator-profile-badge" title={`Active operator: ${merchantName}`}>
+              <span className="avatar" aria-live="polite" aria-label={`Current operator: ${merchantName}`}>
+                {getMerchantInitials(merchantName)}
+              </span>
+              <span className="operator-profile-name">{merchantName}</span>
+            </div>
           </div>
         </header>
         <main>

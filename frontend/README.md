@@ -25,7 +25,8 @@ The default API is `http://localhost:8000`. Set `VITE_API_BASE_URL` in
 
 ## Current screens & components
 
-- **Overview (`/`)**: High-level recovery metrics, KPI cards, and recent activity ledger.
+- **Dashboard (`/`)**: High-level recovery metrics, KPI cards, and recent activity ledger.
+- **Live Mode (`/live`)**: Purpose-built command view with step hero, interactive progress stepper, and real-time streaming decision feed.
 - **Recoveries (`/recoveries`)**: Filterable ledger of active cases with path and execution mode filters.
 - **Transactions (`/transactions`)**: Full transaction history with decline reasons and amounts.
 - **Decision Detail (`/decisions/:id`)**: Full economic ranking breakdown (expected net value, risk penalties, costs), verbatim reasoning trace, and measured outcome.

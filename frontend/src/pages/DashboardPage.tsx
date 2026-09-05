@@ -91,7 +91,7 @@ export function DashboardPage() {
     <div className="page-stack">
       <PageHeader
         eyebrow="REVENUE RECOVERY OPERATIONS"
-        title="Overview"
+        title="Dashboard"
         description="Monitor failed payments, RECOVR decisions and recovery outcomes in one operating view."
       >
         <Link to="/recoveries" className="primary-button">
@@ -260,7 +260,7 @@ export function DashboardPage() {
       </section>
 
       <PageContext>
-        This page gives you a high-level overview of your failed payment recovery operations. The funnel and ticker show the volume of failed payments processed and the amount of revenue successfully recovered. By default, this view is scoped to the current active session, but you can toggle it to see all-time historical performance.
+        This dashboard gives you a high-level view of your failed payment recovery operations. The funnel and ticker show the volume of failed payments processed and the amount of revenue successfully recovered. By default, this view is scoped to the current active session, but you can toggle it to see all-time historical performance.
       </PageContext>
     </div>
   );
