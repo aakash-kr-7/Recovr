@@ -106,7 +106,7 @@ export function DashboardPage() {
       )}
 
       {/* 3. NARRATIVE: How RECOVR works explainer + Pipeline diagram in same top viewport */}
-      <section className="panel" data-tour="decision-flow">
+      <section className="panel" data-tour="how-recovr-works">
         <div className="panel-heading">
           <div>
             <h2>{HOW_RECOVR_WORKS_TITLE}</h2>
@@ -133,7 +133,7 @@ export function DashboardPage() {
       </section>
 
       {/* 1. SCOPE CONSISTENCY: Explicit toggle between "This session" (default) and "All-time" */}
-      <div className="panel" style={{ padding: "0.875rem 1.25rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem" }}>
+      <div className="panel" data-tour="scope-and-funnel" style={{ padding: "0.875rem 1.25rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "0.875rem", flexWrap: "wrap" }}>
           <span style={{ fontSize: "0.8125rem", fontWeight: "700", color: "var(--text-secondary, #475569)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
             Metrics Scope:

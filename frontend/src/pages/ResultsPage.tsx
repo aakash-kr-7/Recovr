@@ -108,7 +108,7 @@ export function ResultsPage() {
           positive
         />
       </div>
-      <section className="panel" data-tour="calibration-chart">
+      <section className="panel" data-tour="evaluation-comparison">
         <div className="panel-heading">
           <div>
             <h2>Baseline comparison</h2>
@@ -210,7 +210,7 @@ export function ResultsPage() {
           </dl>
         </section>
       </section>
-      <section className="panel">
+      <section className="panel" data-tour="calibration-chart">
         <h2>Calibration reliability</h2>
         <p>Comparing predicted probability against realized recovery rate on the holdout evaluation set. Perfect calibration follows the dotted line.</p>
         <div style={{ width: "100%", height: 320, marginTop: "1rem" }}>

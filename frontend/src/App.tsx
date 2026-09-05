@@ -142,28 +142,30 @@ export function App() {
             >
               {theme === "dark" ? "Light theme" : "Dark theme"}
             </button>
-            <div className="live-mode-control" data-tour="simulation-controls">
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }} data-tour="simulation-controls">
+              <div className="live-mode-control">
+                <button
+                  onClick={() => void toggleLiveMode()}
+                  disabled={liveModeChanging}
+                  className={liveMode?.is_running ? "live-mode-button is-running" : "live-mode-button"}
+                  aria-label={liveMode?.is_running ? "Stop Live Mode" : "Start Live Mode"}
+                >
+                  {liveMode?.is_running ? "Stop Live Mode" : "Start Live Mode"}
+                </button>
+                <span className="live-mode-status" aria-live="polite">
+                  {liveMode?.is_running ? `LIVE · Step ${liveProgress}` : `Live Mode · ${liveProgress}`}
+                </span>
+                {liveModeError && <span className="live-mode-error">{liveModeError}</span>}
+              </div>
               <button
-                onClick={() => void toggleLiveMode()}
-                disabled={liveModeChanging}
-                className={liveMode?.is_running ? "live-mode-button is-running" : "live-mode-button"}
-                aria-label={liveMode?.is_running ? "Stop Live Mode" : "Start Live Mode"}
+                onClick={() => setIsSimulatorOpen(true)}
+                className="border-none bg-brand hover:bg-brand-light text-white font-semibold text-75 py-2 px-4 rounded-small cursor-pointer transition-colors"
               >
-                {liveMode?.is_running ? "Stop Live Mode" : "Start Live Mode"}
+                Simulate payment failure
               </button>
-              <span className="live-mode-status" aria-live="polite">
-                {liveMode?.is_running ? `LIVE · Step ${liveProgress}` : `Live Mode · ${liveProgress}`}
-              </span>
-              {liveModeError && <span className="live-mode-error">{liveModeError}</span>}
             </div>
             <button onClick={() => setIsTourOpen(true)} className="tour-button">
               Take a tour
-            </button>
-            <button
-              onClick={() => setIsSimulatorOpen(true)}
-              className="border-none bg-brand hover:bg-brand-light text-white font-semibold text-75 py-2 px-4 rounded-small cursor-pointer transition-colors"
-            >
-              Simulate payment failure
             </button>
             <span
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xsmall bg-brand-subtle text-brand border border-brand/20 font-bold text-50 tracking-wider uppercase ml-2"

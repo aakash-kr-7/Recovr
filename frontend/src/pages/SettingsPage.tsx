@@ -67,7 +67,7 @@ export function SettingsPage() {
       {/* Operational configuration & Provider safety */}
       <div className="content-grid">
         {/* b. Operational configuration - existing real, non-misleading fields only */}
-        <section className="panel">
+        <section className="panel" data-tour="about-configuration">
           <div className="panel-heading">
             <div>
               <h2>Operational configuration</h2>
