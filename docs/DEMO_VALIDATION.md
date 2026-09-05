@@ -98,19 +98,23 @@ two records; it is not a real provider recovery.
 
 ## Frontend/API read-model contract
 
-The golden record was verified through:
+The golden record and interactive workflows were verified through:
 
 ```text
-GET /transactions/recent → RecentTransaction → Dashboard / Recoveries / Transactions / Audit Trail
-GET /transactions/audit/{transaction_id} → AuditDetail → Decision detail
+GET /transactions/recent → RecentTransaction → Dashboard / Recoveries / Audit Trail
+GET /transactions/funnel-summary → FunnelSummary → KPI cards & Funnel charts (session & all scope)
+GET /transactions/audit/{transaction_id} → AuditDetail → Decision detail & Audit Inspector drawer
 GET /evaluation/latest → EvaluationReport → Evaluation (Reliability calibration curve)
 GET /config/public → PublicConfig → Settings (safe operational parameters)
 GET /demo/presets → DemoPresets → Simulator panel drawer
 POST /demo/simulate → SimulationResult → Real-time triage lifecycle
+POST /demo/live-mode/start → LiveModeStatus → Live Mode streaming playback
+POST /demo/live-mode/stop → LiveModeStatus → Live Mode pause / stop
+GET /demo/live-mode/status → LiveModeStatus → Live Mode state polling
 ```
 
-The local UI rendered Dashboard, Recoveries, Transactions, Decision detail,
-Audit Trail, Evaluation, and Settings against the live API. `null` provider references
+The local UI rendered Dashboard, Live Mode, Recoveries, Decision detail,
+Audit Trail with Transaction Inspector, Evaluation, and Settings against the live API. `null` provider references
 and actual recovery values render as `Unavailable`, never as zero or a fake
 recovery.
 

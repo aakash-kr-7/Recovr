@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecentTransactions } from "@/hooks/useRecentTransactions";
-import { ACTION_LABELS, money, percent } from "@/lib/operations";
+import { ACTION_LABELS, money } from "@/lib/operations";
 import type { RecentTransaction, TriageAction } from "@/types/api";
 import { PageHeader } from "@/components/PageHeader";
 import { PageContext } from "@/components/PageContext";
