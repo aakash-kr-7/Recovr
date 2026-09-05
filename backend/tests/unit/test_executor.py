@@ -2,7 +2,7 @@
 cap that make this project's "bounded and gated" claim checkable rather
 than aspirational."""
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from app.agent.executor import BatchSpendTracker, execute
 from app.core.config import get_settings
@@ -18,7 +18,7 @@ def _make_transaction(amount_inr: float = 1000.0) -> Transaction:
         decline_reason_raw="bank timeout",
         customer_id="test-customer",
         customer_history={},
-        failed_at=datetime.utcnow(),
+        failed_at=datetime.now(timezone.utc),
         is_synthetic=True,
     )
 

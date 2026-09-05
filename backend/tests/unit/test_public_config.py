@@ -2,7 +2,7 @@
 
 from fastapi.testclient import TestClient
 from app.main import app
-from app.api.config import check_real_razorpay_credentials
+from app.api.config import check_real_razorpay_credentials, check_real_groq_credentials
 
 client = TestClient(app)
 
@@ -46,3 +46,10 @@ def test_check_real_razorpay_credentials():
     assert not check_real_razorpay_credentials("", "")
     assert not check_real_razorpay_credentials("rzp_live_12345", "secret123")
     assert check_real_razorpay_credentials("rzp_test_valid12345", "real_secret_token_123")
+
+
+def test_check_real_groq_credentials():
+    assert not check_real_groq_credentials("dummy")
+    assert not check_real_groq_credentials("")
+    assert not check_real_groq_credentials("gsk_xxxx")
+    assert check_real_groq_credentials("gsk_1234567890abcdefghijklmnop")

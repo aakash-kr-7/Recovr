@@ -1,6 +1,6 @@
 """Idempotent Razorpay webhook intake and recovery-outcome completion."""
 import hashlib, hmac, uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, Header, HTTPException, Request
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
@@ -41,7 +41,7 @@ def _complete_link_payment(db, payload):
     if outcome.observed_success is not None: return {"status": "duplicate", "transaction_id": outcome.transaction_id}
     recovered = paise_to_inr(entity.get("amount_paid", entity.get("amount", 0)))
     outcome.execution_status, outcome.actual_recovered_inr, outcome.observed_success = ExecutionStatus.SUCCEEDED.value, recovered, recovered > 0
-    outcome.net_recovered_inr, outcome.outcome_timestamp = recovered - outcome.action_cost_inr - outcome.risk_penalty_inr, datetime.utcnow()
+    outcome.net_recovered_inr, outcome.outcome_timestamp = recovered - outcome.action_cost_inr - outcome.risk_penalty_inr, datetime.now(timezone.utc)
     outcome.outcome_source = "razorpay.payment_link.paid"
     audit = db.scalar(select(AuditEntry).where(AuditEntry.transaction_id == outcome.transaction_id))
     if audit: audit.outcome = "recovered" if recovered >= outcome.amount_attempted else "partial_recovery"
@@ -54,7 +54,7 @@ def _complete_link_failure(db, payload):
     if outcome is None: return {"status": "ignored", "reason": "unknown_collection_link"}
     if outcome.observed_success is not None: return {"status": "duplicate", "transaction_id": outcome.transaction_id}
     outcome.execution_status, outcome.actual_recovered_inr, outcome.observed_success = ExecutionStatus.FAILED.value, 0.0, False
-    outcome.net_recovered_inr, outcome.outcome_timestamp, outcome.outcome_source = -outcome.action_cost_inr - outcome.risk_penalty_inr, datetime.utcnow(), "razorpay.payment_link.expired"
+    outcome.net_recovered_inr, outcome.outcome_timestamp, outcome.outcome_source = -outcome.action_cost_inr - outcome.risk_penalty_inr, datetime.now(timezone.utc), "razorpay.payment_link.expired"
     audit = db.scalar(select(AuditEntry).where(AuditEntry.transaction_id == outcome.transaction_id))
     if audit: audit.outcome = "not_recovered"
     db.commit()
@@ -74,7 +74,7 @@ async def handle_razorpay_webhook(request: Request, x_razorpay_signature: str = 
     customer_id = entity.get("contact") or entity.get("email") or "unknown"
     transaction = Transaction(id=str(uuid.uuid4()), razorpay_payment_id=payment_id, amount_inr=paise_to_inr(entity["amount"]),
         decline_reason_raw=entity.get("error_description", "unknown"), decline_reason=_normalize_decline_reason(entity.get("error_code")),
-        customer_id=customer_id, customer_history=get_customer_history(db, customer_id), failed_at=datetime.utcfromtimestamp(entity["created_at"]), is_synthetic=False, data_split="production")
+        customer_id=customer_id, customer_history=get_customer_history(db, customer_id), failed_at=datetime.fromtimestamp(entity["created_at"], tz=timezone.utc), is_synthetic=False, data_split="production")
     db.add(transaction)
     try: db.commit()
     except IntegrityError:

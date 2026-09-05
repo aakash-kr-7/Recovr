@@ -9,7 +9,7 @@ still run in CI with the key configured as a secret. See
 """
 
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 
 import pytest
 
@@ -44,7 +44,7 @@ def test_unmapped_decline_reason_produces_reasoned_hold_not_silent_default():
             "most_recent_decline_reason": None,
             "account_age_days": 45,
         },
-        failed_at=datetime.utcnow(),
+        failed_at=datetime.now(timezone.utc),
         is_synthetic=True,
     )
 

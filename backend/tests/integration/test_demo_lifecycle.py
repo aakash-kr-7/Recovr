@@ -5,7 +5,7 @@ It validates RECOVR's callback/persistence/UI-read-model contract without
 claiming that the callback came from Razorpay.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 import hashlib
 import hmac
 import json
@@ -39,7 +39,7 @@ def test_mocked_payment_link_callback_updates_lifecycle_and_evidence() -> None:
                 decline_reason_raw="lost card",
                 customer_id="demo-customer",
                 customer_history=history,
-                failed_at=datetime.utcnow(),
+                failed_at=datetime.now(timezone.utc),
                 is_synthetic=False,
                 data_split="production",
             ),
@@ -51,7 +51,7 @@ def test_mocked_payment_link_callback_updates_lifecycle_and_evidence() -> None:
                 decline_reason_raw="lost card",
                 customer_id="holdout-customer",
                 customer_history=history,
-                failed_at=datetime.utcnow(),
+                failed_at=datetime.now(timezone.utc),
                 is_synthetic=True,
                 data_split="holdout",
             ),
@@ -87,7 +87,7 @@ def test_mocked_payment_link_callback_updates_lifecycle_and_evidence() -> None:
                 actual_recovered_inr=None,
                 observed_success=None,
                 variance_inr=None,
-                outcome_timestamp=datetime.utcnow(),
+                outcome_timestamp=datetime.now(timezone.utc),
                 provider="mock_razorpay",
                 provider_reference="plink_mock_golden",
                 mode="BOUNDED_SIMULATION",
@@ -104,7 +104,7 @@ def test_mocked_payment_link_callback_updates_lifecycle_and_evidence() -> None:
                 actual_recovered_inr=100.0,
                 observed_success=True,
                 variance_inr=0.0,
-                outcome_timestamp=datetime.utcnow(),
+                outcome_timestamp=datetime.now(timezone.utc),
                 provider="mock_razorpay",
                 provider_reference="plink_mock_holdout",
                 mode="BOUNDED_SIMULATION",

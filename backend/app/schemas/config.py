@@ -23,6 +23,9 @@ class PublicConfigResponse(BaseModel):
     has_real_razorpay_credentials: bool = Field(
         description="Whether valid test-mode Razorpay keys are configured"
     )
+    has_real_groq_credentials: bool = Field(
+        description="Whether a valid Groq API key is configured for the reasoning path"
+    )
     razorpay_mode: str = Field(
         description="Data and execution mode: 'demo_seeded_data' or 'real_test_credentials'"
     )

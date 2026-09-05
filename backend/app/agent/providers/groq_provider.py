@@ -2,6 +2,7 @@ import json
 from groq import Groq
 from pydantic import ValidationError
 
+from app.api.config import check_real_groq_credentials
 from app.core.config import get_settings
 from app.core.logging import get_logger
 from app.models.transaction import Transaction
@@ -12,6 +13,10 @@ logger = get_logger(__name__)
 
 def get_triage_decision_groq(transaction: Transaction, system_prompt: str, user_message: str) -> ReasoningResult:
     settings = get_settings()
+    if not check_real_groq_credentials(settings.groq_api_key):
+        raise ValueError(
+            "Groq API key is missing or placeholder-only; the reasoning path cannot run in this environment."
+        )
     client = Groq(api_key=settings.groq_api_key, max_retries=settings.llm_max_retries, timeout=settings.llm_timeout_seconds)
 
     import re

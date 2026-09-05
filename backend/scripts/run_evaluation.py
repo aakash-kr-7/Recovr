@@ -5,7 +5,7 @@ The policy functions below receive a Transaction only. Hidden potential
 outcomes are read exclusively by ``_record`` after an action is selected.
 """
 import json, random, statistics, sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).parent.parent
@@ -190,7 +190,7 @@ def run_evaluation():
         recovr_records = _apply_policy(transactions, "recovr", True, settings.batch_spend_cap_inr, db)
     binary = _binary(recovr_records)
     recovr = constrained["recovr"]
-    report = {"generated_at": datetime.utcnow().isoformat(), "evaluation_version": "comparable_action_economics_v3", "canonical_seed": CANONICAL_SEED,
+    report = {"generated_at": datetime.now(timezone.utc).isoformat(), "evaluation_version": "comparable_action_economics_v3", "canonical_seed": CANONICAL_SEED,
         "holdout_set_size": len(transactions), "policy_definitions": {"retry_all_same_rail": "Retries every holdout payment on the same rail.", "fixed_rule_policy": "Uses FAST_PATH_TABLE where defined; otherwise retries same rail.", "recovr": "Existing calibrated economics scoring selects an allowed action; no hidden outcome is supplied."},
         "methodology": {"unconstrained": "No spend budget override.", "constrained": "Every policy is processed in the identical holdout order under the same action-cost budget. Over-budget actions become hold_for_review.", "expected_regret": "Best hidden conditional expected net value minus the selected action's hidden conditional expected net value. Realized regret remains separate and uses sampled realized net values."},
         "unconstrained": unconstrained, "constrained": constrained,

@@ -1,7 +1,7 @@
 """Integration tests for the economic pipeline (gate -> scoring -> executor)."""
 
 from unittest.mock import patch
-from datetime import datetime
+from datetime import datetime, timezone
 import json
 
 from app.agent.executor import BatchSpendTracker
@@ -23,7 +23,7 @@ def _make_transaction(decline_reason: str, amount_inr: float = 1000.0, history=N
         decline_reason_raw=decline_reason.replace("_", " "),
         customer_id="test-customer",
         customer_history=history,
-        failed_at=datetime.utcnow(),
+        failed_at=datetime.now(timezone.utc),
         is_synthetic=True,
     )
 

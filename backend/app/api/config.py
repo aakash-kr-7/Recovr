@@ -27,6 +27,18 @@ def check_real_razorpay_credentials(key_id: str, key_secret: str) -> bool:
     return True
 
 
+def check_real_groq_credentials(api_key: str | None) -> bool:
+    """True only for a non-placeholder Groq API key that can actually call the provider."""
+    value = (api_key or "").strip()
+    if not value or value.lower() in {"dummy", "gsk_xxxx"}:
+        return False
+    if "xxxx" in value.lower() or "example" in value.lower():
+        return False
+    if not value.startswith("gsk_"):
+        return False
+    return len(value) >= 20
+
+
 @router.get("/public", response_model=PublicConfigResponse)
 def get_public_config() -> PublicConfigResponse:
     """Return read-only, non-secret operational configuration.
@@ -39,6 +51,7 @@ def get_public_config() -> PublicConfigResponse:
     has_real_creds = check_real_razorpay_credentials(
         settings.razorpay_key_id, settings.razorpay_key_secret
     )
+    has_real_groq_creds = check_real_groq_credentials(settings.groq_api_key)
     mode = "real_test_credentials" if has_real_creds else "demo_seeded_data"
     mode_label = (
         "Real Razorpay test-mode credentials"
@@ -52,6 +65,7 @@ def get_public_config() -> PublicConfigResponse:
         min_auto_execute_confidence=settings.min_auto_execute_confidence,
         max_customer_recovery_attempts=settings.max_customer_recovery_attempts,
         has_real_razorpay_credentials=has_real_creds,
+        has_real_groq_credentials=has_real_groq_creds,
         razorpay_mode=mode,
         data_mode_label=mode_label,
         environment=settings.environment,

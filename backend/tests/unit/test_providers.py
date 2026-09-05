@@ -5,7 +5,7 @@ from app.agent.providers.groq_provider import get_triage_decision_groq
 from app.agent.reasoning import ReasoningResult
 from app.schemas.triage import TriageAction
 from app.models.transaction import Transaction
-from datetime import datetime
+from datetime import datetime, timezone
 
 @pytest.fixture
 def dummy_transaction():
@@ -17,7 +17,7 @@ def dummy_transaction():
         decline_reason="insufficient_funds",
         customer_id="cust_1",
         customer_history={},
-        failed_at=datetime.utcnow(),
+        failed_at=datetime.now(timezone.utc),
         is_synthetic=True
     )
 
@@ -46,7 +46,10 @@ def test_anthropic_provider_contract(dummy_transaction):
         assert result.confidence == 0.95
 
 def test_groq_provider_contract(dummy_transaction):
-    with patch("app.agent.providers.groq_provider.Groq") as MockGroq:
+    with (
+        patch("app.agent.providers.groq_provider.check_real_groq_credentials", return_value=True),
+        patch("app.agent.providers.groq_provider.Groq") as MockGroq,
+    ):
         mock_client = MagicMock()
         MockGroq.return_value = mock_client
         

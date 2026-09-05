@@ -8,7 +8,7 @@ the database reflects true agent behavior.
 import sys
 import random
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).parent.parent
@@ -56,7 +56,7 @@ def clear_demo_data(db):
 
 def seed_demo_database(count=30, seed=101):
     rng = random.Random(seed)
-    base_time = datetime.utcnow() - timedelta(days=2)
+    base_time = datetime.now(timezone.utc) - timedelta(days=2)
     
     with SessionLocal() as db:
         clear_demo_data(db)

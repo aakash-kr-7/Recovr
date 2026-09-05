@@ -12,7 +12,7 @@ Covers:
 8. Supporting evidence formatting on RecoveryOption.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
@@ -64,7 +64,7 @@ def _create_txn_and_outcome(
         decline_reason_raw=decline_reason.replace("_", " ").title(),
         customer_id=f"cust_{txn_id}",
         customer_history=customer_history,
-        failed_at=datetime.utcnow(),
+        failed_at=datetime.now(timezone.utc),
         is_synthetic=True,
         data_split=data_split,
     )
@@ -77,7 +77,7 @@ def _create_txn_and_outcome(
         actual_recovered_inr=1500.0 if observed_success else 0.0 if observed_success is False else None,
         observed_success=observed_success,
         variance_inr=0.0 if observed_success is not None else None,
-        outcome_timestamp=datetime.utcnow(),
+        outcome_timestamp=datetime.now(timezone.utc),
     )
     db.add(outcome)
     db.commit()

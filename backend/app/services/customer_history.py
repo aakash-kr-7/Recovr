@@ -7,7 +7,7 @@ based on our internal recovery actions). Querying it for this data is not suppor
 by their API. Therefore, we use the local DB query as the sole source.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from app.core.logging import get_logger
@@ -39,7 +39,10 @@ def get_customer_history(db: Session, customer_id: str) -> dict:
     
     if rows:
         earliest_txn = rows[-1][0]
-        account_age_days = (datetime.utcnow() - earliest_txn.failed_at).days
+        earliest_failed_at = earliest_txn.failed_at
+        if earliest_failed_at.tzinfo is None:
+            earliest_failed_at = earliest_failed_at.replace(tzinfo=timezone.utc)
+        account_age_days = (datetime.now(timezone.utc) - earliest_failed_at).days
     else:
         account_age_days = None
         

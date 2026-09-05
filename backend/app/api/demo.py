@@ -3,7 +3,7 @@ from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 import asyncio
 
 from app.db.session import get_db, SessionLocal
@@ -36,7 +36,7 @@ class DemoSimulateRequest(BaseModel):
 class LiveModeStartRequest(BaseModel):
     """Controls playback pace only; it never changes the decision pipeline."""
 
-    interval_seconds: float = Field(default=5.0, gt=0)
+    interval_seconds: float = Field(default=0.75, gt=0)
 
 _live_mode_task: Optional[asyncio.Task] = None
 _live_mode_state = {
@@ -86,7 +86,7 @@ def _simulate_transaction(payload: DemoSimulateRequest, source: str, db: Session
         decline_reason=decline_reason,
         customer_id=customer_id,
         customer_history=cust_history,
-        failed_at=datetime.utcnow(),
+        failed_at=datetime.now(timezone.utc),
         is_synthetic=True,
         data_split=source
     )

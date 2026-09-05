@@ -1,5 +1,5 @@
 """Focused tests for the real/simulated execution boundary."""
-from datetime import datetime
+from datetime import datetime, timezone
 from types import SimpleNamespace
 
 from app.agent.executor import BatchSpendTracker, ExecutionMode, ExecutionStatus, execute
@@ -11,7 +11,7 @@ from app.services.razorpay_client import RazorpayTestModeClient
 def _transaction(synthetic=False):
     return Transaction(id="txn-loop", razorpay_payment_id="pay_loop", amount_inr=250.0,
         decline_reason="bank_timeout", decline_reason_raw="timeout", customer_id="customer-loop",
-        customer_history={}, failed_at=datetime.utcnow(), is_synthetic=synthetic, data_split="production")
+        customer_history={}, failed_at=datetime.now(timezone.utc), is_synthetic=synthetic, data_split="production")
 
 
 def test_collection_link_is_the_only_real_executor_mapping():

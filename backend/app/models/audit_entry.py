@@ -8,7 +8,7 @@ is a separate component from the reasoning", for why every entry captures
 both the decision and the reasoning that produced it.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import DateTime, Float, String
 from sqlalchemy.orm import Mapped, mapped_column
@@ -55,4 +55,4 @@ class AuditEntry(Base):
     the retry result."""
 
     amount_inr: Mapped[float] = mapped_column(Float)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))

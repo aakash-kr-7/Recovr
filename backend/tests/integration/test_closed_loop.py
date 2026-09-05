@@ -1,6 +1,6 @@
 import pytest
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.db.session import Base
@@ -54,7 +54,7 @@ def test_closed_loop_customer_history_and_evidence(db_session):
         decline_reason_raw="Insufficient Funds",
         customer_id=customer_id,
         customer_history=expected_history,
-        failed_at=datetime.utcnow() - timedelta(days=2),
+        failed_at=datetime.now(timezone.utc) - timedelta(days=2),
         is_synthetic=True,
         data_split="working",
     )
@@ -68,7 +68,7 @@ def test_closed_loop_customer_history_and_evidence(db_session):
         actual_recovered_inr=1000.0,
         observed_success=True,
         variance_inr=0.0,
-        outcome_timestamp=datetime.utcnow() - timedelta(days=1),
+        outcome_timestamp=datetime.now(timezone.utc) - timedelta(days=1),
     )
     db_session.add(outcome1)
     db_session.commit()

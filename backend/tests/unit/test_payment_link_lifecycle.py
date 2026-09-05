@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -18,11 +18,11 @@ def _session():
 def _seed(db):
     db.add(Transaction(id="origin", razorpay_payment_id="pay_origin", amount_inr=100,
         decline_reason="bank_timeout", decline_reason_raw="timeout", customer_id="cust", customer_history={},
-        failed_at=datetime.utcnow(), is_synthetic=False, data_split="production"))
+        failed_at=datetime.now(timezone.utc), is_synthetic=False, data_split="production"))
     db.add(AuditEntry(transaction_id="origin", path_taken="deterministic", action="escalate_to_dunning",
         reasoning_text="test", confidence=None, was_gated=False, amount_inr=100, outcome="pending"))
     db.add(RecoveryOutcomeRow(transaction_id="origin", action="escalate_to_dunning", execution_status="PENDING",
-        actual_recovered_inr=None, observed_success=None, variance_inr=None, outcome_timestamp=datetime.utcnow(),
+        actual_recovered_inr=None, observed_success=None, variance_inr=None, outcome_timestamp=datetime.now(timezone.utc),
         provider="razorpay", provider_reference="plink_1", mode="REAL_RAZORPAY_ACTION", amount_attempted=100,
         action_cost_inr=4, risk_penalty_inr=0, net_recovered_inr=None, outcome_source="executor"))
     db.commit()

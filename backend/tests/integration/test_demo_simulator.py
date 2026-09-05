@@ -153,7 +153,7 @@ def test_repeat_offender_economic_shift(db_session):
         
         # Seed 5 failed outcomes for this customer to cross MIN_SAMPLE_SIZE
         import uuid
-        from datetime import datetime
+        from datetime import datetime, timezone
         from app.models.transaction import Transaction
         
         for _ in range(5):
@@ -166,7 +166,7 @@ def test_repeat_offender_economic_shift(db_session):
                 decline_reason_raw="Insufficient Funds",
                 customer_id="demo_cust",
                 customer_history=repeat_offender["payload"]["customer_history"],
-                failed_at=datetime.utcnow(),
+                failed_at=datetime.now(timezone.utc),
                 is_synthetic=True,
                 data_split="demo"
             )
@@ -181,7 +181,7 @@ def test_repeat_offender_economic_shift(db_session):
                 action_cost_inr=0.0,
                 risk_penalty_inr=0.0,
                 outcome_source="executor",
-                outcome_timestamp=datetime.utcnow()
+                outcome_timestamp=datetime.now(timezone.utc)
             )
             db_session.add(fake_out)
         db_session.commit()

@@ -72,3 +72,7 @@ def test_live_mode_is_ordered_stoppable_and_restarts_from_step_zero(monkeypatch)
     second_run = fired[len(first_run):]
     assert second_run == expected[:len(second_run)]
     assert len(second_run) >= 2
+
+
+def test_live_mode_default_interval_is_0_75_seconds():
+    assert demo.LiveModeStartRequest().interval_seconds == pytest.approx(0.75)

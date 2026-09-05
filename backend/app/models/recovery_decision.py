@@ -17,7 +17,7 @@ docs/decisions/0006-economic-decision-layer.md for why an expected
 value and a measured outcome must never share a row.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import JSON, Boolean, DateTime, Float, String
 from sqlalchemy.orm import Mapped, mapped_column
@@ -84,4 +84,4 @@ class RecoveryDecisionRow(Base):
     hold_for_review instead of auto-executing. Mirrors the was_gated
     field on AuditEntry."""
 
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))

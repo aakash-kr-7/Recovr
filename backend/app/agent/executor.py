@@ -6,7 +6,7 @@ real operation exposed here is a standard Payment Link collection request for
 later Razorpay event confirms payment.
 """
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 
 from sqlalchemy import func, select
@@ -85,7 +85,7 @@ def execute(transaction: Transaction, path: TriagePath, action: TriageAction, re
             confidence: float | None, spend_tracker: BatchSpendTracker, options: list[RecoveryOption],
             selected_expected_net_recovery_inr: float, value_advantage_vs_next_best_inr: float,
             db: Session | None = None, client: RazorpayTestModeClient | None = None) -> ExecutionResult:
-    settings, now = get_settings(), datetime.utcnow()
+    settings, now = get_settings(), datetime.now(timezone.utc)
     final_action, gated, suffix = action, False, ""
     if path == TriagePath.REASONING and confidence is not None and confidence < settings.min_auto_execute_confidence:
         final_action, gated, suffix = TriageAction.HOLD_FOR_REVIEW, True, " [Gated: confidence below auto-execute threshold.]"
@@ -111,9 +111,9 @@ def execute(transaction: Transaction, path: TriagePath, action: TriageAction, re
             raise ValueError("Razorpay Payment Link response lacks a usable id")
         spend_tracker.record(actual_provider_cost)
         return ExecutionResult(decision, final_action, ExecutionStatus.PENDING, "razorpay", link["id"], now,
-            datetime.utcnow(), transaction.amount_inr, actual_provider_cost, mode=ExecutionMode.REAL_RAZORPAY_ACTION)
+            datetime.now(timezone.utc), transaction.amount_inr, actual_provider_cost, mode=ExecutionMode.REAL_RAZORPAY_ACTION)
     except Exception as exc:
         logger.exception("Razorpay collection-link creation failed for %s", transaction.id)
         return ExecutionResult(decision, final_action, ExecutionStatus.FAILED, "razorpay", None, now,
-            datetime.utcnow(), transaction.amount_inr, actual_provider_cost, "razorpay_request_failed", str(exc),
+            datetime.now(timezone.utc), transaction.amount_inr, actual_provider_cost, "razorpay_request_failed", str(exc),
             ExecutionMode.REAL_RAZORPAY_ACTION)

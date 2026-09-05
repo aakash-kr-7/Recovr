@@ -5,7 +5,7 @@ logic in isolation, which is exactly what a unit test for a gate should
 do.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from app.agent.gate import route
 from app.models.transaction import Transaction
@@ -20,7 +20,7 @@ def _make_transaction(decline_reason: str) -> Transaction:
         decline_reason_raw=decline_reason,
         customer_id="test-customer",
         customer_history={},
-        failed_at=datetime.utcnow(),
+        failed_at=datetime.now(timezone.utc),
         is_synthetic=True,
     )
 
