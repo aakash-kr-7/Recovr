@@ -14,6 +14,9 @@ import type { RecentTransaction, TriageAction } from "@/types/api";
 import { PageHeader } from "@/components/PageHeader";
 import { KpiCard } from "@/components/KpiCard";
 import { ActivityTable } from "@/components/ActivityTable";
+import { RecoveryFunnel } from "@/components/RecoveryFunnel";
+import { RecoveryChart } from "@/components/RecoveryChart";
+import { useRecoveryFunnel } from "@/hooks/useRecoveryFunnel";
 
 const actions: TriageAction[] = [
   "retry_same_rail",
@@ -26,6 +29,7 @@ const actions: TriageAction[] = [
 export function DashboardPage() {
   const [hoveredTx, setHoveredTx] = useState<RecentTransaction | null>(null);
   const { transactions, loading, error } = useRecentTransactions();
+  const funnel = useRecoveryFunnel();
   const atRisk = transactions.reduce(
     (total, item) => total + item.amount_inr,
     0,
@@ -64,6 +68,8 @@ export function DashboardPage() {
           The operations API is unavailable. {error}
         </div>
       )}
+      <RecoveryChart {...funnel} />
+      <RecoveryFunnel {...funnel} />
       {loading && transactions.length === 0 ? (
         <div className="state">Loading payment operations…</div>
       ) : transactions.length === 0 ? (
@@ -255,4 +261,3 @@ function PipelineDiagram({ hoveredTx }: { hoveredTx: RecentTransaction | null })
     </div>
   );
 }
-

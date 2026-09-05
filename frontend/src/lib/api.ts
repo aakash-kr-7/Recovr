@@ -32,6 +32,10 @@ export const api = {
     request<import("@/types/api").RecentTransaction[]>(
       `/transactions/recent?limit=${limit}`,
     ),
+  getRecoveryFunnel: () =>
+    request<import("@/types/api").RecoveryFunnelSummary>(
+      "/transactions/funnel-summary",
+    ),
   getAuditDetail: (transactionId: string) =>
     request<import("@/types/api").AuditDetail>(
       `/transactions/audit/${transactionId}`,
@@ -61,6 +65,14 @@ export const api = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     }),
+  getLiveModeStatus: () =>
+    request<import("@/types/api").LiveModeStatus>("/demo/live-mode/status"),
+  startLiveMode: () =>
+    request<{ status: string; sequence_length?: number }>("/demo/live-mode/start", {
+      method: "POST",
+    }),
+  stopLiveMode: () =>
+    request<{ status: string }>("/demo/live-mode/stop", { method: "POST" }),
   getPublicConfig: () =>
     request<import("@/types/api").PublicConfig>("/config/public"),
 };

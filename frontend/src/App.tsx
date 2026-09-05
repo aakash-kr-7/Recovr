@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, Route, Routes, useNavigate } from "react-router-dom";
 import { DashboardPage } from "@/pages/DashboardPage";
 import { AuditTrailPage } from "@/pages/AuditTrailPage";
@@ -8,6 +8,8 @@ import { DecisionPage } from "@/pages/DecisionPage";
 import { TransactionsPage } from "@/pages/TransactionsPage";
 import { SettingsPage } from "@/pages/SettingsPage";
 import { SimulatorPanel } from "@/components/SimulatorPanel";
+import { api } from "@/lib/api";
+import type { LiveModeStatus } from "@/types/api";
 
 const links = [
   { to: "/", label: "Overview", end: true },
@@ -21,11 +23,55 @@ const links = [
 
 export function App() {
   const [isSimulatorOpen, setIsSimulatorOpen] = useState(false);
+  const [liveMode, setLiveMode] = useState<LiveModeStatus | null>(null);
+  const [liveModeError, setLiveModeError] = useState<string | null>(null);
+  const [liveModeChanging, setLiveModeChanging] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    let cancelled = false;
+    const refresh = async () => {
+      try {
+        const status = await api.getLiveModeStatus();
+        if (!cancelled) {
+          setLiveMode(status);
+          setLiveModeError(null);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setLiveModeError(error instanceof Error ? error.message : "Live Mode unavailable");
+        }
+      }
+    };
+    void refresh();
+    const poll = window.setInterval(refresh, 1500);
+    return () => {
+      cancelled = true;
+      window.clearInterval(poll);
+    };
+  }, []);
 
   const handleSimulateSuccess = (transactionId: string) => {
     navigate("/", { state: { highlightId: transactionId }, replace: true });
   };
+
+  const toggleLiveMode = async () => {
+    setLiveModeChanging(true);
+    setLiveModeError(null);
+    try {
+      if (liveMode?.is_running) await api.stopLiveMode();
+      else await api.startLiveMode();
+      setLiveMode(await api.getLiveModeStatus());
+    } catch (error) {
+      setLiveModeError(error instanceof Error ? error.message : "Live Mode request failed");
+    } finally {
+      setLiveModeChanging(false);
+    }
+  };
+
+  const liveProgress = liveMode?.sequence_length
+    ? `${Math.max(1, liveMode.current_step)} of ${liveMode.sequence_length}`
+    : "Ready";
 
   return (
     <div className="app-shell">
@@ -64,6 +110,20 @@ export function App() {
             <strong>RECOVR Operations</strong>
           </div>
           <div className="topbar-meta">
+            <div className="live-mode-control">
+              <button
+                onClick={() => void toggleLiveMode()}
+                disabled={liveModeChanging}
+                className={liveMode?.is_running ? "live-mode-button is-running" : "live-mode-button"}
+                aria-label={liveMode?.is_running ? "Stop Live Mode" : "Start Live Mode"}
+              >
+                {liveMode?.is_running ? "Stop Live Mode" : "Start Live Mode"}
+              </button>
+              <span className="live-mode-status" aria-live="polite">
+                {liveMode?.is_running ? `LIVE · Step ${liveProgress}` : `Live Mode · ${liveProgress}`}
+              </span>
+              {liveModeError && <span className="live-mode-error">{liveModeError}</span>}
+            </div>
             <button
               onClick={() => setIsSimulatorOpen(true)}
               className="border-none bg-brand hover:bg-brand-light text-white font-semibold text-75 py-2 px-4 rounded-small cursor-pointer transition-colors"

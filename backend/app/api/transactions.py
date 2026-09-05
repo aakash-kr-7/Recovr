@@ -5,7 +5,7 @@ webhook intake path or the evaluation script, never directly via this API.
 """
 
 from fastapi import APIRouter, Depends
-from sqlalchemy import select
+from sqlalchemy import case, func, or_, select
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
@@ -30,6 +30,88 @@ def _serialize_options(options_json: list[dict] | None) -> list[dict] | None:
         opt
         for opt in options_json
     ]
+
+
+@router.get("/funnel-summary")
+def get_funnel_summary(db: Session = Depends(get_db)):
+    """Aggregate the failure/recovery funnel across every known transaction.
+
+    Transactions in RECOVR begin as failed-payment attempts.  Until an
+    outcome explicitly records observed_success=True, their original amount
+    remains in failed_volume_inr.  Recovered volume is deliberately based on
+    measured actual_recovered_inr, never an economic expectation.
+    """
+    failed_or_unresolved = or_(
+        RecoveryOutcomeRow.observed_success.is_(None),
+        RecoveryOutcomeRow.observed_success.is_(False),
+    )
+    attempted_volume_inr, failed_volume_inr, recovered_volume_inr, transaction_count = db.execute(
+        select(
+            func.coalesce(func.sum(Transaction.amount_inr), 0.0),
+            func.coalesce(
+                func.sum(case((failed_or_unresolved, Transaction.amount_inr), else_=0.0)),
+                0.0,
+            ),
+            func.coalesce(
+                func.sum(
+                    case(
+                        (
+                            RecoveryOutcomeRow.observed_success.is_(True),
+                            func.coalesce(RecoveryOutcomeRow.actual_recovered_inr, 0.0),
+                        ),
+                        else_=0.0,
+                    )
+                ),
+                0.0,
+            ),
+            func.count(Transaction.id),
+        ).select_from(Transaction).outerjoin(
+            RecoveryOutcomeRow,
+            RecoveryOutcomeRow.transaction_id == Transaction.id,
+        )
+    ).one()
+    live_mode_started_at = db.scalar(
+        select(func.min(AuditEntry.created_at))
+        .join(Transaction, AuditEntry.transaction_id == Transaction.id)
+        .where(Transaction.data_split == "live_mode")
+    )
+    recovery_rows = db.execute(
+        select(
+            RecoveryOutcomeRow.outcome_timestamp,
+            RecoveryOutcomeRow.actual_recovered_inr,
+        )
+        .join(Transaction, RecoveryOutcomeRow.transaction_id == Transaction.id)
+        .where(
+            Transaction.data_split == "live_mode",
+            RecoveryOutcomeRow.observed_success.is_(True),
+            RecoveryOutcomeRow.actual_recovered_inr.is_not(None),
+        )
+        .order_by(RecoveryOutcomeRow.outcome_timestamp.asc())
+    ).all()
+    cumulative_recovered = 0.0
+    recovery_timeline = []
+    if live_mode_started_at is not None:
+        recovery_timeline.append(
+            {
+                "timestamp": live_mode_started_at.isoformat(),
+                "cumulative_recovered_inr": cumulative_recovered,
+            }
+        )
+    for outcome_timestamp, actual_recovered_inr in recovery_rows:
+        cumulative_recovered += float(actual_recovered_inr)
+        recovery_timeline.append(
+            {
+                "timestamp": outcome_timestamp.isoformat(),
+                "cumulative_recovered_inr": cumulative_recovered,
+            }
+        )
+    return {
+        "attempted_volume_inr": float(attempted_volume_inr),
+        "failed_volume_inr": float(failed_volume_inr),
+        "recovered_volume_inr": float(recovered_volume_inr),
+        "transaction_count": int(transaction_count),
+        "recovery_timeline": recovery_timeline,
+    }
 
 
 @router.get("/recent")

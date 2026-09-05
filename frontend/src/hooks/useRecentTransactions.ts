@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { api, ApiError } from "@/lib/api";
 import type { RecentTransaction } from "@/types/api";
 
-const POLL_INTERVAL_MS = 4000;
+export const RECENT_TRANSACTIONS_POLL_INTERVAL_MS = 4000;
 
 interface UseRecentTransactionsResult {
   transactions: RecentTransaction[];
@@ -43,7 +43,7 @@ export function useRecentTransactions(limit = 50): UseRecentTransactionsResult {
     }
 
     fetchOnce();
-    const interval = setInterval(fetchOnce, POLL_INTERVAL_MS);
+    const interval = setInterval(fetchOnce, RECENT_TRANSACTIONS_POLL_INTERVAL_MS);
     return () => {
       cancelled = true;
       clearInterval(interval);

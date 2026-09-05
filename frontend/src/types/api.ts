@@ -114,3 +114,24 @@ export interface PublicConfig {
   review_cost_inr: number;
   dunning_cost_inr: number;
 }
+
+export interface RecoveryFunnelSummary {
+  attempted_volume_inr: number;
+  failed_volume_inr: number;
+  recovered_volume_inr: number;
+  transaction_count: number;
+  recovery_timeline: RecoveryTimelinePoint[];
+}
+
+export interface RecoveryTimelinePoint {
+  timestamp: string;
+  cumulative_recovered_inr: number;
+}
+
+export interface LiveModeStatus {
+  is_running: boolean;
+  current_step: number;
+  transactions_fired: number;
+  sequence_length: number;
+  current_preset: string | null;
+}

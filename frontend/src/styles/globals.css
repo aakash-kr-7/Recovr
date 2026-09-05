@@ -139,6 +139,46 @@ select:focus-visible {
   align-items: center;
   gap: 14px;
 }
+.live-mode-control {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: 3px 7px;
+}
+.live-mode-button {
+  border: 1px solid #bfcbdf;
+  border-radius: 4px;
+  background: #fff;
+  padding: 7px 9px;
+  color: #3158c8;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+}
+.live-mode-button:hover:not(:disabled) {
+  border-color: #3158c8;
+  background: #f3f6ff;
+}
+.live-mode-button.is-running {
+  border-color: #d8b877;
+  background: #fff9ed;
+  color: #805f20;
+}
+.live-mode-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+.live-mode-status {
+  color: #687589;
+  font-size: 10px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.live-mode-error {
+  grid-column: 1 / -1;
+  color: #a12e47;
+  font-size: 10px;
+}
 .avatar {
   display: grid;
   width: 28px;
@@ -261,6 +301,66 @@ main {
 }
 .chart-wrap {
   margin: 0 -7px -6px;
+}
+.recovery-funnel-panel {
+  min-height: 256px;
+}
+.recovery-funnel-chart {
+  min-height: 190px;
+}
+.recovered-counter-panel {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.5fr);
+  gap: 28px;
+  min-height: 238px;
+}
+.recovered-counter-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid #e7ebf1;
+  padding: 8px 28px 8px 4px;
+}
+.recovered-counter-copy h2 {
+  margin: 7px 0 4px;
+  color: #1b273a;
+  font-size: 16px;
+}
+.recovered-counter-value {
+  display: block;
+  margin-top: 7px;
+  color: #13825f;
+  font-size: 35px;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+.recovered-counter-copy p:not(.eyebrow),
+.recovered-counter-loading {
+  margin: 9px 0 0;
+  color: #778397;
+  font-size: 11px;
+  line-height: 1.45;
+}
+.recovered-line-wrap {
+  min-width: 0;
+  padding-top: 5px;
+}
+.recovered-line-heading {
+  margin: 0 0 8px;
+  color: #58657a;
+  font-size: 11px;
+  font-weight: 700;
+}
+.recovery-chart-empty {
+  display: grid;
+  min-height: 152px;
+  place-items: center;
+  border: 1px dashed #d7dee8;
+  background: #fafbfc;
+  padding: 18px;
+  color: #758096;
+  font-size: 12px;
+  text-align: center;
 }
 .health-list {
   display: grid;
@@ -548,6 +648,12 @@ main {
   .topbar {
     padding: 0 18px;
   }
+  .topbar-meta {
+    gap: 8px;
+  }
+  .live-mode-status {
+    display: none;
+  }
   .page-heading,
   .panel-heading {
     flex-direction: column;
@@ -557,6 +663,14 @@ main {
   .detail-grid,
   .reasoning-grid {
     grid-template-columns: 1fr;
+  }
+  .recovered-counter-panel {
+    grid-template-columns: 1fr;
+  }
+  .recovered-counter-copy {
+    border-right: 0;
+    border-bottom: 1px solid #e7ebf1;
+    padding: 4px 0 18px;
   }
   main {
     padding: 20px 16px;
