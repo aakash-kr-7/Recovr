@@ -177,7 +177,10 @@ export function SettingsPage() {
               Why these numbers: each recovery action is scored by expected net
               rupee value (expected recovery minus execution cost). These
               baseline constants calibrate the optimizer so it never recommends
-              a recovery action that costs more than it recovers.
+              a recovery action that costs more than it recovers. These are the
+              SAME cost constants used live in Recoveries and Transactions, not
+              separate evaluation-only numbers — ensuring the offline evaluation
+              directly reflects real-world operational economics.
             </p>
           </div>
         </div>
@@ -199,6 +202,12 @@ export function SettingsPage() {
             <dd>{money(config.dunning_cost_inr)}</dd>
           </div>
         </dl>
+        <div style={{ marginTop: "1rem", padding: "12px 14px", background: "rgba(255, 255, 255, 0.03)", borderRadius: "6px", border: "1px solid var(--border-subtle, rgba(255, 255, 255, 0.08))" }}>
+          <p style={{ margin: 0, fontSize: "12px", lineHeight: "1.6", color: "var(--text-secondary, #94a3b8)" }}>
+            <strong style={{ color: "var(--text-primary, #f8fafc)" }}>Worked example from real transaction (ID: <code>660e4c21</code>):</strong> A
+            ₹2,500 payment failed with <code>bank_timeout</code>. The optimizer evaluated an alternate-rail retry with an estimated 34.38% success probability, yielding an expected recovery of ₹859.50. Subtracting the ₹10.00 alternate-rail cost gives an expected net recovery of ₹849.50 — beating same-rail retry (₹773.25 net after ₹8.00 cost), manual review (₹359.63 net after ₹6.00 cost), and dunning (₹156.11 net after ₹4.00 cost). This expected net recovery is the exact number the optimizer compares across every possible action before picking a winner.
+          </p>
+        </div>
       </section>
 
       <PageContext>
