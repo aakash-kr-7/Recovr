@@ -71,12 +71,19 @@ export function DashboardPage() {
       <RecoveryChart {...funnel} />
       <RecoveryFunnel {...funnel} />
       {loading && transactions.length === 0 ? (
-        <div className="state">Loading payment operations…</div>
+        <>
+          <div className="state" data-tour="decision-flow">Loading the decision flow…</div>
+          <div className="state" data-tour="live-decision-feed">Loading live recovery activity…</div>
+        </>
       ) : transactions.length === 0 ? (
-        <div className="state">
-          No recovery activity yet. Incoming failed payments will appear here
-          after triage.
-        </div>
+        <>
+          <div className="state" data-tour="decision-flow">
+            The decision flow will appear here when a failed payment reaches triage.
+          </div>
+          <div className="state" data-tour="live-decision-feed">
+            No recovery activity yet. Incoming failed payments will appear here after triage.
+          </div>
+        </>
       ) : (
         <>
           <div className="kpi-grid">
@@ -116,7 +123,7 @@ export function DashboardPage() {
               detail="Pending outcome or execution"
             />
           </div>
-          <section className="panel">
+          <section className="panel" data-tour="decision-flow">
             <div className="panel-heading">
               <div>
                 <h2>Decision pipeline</h2>
@@ -167,7 +174,7 @@ export function DashboardPage() {
               </div>
             </section>
           </div>
-          <section className="panel">
+          <section className="panel" data-tour="live-decision-feed">
             <div className="panel-heading">
               <div>
                 <h2>Recent recovery activity</h2>

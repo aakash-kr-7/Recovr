@@ -28,7 +28,7 @@ export function AuditTrailPage() {
         title="Audit trail"
         description="Every triage decision, economic ranking and execution outcome retained for review."
       />
-      <div className="filter-bar">
+      <div className="filter-bar" data-tour="audit-filters">
         <label>
           Action
           <select

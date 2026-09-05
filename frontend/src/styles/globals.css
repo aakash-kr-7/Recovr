@@ -179,6 +179,93 @@ select:focus-visible {
   color: #a12e47;
   font-size: 10px;
 }
+.tour-button {
+  border: 1px solid #d3dbe7;
+  border-radius: 4px;
+  background: #fff;
+  padding: 7px 9px;
+  color: #46546a;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.tour-button:hover {
+  border-color: #3158c8;
+  color: #3158c8;
+}
+.guided-tour {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+}
+.guided-tour-shade {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 30, 46, 0.68);
+}
+.guided-tour-spotlight {
+  position: fixed;
+  z-index: 1;
+  border: 2px solid #a8c0ff;
+  border-radius: 5px;
+  box-shadow: 0 0 0 9999px rgba(20, 30, 46, 0.68), 0 0 0 4px rgba(255, 255, 255, 0.22);
+  pointer-events: none;
+}
+.guided-tour-card {
+  position: fixed;
+  z-index: 2;
+  width: min(354px, calc(100vw - 32px));
+  border: 1px solid #d5dce7;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 14px 38px rgba(18, 30, 48, 0.24);
+  padding: 18px;
+}
+.guided-tour-card h2 {
+  margin: 7px 0 6px;
+  color: #1b273a;
+  font-size: 16px;
+}
+.guided-tour-card > p:not(.eyebrow) {
+  margin: 0;
+  color: #556379;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.guided-tour-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+.guided-tour-actions > div {
+  display: flex;
+  gap: 7px;
+}
+.guided-tour-actions button {
+  border-radius: 4px;
+  padding: 7px 9px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+}
+.guided-tour-skip,
+.guided-tour-back {
+  border: 1px solid #d6dee9;
+  background: #fff;
+  color: #667388;
+}
+.guided-tour-next {
+  border: 1px solid #3158c8;
+  background: #3158c8;
+  color: #fff;
+}
+.guided-tour-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
 .avatar {
   display: grid;
   width: 28px;
@@ -652,6 +739,9 @@ main {
     gap: 8px;
   }
   .live-mode-status {
+    display: none;
+  }
+  .tour-button {
     display: none;
   }
   .page-heading,

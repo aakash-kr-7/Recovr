@@ -30,7 +30,7 @@ export function RecoveryFunnel({ summary, loading, error }: RecoveryFunnelProps)
     : [];
 
   return (
-    <section className="panel recovery-funnel-panel" aria-labelledby="recovery-funnel-title">
+    <section className="panel recovery-funnel-panel" data-tour="recovery-funnel" aria-labelledby="recovery-funnel-title">
       <div className="panel-heading">
         <div>
           <h2 id="recovery-funnel-title">Recovery funnel</h2>

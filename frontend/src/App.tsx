@@ -8,6 +8,7 @@ import { DecisionPage } from "@/pages/DecisionPage";
 import { TransactionsPage } from "@/pages/TransactionsPage";
 import { SettingsPage } from "@/pages/SettingsPage";
 import { SimulatorPanel } from "@/components/SimulatorPanel";
+import { GuidedTour } from "@/components/GuidedTour";
 import { api } from "@/lib/api";
 import type { LiveModeStatus } from "@/types/api";
 
@@ -23,6 +24,7 @@ const links = [
 
 export function App() {
   const [isSimulatorOpen, setIsSimulatorOpen] = useState(false);
+  const [isTourOpen, setIsTourOpen] = useState(false);
   const [liveMode, setLiveMode] = useState<LiveModeStatus | null>(null);
   const [liveModeError, setLiveModeError] = useState<string | null>(null);
   const [liveModeChanging, setLiveModeChanging] = useState(false);
@@ -110,7 +112,7 @@ export function App() {
             <strong>RECOVR Operations</strong>
           </div>
           <div className="topbar-meta">
-            <div className="live-mode-control">
+            <div className="live-mode-control" data-tour="simulation-controls">
               <button
                 onClick={() => void toggleLiveMode()}
                 disabled={liveModeChanging}
@@ -124,6 +126,9 @@ export function App() {
               </span>
               {liveModeError && <span className="live-mode-error">{liveModeError}</span>}
             </div>
+            <button onClick={() => setIsTourOpen(true)} className="tour-button">
+              Take a tour
+            </button>
             <button
               onClick={() => setIsSimulatorOpen(true)}
               className="border-none bg-brand hover:bg-brand-light text-white font-semibold text-75 py-2 px-4 rounded-small cursor-pointer transition-colors"
@@ -164,6 +169,7 @@ export function App() {
         onClose={() => setIsSimulatorOpen(false)}
         onSuccess={handleSimulateSuccess}
       />
+      <GuidedTour open={isTourOpen} onClose={() => setIsTourOpen(false)} />
     </div>
   );
 }

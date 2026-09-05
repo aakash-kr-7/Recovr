@@ -31,13 +31,13 @@ export function ResultsPage() {
   if (loading)
     return (
       <div className="page-stack">
-        <div className="state">Loading evaluation report…</div>
+        <div className="state" data-tour="calibration-chart">Loading evaluation report…</div>
       </div>
     );
   if (error || !report)
     return (
       <div className="page-stack">
-        <div className="state state-error">
+        <div className="state state-error" data-tour="calibration-chart">
           Evaluation unavailable. {error ?? "No report found."}
         </div>
       </div>
@@ -100,7 +100,7 @@ export function ResultsPage() {
           positive
         />
       </div>
-      <section className="panel">
+      <section className="panel" data-tour="calibration-chart">
         <div className="panel-heading">
           <div>
             <h2>Baseline comparison</h2>
@@ -287,4 +287,3 @@ function ActionDistribution({ policy }: { policy: PolicyMetrics }) {
     </div>
   );
 }
-
