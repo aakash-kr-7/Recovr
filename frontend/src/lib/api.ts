@@ -19,7 +19,9 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
     try {
       const json = JSON.parse(body);
       if (json.detail) errorMessage = json.detail;
-    } catch (e) {}
+    } catch {
+      // Ignored
+    }
     throw new ApiError(errorMessage || `Error ${res.status}`, res.status);
   }
   return res.json() as Promise<T>;
@@ -36,8 +38,18 @@ export const api = {
     ),
   getLatestEvaluation: () =>
     request<import("@/types/api").EvaluationReport>("/evaluation/latest"),
-  getDemoPresets: () => request<any[]>("/demo/presets"),
-  simulateDemo: (payload: any) =>
+  getDemoPresets: () =>
+    request<
+      {
+        name: string;
+        payload: {
+          amount_inr: number;
+          decline_reason: string;
+          customer_history: Record<string, unknown>;
+        };
+      }[]
+    >("/demo/presets"),
+  simulateDemo: (payload: Record<string, unknown>) =>
     request<{
       status: string;
       transaction_id: string;

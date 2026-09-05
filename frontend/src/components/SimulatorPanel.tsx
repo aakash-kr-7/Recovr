@@ -14,7 +14,12 @@ export function SimulatorPanel({
   onClose,
   onSuccess,
 }: SimulatorPanelProps) {
-  const [presets, setPresets] = useState<any[]>([]);
+  const [presets, setPresets] = useState<
+    {
+      name: string;
+      payload: { amount_inr: number; decline_reason: string };
+    }[]
+  >([]);
   const [loadingPresets, setLoadingPresets] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [simulating, setSimulating] = useState<string | null>(null);
@@ -42,15 +47,20 @@ export function SimulatorPanel({
 
   if (!isOpen) return null;
 
-  const handleSimulate = async (preset: any) => {
+  const handleSimulate = async (
+    preset: {
+      name: string;
+      payload: Record<string, unknown>;
+    }
+  ) => {
     setSimulating(preset.name);
     setError(null);
     try {
       const res = await api.simulateDemo(preset.payload);
       onSuccess(res.transaction_id);
       onClose();
-    } catch (err: any) {
-      setError(err.message || "Simulation failed.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Simulation failed.");
     } finally {
       setSimulating(null);
     }
