@@ -5,7 +5,7 @@ import { AuditTrailPage } from "@/pages/AuditTrailPage";
 import { ResultsPage } from "@/pages/ResultsPage";
 import { RecoveriesPage } from "@/pages/RecoveriesPage";
 import { DecisionPage } from "@/pages/DecisionPage";
-import { TransactionsPage } from "@/pages/TransactionsPage";
+
 import { SettingsPage } from "@/pages/SettingsPage";
 import { LiveModePage } from "@/pages/LiveModePage";
 import { SimulatorPanel } from "@/components/SimulatorPanel";
@@ -20,7 +20,7 @@ const links = [
   { to: "/", label: "Dashboard", end: true },
   { to: "/live", label: "Live Mode" },
   { to: "/recoveries", label: "Recoveries" },
-  { to: "/transactions", label: "Transactions" },
+
   { to: "/audit", label: "Audit trail" },
   { to: "/results", label: "Evaluation" },
   { to: "/settings", label: "About & Configuration" },
@@ -208,7 +208,7 @@ export function App() {
             <Route path="/" element={<DashboardPage />} />
             <Route path="/live" element={<LiveModePage />} />
             <Route path="/recoveries" element={<RecoveriesPage />} />
-            <Route path="/transactions" element={<TransactionsPage />} />
+            <Route path="/transactions" element={<Navigate to="/recoveries" replace />} />
             <Route
               path="/decisions/:transactionId"
               element={<DecisionPage />}

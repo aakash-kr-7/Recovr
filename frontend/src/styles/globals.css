@@ -1464,3 +1464,415 @@ main {
   color: var(--text-secondary);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   RECOVERIES PAGE — Operational Worklist
+   ═══════════════════════════════════════════════════════════════ */
+
+.recoveries-kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.recoveries-kpi {
+  border: 1px solid #e2e7ee;
+  border-radius: 6px;
+  background: #fff;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.recoveries-kpi-label {
+  color: #697588;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.recoveries-kpi-value {
+  color: #1b273a;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.recoveries-tabs-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.recoveries-tabs {
+  display: flex;
+  gap: 2px;
+  border: 1px solid #dce2eb;
+  border-radius: 6px;
+  padding: 3px;
+  background: #f6f7f9;
+}
+.recoveries-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  padding: 7px 12px;
+  color: #657287;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+.recoveries-tab:hover {
+  background: #edf0f5;
+}
+.recoveries-tab.active {
+  background: #fff;
+  color: #1b273a;
+  font-weight: 650;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.recoveries-tab-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.recoveries-tab-count {
+  background: #edf0f5;
+  border-radius: 10px;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #687589;
+}
+.recoveries-tab.active .recoveries-tab-count {
+  background: #e0e8f7;
+  color: #3158c8;
+}
+
+.recoveries-action-chip {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: #eef1f7;
+  color: #3a4b66;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.recoveries-row--pending td:first-child {
+  border-left: 3px solid #d4a844;
+}
+.recoveries-row--recovered td:first-child {
+  border-left: 3px solid #13825f;
+}
+.recoveries-row--failed td:first-child {
+  border-left: 3px solid #ad334d;
+}
+.recoveries-row--held td:first-child {
+  border-left: 3px solid #8893a4;
+}
+
+@media (max-width: 900px) {
+  .recoveries-kpi-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .recoveries-tabs-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .recoveries-tabs {
+    overflow-x: auto;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   AUDIT TRAIL PAGE — Forensic Decision Timeline
+   ═══════════════════════════════════════════════════════════════ */
+
+.audit-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.audit-timeline {
+  display: grid;
+  gap: 10px;
+}
+
+.audit-event-card {
+  border: 1px solid #e0e5ec;
+  border-radius: 8px;
+  background: #fff;
+  padding: 0;
+  overflow: hidden;
+  transition: box-shadow 0.15s;
+}
+.audit-event-card:hover {
+  box-shadow: 0 2px 12px rgba(18,30,48,0.07);
+}
+
+.audit-event-card--ai {
+  border-left: 3px solid var(--brand-primary, #3158c8);
+}
+.audit-event-card--rule {
+  border-left: 3px solid #a8b3c5;
+}
+
+.audit-event-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid #f0f2f5;
+  background: #fafbfc;
+}
+
+.audit-event-path-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 650;
+  color: #435168;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.audit-path-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.audit-path-indicator--ai {
+  background: var(--brand-primary, #3158c8);
+  box-shadow: 0 0 0 2px rgba(49,88,200,0.2);
+}
+.audit-path-indicator--rule {
+  background: #a8b3c5;
+  box-shadow: 0 0 0 2px rgba(168,179,197,0.25);
+}
+
+.audit-event-time {
+  font-size: 11px;
+  color: #7c8798;
+  white-space: nowrap;
+}
+
+.audit-event-body {
+  display: grid;
+  grid-template-columns: 1.2fr 1.2fr 0.9fr 1fr 0.8fr 0.7fr 0.7fr;
+  gap: 12px;
+  padding: 14px 16px;
+  align-items: start;
+}
+
+.audit-event-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.audit-event-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #8a95a6;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.audit-event-value {
+  font-size: 12px;
+  color: #344158;
+}
+.audit-event-action {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: #eef1f7;
+  color: #3a4b66;
+  font-size: 11px;
+  font-weight: 600;
+  width: fit-content;
+}
+.audit-event-status {
+  font-weight: 600;
+}
+
+/* Confidence meter */
+.audit-confidence {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.audit-confidence-bar {
+  width: 56px;
+  height: 5px;
+  border-radius: 3px;
+  background: #e8ecf2;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.audit-confidence-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+.audit-confidence-label {
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 32px;
+}
+.audit-confidence-na {
+  font-size: 10px;
+  color: #a0a9b6;
+  font-style: italic;
+}
+
+/* Outcome pills */
+.audit-outcome-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  width: fit-content;
+}
+.audit-outcome-pill--success {
+  background: #e6f5ef;
+  color: #157154;
+}
+.audit-outcome-pill--fail {
+  background: #fbecef;
+  color: #ad334d;
+}
+.audit-outcome-pill--held {
+  background: #edf0f4;
+  color: #516076;
+}
+.audit-outcome-pill--pending {
+  background: #fff7e6;
+  color: #805f20;
+}
+
+/* AI reasoning excerpt */
+.audit-reasoning-excerpt {
+  padding: 10px 16px 14px;
+  border-top: 1px solid #f0f2f5;
+  background: #fafbfd;
+}
+.audit-reasoning-excerpt p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #536177;
+  white-space: normal;
+}
+
+@media (max-width: 1100px) {
+  .audit-event-body {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .audit-event-body {
+    grid-template-columns: 1fr 1fr;
+  }
+  .audit-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* ── Dark mode overrides for Recoveries + Audit ── */
+:root[data-theme="dark"] .recoveries-kpi {
+  background: var(--surface-raised);
+  border-color: var(--border-subtle);
+}
+:root[data-theme="dark"] .recoveries-kpi-value {
+  color: var(--text-primary);
+}
+:root[data-theme="dark"] .recoveries-kpi-label {
+  color: var(--text-secondary);
+}
+:root[data-theme="dark"] .recoveries-tabs {
+  background: var(--surface-base);
+  border-color: var(--border-subtle);
+}
+:root[data-theme="dark"] .recoveries-tab {
+  color: var(--text-secondary);
+}
+:root[data-theme="dark"] .recoveries-tab:hover {
+  background: var(--surface-subtle);
+}
+:root[data-theme="dark"] .recoveries-tab.active {
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+:root[data-theme="dark"] .recoveries-tab-count {
+  background: var(--surface-subtle);
+  color: var(--text-secondary);
+}
+:root[data-theme="dark"] .recoveries-action-chip {
+  background: hsla(218, 89%, 51%, 0.12);
+  color: var(--brand-primary);
+}
+
+:root[data-theme="dark"] .audit-event-card {
+  background: var(--surface-raised);
+  border-color: var(--border-subtle);
+}
+:root[data-theme="dark"] .audit-event-header {
+  background: var(--surface-subtle);
+  border-color: var(--border-subtle);
+}
+:root[data-theme="dark"] .audit-event-path-badge {
+  color: var(--text-primary);
+}
+:root[data-theme="dark"] .audit-event-time {
+  color: var(--text-secondary);
+}
+:root[data-theme="dark"] .audit-event-value {
+  color: var(--text-primary);
+}
+:root[data-theme="dark"] .audit-event-label {
+  color: var(--text-muted, var(--text-secondary));
+}
+:root[data-theme="dark"] .audit-event-action {
+  background: hsla(218, 89%, 51%, 0.12);
+  color: var(--brand-primary);
+}
+:root[data-theme="dark"] .audit-confidence-bar {
+  background: var(--border-subtle);
+}
+:root[data-theme="dark"] .audit-reasoning-excerpt {
+  background: var(--surface-subtle);
+  border-color: var(--border-subtle);
+}
+:root[data-theme="dark"] .audit-reasoning-excerpt p {
+  color: var(--text-secondary);
+}
+:root[data-theme="dark"] .audit-outcome-pill--success {
+  background: hsla(150, 48%, 44%, 0.18);
+  color: #3ed9a2;
+}
+:root[data-theme="dark"] .audit-outcome-pill--fail {
+  background: hsla(345, 55%, 44%, 0.18);
+  color: #f28da2;
+}
+:root[data-theme="dark"] .audit-outcome-pill--held {
+  background: var(--surface-subtle);
+  color: var(--text-secondary);
+}
+:root[data-theme="dark"] .audit-outcome-pill--pending {
+  background: hsla(35, 90%, 50%, 0.14);
+  color: #f0b952;
+}
