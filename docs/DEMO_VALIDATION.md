@@ -103,13 +103,17 @@ The golden record was verified through:
 ```text
 GET /transactions/recent → RecentTransaction → Overview / Recoveries / Transactions / Audit Trail
 GET /transactions/audit/{transaction_id} → AuditDetail → Decision detail
-GET /evaluation/latest → EvaluationReport → Evaluation
+GET /evaluation/latest → EvaluationReport → Evaluation (Reliability calibration curve)
+GET /config/public → PublicConfig → Settings (safe operational parameters)
+GET /demo/presets → DemoPresets → Simulator panel drawer
+POST /demo/simulate → SimulationResult → Real-time triage lifecycle
 ```
 
 The local UI rendered Overview, Recoveries, Transactions, Decision detail,
-Audit Trail, and Evaluation against the live API. `null` provider references
+Audit Trail, Evaluation, and Settings against the live API. `null` provider references
 and actual recovery values render as `Unavailable`, never as zero or a fake
 recovery.
+
 
 ## Real-provider blocker
 

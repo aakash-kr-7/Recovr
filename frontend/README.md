@@ -1,7 +1,15 @@
 # RECOVR frontend
 
 React + TypeScript operations console for RECOVR. It presents read-only
-backend evidence; it does not execute recovery actions.
+backend evidence, an interactive failure simulator, and safe operational settings.
+
+## Design Language & Tokens
+
+The frontend is styled using Razorpay's real published design tokens extracted directly from the Blade design system source:
+- **Brand Palette**: Intense brand blue (`hsla(218, 89%, 51%, 1)`), brand light (`hsla(218, 100%, 63%, 1)`), and subtle background tint (`hsla(218, 89%, 51%, 0.09)`).
+- **Blade Scales**: Exact typography font scale (`text-25` through `text-1100`), spacing scale (`0` through `11`), and border radius tokens (`xsmall` through `round`).
+- **Persistent Header Badge**: Calm, clear "TEST MODE" badge in the top bar (`App.tsx`) communicating that no real money is at risk.
+- **Brand Integrity**: Deliberately avoids inserting third-party trademarked logos, wordmarks, or proprietary assets.
 
 ## Run locally
 
@@ -14,22 +22,24 @@ npm run dev
 The default API is `http://localhost:8000`. Set `VITE_API_BASE_URL` in
 `.env.local` when needed.
 
-## Current screens
+## Current screens & components
 
-- Overview, recoveries, and transaction ledger read `GET /transactions/recent`.
-- Decision detail reads `GET /transactions/audit/{transaction_id}`.
-- Audit Trail uses the same transaction read model.
-- Evaluation reads `GET /evaluation/latest` and labels every displayed value
-  as synthetic evaluation data.
+- **Overview (`/`)**: High-level recovery metrics, KPI cards, and recent activity ledger.
+- **Recoveries (`/recoveries`)**: Filterable ledger of active cases with path and execution mode filters.
+- **Transactions (`/transactions`)**: Full transaction history with decline reasons and amounts.
+- **Decision Detail (`/decisions/:id`)**: Full economic ranking breakdown (expected net value, risk penalties, costs), verbatim reasoning trace, and measured outcome.
+- **Audit Trail (`/audit`)**: Verifiable chronological log of all decisions, gate evaluations, and provider attempts.
+- **Evaluation (`/results`)**: Counterfactual comparison of policies (Retry-All, Fixed-Rule, RECOVR), regret analysis, five-seed robustness, and a reliability calibration chart (predicted vs. observed recovery rates).
+- **Settings (`/settings`)**: Read-only operational configuration from `GET /config/public` (active LLM provider, models, batch spend cap, min auto confidence, credential status, and cost baseline).
+- **Simulator Drawer (Header)**: Slide-over interactive failure simulator allowing operators to trigger realistic failure presets and observe live triage.
 
-Execution mode and outcome are separate: a real Razorpay attempt is not a
-recovery, simulated harness activity is not a provider action, and a null
-actual-recovery value is rendered as unavailable rather than zero.
+Execution mode and outcome are strictly decoupled: a real Razorpay attempt is not a recovery, simulated harness activity is never called a provider action, and null actual-recovery values are rendered as `Unavailable` rather than zero.
 
-## Checks
+## Verification & Checks
 
 ```bash
 npm run typecheck
-npm run build
 npm run lint
+npm run build
 ```
+

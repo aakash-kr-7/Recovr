@@ -21,9 +21,9 @@ paths based on how much the decline reason alone tells you.
               ┌────────────────┴────────────────┐
               ▼                                 ▼
    ┌───────────────────────┐       ┌─────────────────────────────┐
-   │ Deterministic fast path │       │ Reasoning path (Claude API)  │
+   │ Deterministic fast path │       │ Reasoning path (Groq/Claude)│
    │ app/agent/rules/         │       │ app/agent/reasoning.py       │
-   │                          │       │                              │
+   │                          │       │                             │
    │ Fixed table: decline     │       │ Given: decline reason, last  │
    │ code → action, no model  │       │ N transactions for this      │
    │ call. Used only when the │       │ customer, time-of-day/date   │
@@ -102,7 +102,11 @@ explainable, bounded, and gated.
 Every triage decision — regardless of which path produced it — writes one
 `AuditEntry` row containing the full reasoning trace. The frontend
 dashboard reads this table directly; there is no separate "logging system"
-to keep in sync. See [`backend/app/db/models.py`](../../backend/app/db/models.py).
+to keep in sync. See [`backend/app/db/`](../../backend/app/db/).
+
+## Safe public inspection (`GET /config/public`)
+
+To allow judges and operators to inspect runtime configuration honestly without compromising environment security, the service exposes `GET /config/public`. This endpoint serves operational thresholds (active LLM provider, spend ceiling, confidence gate, per-customer attempt limits, credential mode, and cost baseline) while strictly excluding every secret, webhook key, and database credential.
 
 ## What is out of scope, deliberately
 
@@ -111,8 +115,10 @@ to keep in sync. See [`backend/app/db/models.py`](../../backend/app/db/models.py
   (e.g., retry via UPI instead of card), not building a multi-PSP
   orchestration layer. That space is already occupied (GR4VY, Razorpay's
   own routing) and is out of scope for a one-week solo build.
-- **No custom-trained ML model.** The reasoning path uses the Claude API
-  directly with structured context, not a fine-tuned classifier. See
+- **No custom-trained ML model.** The reasoning path uses an LLM provider
+  directly (Groq with `openai/gpt-oss-120b` by default, or Anthropic Claude)
+  with structured context, not a fine-tuned classifier. See
   [`docs/decisions/0002-no-custom-model.md`](../decisions/0002-no-custom-model.md).
 - **No multi-tenant merchant accounts.** One demo merchant, hardcoded, is
   sufficient to prove the mechanism.
+
