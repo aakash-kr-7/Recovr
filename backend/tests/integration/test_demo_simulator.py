@@ -40,12 +40,20 @@ def test_demo_presets_exist():
     response = client.get("/demo/presets")
     assert response.status_code == 200
     presets = response.json()
-    assert len(presets) == 4
+    assert len(presets) == 10
+    for p in presets:
+        assert "description" in p
     names = [p["name"] for p in presets]
     assert "Nighttime bank timeout" in names
     assert "High-value clean customer" in names
     assert "Stolen card" in names
     assert "Unmapped bank error" in names
+    assert "Repeat offender" in names
+    assert "Low-value nuisance" in names
+    assert "Spend cap in action" in names
+    assert "Genuinely novel bank code" in names
+    assert "Account closed" in names
+    assert "Compliance block" in names
 
 @patch("app.api.demo.get_triage_decision")
 def test_demo_simulate_stolen_card(mock_get_triage_decision, db_session):
@@ -113,4 +121,82 @@ def test_demo_simulate_all_presets(db_session):
             
             decision = db_session.query(RecoveryDecisionRow).filter_by(transaction_id=txn_id).first()
             assert decision is not None
+
+def test_repeat_offender_economic_shift(db_session):
+    """
+    Proves the 'Repeat offender' scenario's second/third occurrence actually produces 
+    a measurably different economic outcome than the first, proving the historical 
+    evidence loop is doing real work here.
+    """
+    with patch("app.api.demo.get_triage_decision") as mock_llm:
+        from app.schemas.triage import TriageAction
+        from app.agent.reasoning import ReasoningResult
+        
+        # We mock LLM to always suggest RETRY_SAME_RAIL with some reasoning.
+        mock_llm.return_value = ReasoningResult(
+            action=TriageAction.RETRY_SAME_RAIL,
+            reasoning_text="LLM suggests retry",
+            confidence=0.9
+        )
+        
+        response = client.get("/demo/presets")
+        presets = response.json()
+        repeat_offender = next(p for p in presets if p["name"] == "Repeat offender")
+        
+        # Occurrence 1: Before any historical evidence is logged.
+        resp1 = client.post("/demo/simulate", json=repeat_offender["payload"])
+        assert resp1.status_code == 200
+        txn1_id = resp1.json()["transaction_id"]
+        
+        dec1 = db_session.query(RecoveryDecisionRow).filter_by(transaction_id=txn1_id).first()
+        expected_recovery_1 = dec1.selected_expected_net_recovery_inr
+        
+        # Seed 5 failed outcomes for this customer to cross MIN_SAMPLE_SIZE
+        import uuid
+        from datetime import datetime
+        from app.models.transaction import Transaction
+        
+        for _ in range(5):
+            fake_txn_id = str(uuid.uuid4())
+            fake_txn = Transaction(
+                id=fake_txn_id,
+                razorpay_payment_id=f"fake_pay_{fake_txn_id}",
+                amount_inr=repeat_offender["payload"]["amount_inr"],
+                decline_reason=repeat_offender["payload"]["decline_reason"],
+                decline_reason_raw="Insufficient Funds",
+                customer_id="demo_cust",
+                customer_history=repeat_offender["payload"]["customer_history"],
+                failed_at=datetime.utcnow(),
+                is_synthetic=True,
+                data_split="demo"
+            )
+            db_session.add(fake_txn)
+            
+            fake_out = RecoveryOutcomeRow(
+                transaction_id=fake_txn_id,
+                action="retry_same_rail",
+                execution_status="completed",
+                observed_success=False,
+                amount_attempted=repeat_offender["payload"]["amount_inr"],
+                action_cost_inr=0.0,
+                risk_penalty_inr=0.0,
+                outcome_source="executor",
+                outcome_timestamp=datetime.utcnow()
+            )
+            db_session.add(fake_out)
+        db_session.commit()
+        
+        # Occurrence 2: After 5 failures, historical evidence should shift probability to 0.0
+        resp2 = client.post("/demo/simulate", json=repeat_offender["payload"])
+        assert resp2.status_code == 200
+        txn2_id = resp2.json()["transaction_id"]
+        
+        dec2 = db_session.query(RecoveryDecisionRow).filter_by(transaction_id=txn2_id).first()
+        expected_recovery_2 = dec2.selected_expected_net_recovery_inr
+        
+        # Prove the expected recovery shifted downwards
+        assert expected_recovery_2 < expected_recovery_1
+        
+        # In fact, with 0% historical success on retry_same_rail, it shouldn't pick retry_same_rail anymore
+        assert dec2.selected_action != dec1.selected_action
 
