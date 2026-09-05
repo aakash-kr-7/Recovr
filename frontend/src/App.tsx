@@ -7,6 +7,7 @@ import { RecoveriesPage } from "@/pages/RecoveriesPage";
 import { DecisionPage } from "@/pages/DecisionPage";
 import { TransactionsPage } from "@/pages/TransactionsPage";
 import { SettingsPage } from "@/pages/SettingsPage";
+import { LiveModePage } from "@/pages/LiveModePage";
 import { SimulatorPanel } from "@/components/SimulatorPanel";
 import { GuidedTour } from "@/components/GuidedTour";
 import { api } from "@/lib/api";
@@ -15,6 +16,7 @@ import type { LiveModeStatus } from "@/types/api";
 
 const links = [
   { to: "/", label: "Overview", end: true },
+  { to: "/live", label: "Live Mode" },
   { to: "/recoveries", label: "Recoveries" },
   { to: "/transactions", label: "Transactions" },
   { to: "/audit", label: "Audit trail" },
@@ -47,12 +49,12 @@ export function App() {
       }
     };
     void refresh();
-    const poll = window.setInterval(refresh, 1500);
+    const poll = window.setInterval(refresh, liveMode?.is_running ? 1000 : 2000);
     return () => {
       cancelled = true;
       window.clearInterval(poll);
     };
-  }, []);
+  }, [liveMode?.is_running]);
 
   const handleSimulateSuccess = (transactionId: string) => {
     navigate("/", { state: { highlightId: transactionId }, replace: true });
@@ -62,8 +64,12 @@ export function App() {
     setLiveModeChanging(true);
     setLiveModeError(null);
     try {
-      if (liveMode?.is_running) await api.stopLiveMode();
-      else await api.startLiveMode();
+      if (liveMode?.is_running) {
+        await api.stopLiveMode();
+      } else {
+        await api.startLiveMode();
+        navigate("/live");
+      }
       setLiveMode(await api.getLiveModeStatus());
     } catch (error) {
       setLiveModeError(error instanceof Error ? error.message : "Live Mode request failed");
@@ -87,18 +93,33 @@ export function App() {
           </div>
         </div>
         <nav aria-label="Primary navigation">
-          {links.map((link, index) => (
-            <NavLink
-              key={`${link.label}-${index}`}
-              to={link.to}
-              end={link.end}
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
+          {links.map((link, index) => {
+            const isLive = link.to === "/live";
+            return (
+              <NavLink
+                key={`${link.label}-${index}`}
+                to={link.to}
+                end={link.end}
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+                style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}
+              >
+                <span>{link.label}</span>
+                {isLive && liveMode?.is_running && (
+                  <span className="live-nav-badge is-live">
+                    <span className="pulse-dot" />
+                    LIVE
+                  </span>
+                )}
+                {isLive && !liveMode?.is_running && (liveMode?.current_step ?? 0) > 0 && (
+                  <span className="live-nav-badge is-complete">
+                    {liveMode?.current_step}/10
+                  </span>
+                )}
+              </NavLink>
+            );
+          })}
         </nav>
         <div className="sidebar-footer">
           <span className="status-dot" /> Test environment
@@ -159,6 +180,7 @@ export function App() {
         <main>
           <Routes>
             <Route path="/" element={<DashboardPage />} />
+            <Route path="/live" element={<LiveModePage />} />
             <Route path="/recoveries" element={<RecoveriesPage />} />
             <Route path="/transactions" element={<TransactionsPage />} />
             <Route

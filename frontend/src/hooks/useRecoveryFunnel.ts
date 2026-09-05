@@ -3,7 +3,10 @@ import { api, ApiError } from "@/lib/api";
 import type { RecoveryFunnelSummary } from "@/types/api";
 import { RECENT_TRANSACTIONS_POLL_INTERVAL_MS } from "@/hooks/useRecentTransactions";
 
-export function useRecoveryFunnel(scope: "session" | "all" = "session") {
+export function useRecoveryFunnel(
+  scope: "session" | "all" = "session",
+  pollIntervalMs = RECENT_TRANSACTIONS_POLL_INTERVAL_MS,
+) {
   const [summary, setSummary] = useState<RecoveryFunnelSummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -27,12 +30,12 @@ export function useRecoveryFunnel(scope: "session" | "all" = "session") {
     }
     setLoading(true);
     fetchSummary();
-    const poll = window.setInterval(fetchSummary, RECENT_TRANSACTIONS_POLL_INTERVAL_MS);
+    const poll = window.setInterval(fetchSummary, pollIntervalMs);
     return () => {
       cancelled = true;
       window.clearInterval(poll);
     };
-  }, [scope]);
+  }, [scope, pollIntervalMs]);
 
   return { summary, loading, error };
 }
