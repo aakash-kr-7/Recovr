@@ -3,6 +3,7 @@ import { ActivityTable } from "@/components/ActivityTable";
 import { PageHeader } from "@/components/PageHeader";
 import { useRecentTransactions } from "@/hooks/useRecentTransactions";
 import type { TriageAction } from "@/types/api";
+import { PageContext } from "@/components/PageContext";
 
 export function RecoveriesPage() {
   const { transactions, loading, error } = useRecentTransactions(200);
@@ -85,6 +86,10 @@ export function RecoveriesPage() {
           <ActivityTable transactions={filtered} />
         </section>
       )}
+
+      <PageContext>
+        These are the cases still awaiting resolution. You can click any row to see exactly why the system chose that action, and trace the decision path from failure to execution.
+      </PageContext>
     </div>
   );
 }

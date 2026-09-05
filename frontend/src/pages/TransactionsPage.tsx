@@ -1,6 +1,7 @@
 import { ActivityTable } from "@/components/ActivityTable";
 import { PageHeader } from "@/components/PageHeader";
 import { useRecentTransactions } from "@/hooks/useRecentTransactions";
+import { PageContext } from "@/components/PageContext";
 
 export function TransactionsPage() {
   const { transactions, loading, error } = useRecentTransactions(200);
@@ -28,6 +29,10 @@ export function TransactionsPage() {
           <ActivityTable transactions={transactions} />
         </section>
       )}
+
+      <PageContext>
+        This is the full historical record of all processed items, regardless of outcome. Use this to see absolutely everything that flowed through the system, not just what currently needs attention.
+      </PageContext>
     </div>
   );
 }

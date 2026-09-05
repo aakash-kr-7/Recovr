@@ -4,6 +4,7 @@ import { HowItWorks } from "@/components/HowItWorks";
 import { api } from "@/lib/api";
 import { money, percent } from "@/lib/operations";
 import type { PublicConfig } from "@/types/api";
+import { PageContext } from "@/components/PageContext";
 
 export function SettingsPage() {
   const [config, setConfig] = useState<PublicConfig | null>(null);
@@ -199,6 +200,10 @@ export function SettingsPage() {
           </div>
         </dl>
       </section>
+
+      <PageContext>
+        This page details the underlying operational rules and economic constraints governing the AI agent, demonstrating that every action is safely bounded by strict sandbox parameters and verifiable cost logic.
+      </PageContext>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { OutcomeBadge, StatusBadge } from "@/components/StatusBadges";
 import { ACTION_LABELS, money, percent } from "@/lib/operations";
 import type { TriageAction } from "@/types/api";
 import { PageHeader } from "@/components/PageHeader";
+import { PageContext } from "@/components/PageContext";
 
 export function AuditTrailPage() {
   const { transactions, loading, error } = useRecentTransactions(200);
@@ -117,6 +118,10 @@ export function AuditTrailPage() {
           </table>
         </section>
       )}
+
+      <PageContext>
+        This shows HOW each decision was reasoned, not just what happened. Confidence scores only appear for AI-informed decisions — deterministic decisions don't need a confidence score because the rule is fixed.
+      </PageContext>
     </div>
   );
 }

@@ -8,6 +8,7 @@ import { useRecentTransactions } from "@/hooks/useRecentTransactions";
 import { OutcomeBadge, StatusBadge } from "@/components/StatusBadges";
 import { ACTION_LABELS, money } from "@/lib/operations";
 import { api } from "@/lib/api";
+import { PageContext } from "@/components/PageContext";
 import type { LiveModeStatus, RecentTransaction } from "@/types/api";
 
 const LIVE_MODE_PRESETS = [
@@ -470,6 +471,10 @@ export function LiveModePage() {
           </section>
         </>
       )}
+
+      <PageContext>
+        Live Mode runs a scripted, repeatable sequence of realistic failure scenarios for demonstration purposes — this is not live customer traffic. Watch it to understand how the system dynamically responds to various error codes, network timeouts, and spend caps.
+      </PageContext>
     </div>
   );
 }

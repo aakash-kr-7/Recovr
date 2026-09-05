@@ -12,6 +12,8 @@ import { SimulatorPanel } from "@/components/SimulatorPanel";
 import { GuidedTour } from "@/components/GuidedTour";
 import { api } from "@/lib/api";
 import { useTheme } from "@/context/useTheme";
+import { useMerchant } from "@/context/MerchantContext";
+import { LoginPage } from "@/pages/LoginPage";
 import type { LiveModeStatus } from "@/types/api";
 
 const links = [
@@ -26,6 +28,7 @@ const links = [
 
 export function App() {
   const { theme, toggleTheme } = useTheme();
+  const { merchantName } = useMerchant();
   const [isSimulatorOpen, setIsSimulatorOpen] = useState(false);
   const [isTourOpen, setIsTourOpen] = useState(false);
   const [liveMode, setLiveMode] = useState<LiveModeStatus | null>(null);
@@ -78,15 +81,24 @@ export function App() {
     }
   };
 
-  const liveProgress = liveMode?.sequence_length
-    ? `${Math.max(1, liveMode.current_step)} of ${liveMode.sequence_length}`
-    : "Ready";
+  let liveStatusText = "";
+  if (!liveMode || (liveMode.current_step === 0 && !liveMode.is_running)) {
+    liveStatusText = "Live Mode: ready";
+  } else if (liveMode.is_running) {
+    liveStatusText = `Live Mode running — step ${Math.max(1, liveMode.current_step)} of ${liveMode.sequence_length}`;
+  } else {
+    liveStatusText = `Live Mode complete — ${liveMode.sequence_length} scenarios run`;
+  }
+
+  if (!merchantName) {
+    return <LoginPage />;
+  }
 
   return (
     <div className="app-shell">
       <aside className="sidebar">
         <div className="brand">
-          <span className="brand-mark">R</span>
+          <img src="/logo.svg" alt="RECOVR" width="24" height="24" className="brand-logo" />
           <div>
             <strong>RECOVR</strong>
             <small>Revenue recovery</small>
@@ -114,7 +126,7 @@ export function App() {
                 )}
                 {isLive && !liveMode?.is_running && (liveMode?.current_step ?? 0) > 0 && (
                   <span className="live-nav-badge is-complete">
-                    {liveMode?.current_step}/10
+                    Complete
                   </span>
                 )}
               </NavLink>
@@ -131,7 +143,7 @@ export function App() {
         <header className="topbar">
           <div>
             <span className="merchant-label">Merchant workspace</span>
-            <strong>RECOVR Operations</strong>
+            <strong>{merchantName}</strong>
           </div>
           <div className="topbar-meta">
             <button
@@ -153,7 +165,7 @@ export function App() {
                   {liveMode?.is_running ? "Stop Live Mode" : "Start Live Mode"}
                 </button>
                 <span className="live-mode-status" aria-live="polite">
-                  {liveMode?.is_running ? `LIVE · Step ${liveProgress}` : `Live Mode · ${liveProgress}`}
+                  {liveStatusText}
                 </span>
                 {liveModeError && <span className="live-mode-error">{liveModeError}</span>}
               </div>
@@ -174,8 +186,8 @@ export function App() {
               <span className="w-1.5 h-1.5 rounded-round bg-brand inline-block" />
               TEST MODE
             </span>
-            <span className="avatar" aria-label="Current operator">
-              OP
+            <span className="avatar" aria-live="polite" aria-label={`Current operator: ${merchantName}`}>
+              {merchantName ? merchantName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'OP'}
             </span>
           </div>
         </header>
