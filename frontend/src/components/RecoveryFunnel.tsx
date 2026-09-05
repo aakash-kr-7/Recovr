@@ -22,11 +22,15 @@ interface RecoveryFunnelProps {
   summary: RecoveryFunnelSummary | null;
   loading: boolean;
   error: string | null;
+  scope?: "session" | "all";
 }
 
-export function RecoveryFunnel({ summary, loading, error }: RecoveryFunnelProps) {
+export function RecoveryFunnel({ summary, loading, error, scope }: RecoveryFunnelProps) {
   if (loading && !summary) return <div className="state">Loading recovery funnel…</div>;
   if (error && !summary) return <div className="state state-error">Recovery funnel unavailable. {error}</div>;
+
+  const activeScope = scope ?? summary?.scope ?? "session";
+  const isSession = activeScope === "session";
 
   const data = summary
     ? [
@@ -41,9 +45,13 @@ export function RecoveryFunnel({ summary, loading, error }: RecoveryFunnelProps)
       <div className="panel-heading">
         <div>
           <h2 id="recovery-funnel-title">Recovery funnel</h2>
-          <p>Measured recovery only; pending outcomes remain in failed volume.</p>
+          <p>
+            Measured recovery for {isSession ? "current live session" : "all-time database history"} (pending reviews remain in failed volume until resolved).
+          </p>
         </div>
-        <span className="badge badge-neutral">{summary?.transaction_count ?? 0} ATTEMPTS</span>
+        <span className={`badge ${isSession ? "badge-sim" : "badge-neutral"}`}>
+          {summary?.transaction_count ?? 0} {isSession ? "SESSION ATTEMPTS" : "ALL-TIME ATTEMPTS"}
+        </span>
       </div>
       <div className="recovery-funnel-chart">
         <ResponsiveContainer width="100%" height={190}>

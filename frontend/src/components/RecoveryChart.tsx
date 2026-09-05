@@ -23,6 +23,7 @@ interface RecoveryChartProps {
   summary: RecoveryFunnelSummary | null;
   loading: boolean;
   error: string | null;
+  scope?: "session" | "all";
 }
 
 function AnimatedMoney({ value }: { value: number }) {
@@ -47,7 +48,9 @@ function AnimatedMoney({ value }: { value: number }) {
   return <strong className="recovered-counter-value">{money(displayed)}</strong>;
 }
 
-export function RecoveryChart({ summary, loading, error }: RecoveryChartProps) {
+export function RecoveryChart({ summary, loading, error, scope }: RecoveryChartProps) {
+  const activeScope = scope ?? summary?.scope ?? "session";
+  const isSession = activeScope === "session";
   const timeline = summary?.recovery_timeline ?? [];
   const hasRecovery = timeline.some((point) => point.cumulative_recovered_inr > 0);
   const chartData = timeline.map((point) => ({
@@ -58,17 +61,19 @@ export function RecoveryChart({ summary, loading, error }: RecoveryChartProps) {
   return (
     <section className="panel recovered-counter-panel" aria-labelledby="recovered-counter-title">
       <div className="recovered-counter-copy">
-        <p className="eyebrow">MEASURED RECOVERY</p>
+        <p className="eyebrow">{isSession ? "THIS SESSION MEASURED RECOVERY" : "ALL-TIME MEASURED RECOVERY"}</p>
         <h2 id="recovered-counter-title">₹ recovered so far</h2>
         {loading && !summary ? (
           <div className="recovered-counter-loading">Loading measured outcomes…</div>
         ) : (
           <AnimatedMoney value={summary?.recovered_volume_inr ?? 0} />
         )}
-        <p>Confirmed outcomes only. Expected recovery is not included.</p>
+        <p>{isSession ? "Current live session outcomes only. Seed/historical data excluded." : "Confirmed outcomes across full database history."}</p>
       </div>
       <div className="recovered-line-wrap">
-        <div className="recovered-line-heading">Cumulative recovery since Live Mode began</div>
+        <div className="recovered-line-heading">
+          {isSession ? "Cumulative recovery since Live Mode began" : "All-time cumulative recovery"}
+        </div>
         {error && !summary ? (
           <div className="state state-error">Recovery history unavailable. {error}</div>
         ) : !hasRecovery ? (

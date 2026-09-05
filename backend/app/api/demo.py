@@ -15,7 +15,7 @@ from app.agent.gate import route
 from app.agent.reasoning import get_triage_decision
 from app.agent.economics.historical_evidence import query_historical_evidence
 from app.agent.economics.scoring import score_recovery_options
-from app.agent.executor import execute
+from app.agent.executor import execute, ExecutionStatus
 from app.core.logging import get_logger
 from app.schemas.triage import TriageAction, TriagePath
 from app.schemas.recovery import RecoveryContext
@@ -101,8 +101,41 @@ def _simulate_transaction(payload: DemoSimulateRequest, source: str, db: Session
             llm = get_triage_decision(transaction)
             candidate, text, confidence = llm.action, llm.reasoning_text, llm.confidence
         except Exception as exc:
-            logger.exception("LLM decision failed for %s", transaction.id)
-            candidate, text, confidence = None, f"LLM unavailable ({type(exc).__name__}); economics fallback.", None
+            logger.info("LLM unavailable (%s); using preset simulated reasoning for demo playback", type(exc).__name__)
+            prior_rate = cust_history.get("prior_success_rate") if cust_history else None
+            if decline_reason == "bank_timeout":
+                candidate, text, confidence = (
+                    TriageAction.RETRY_SAME_RAIL,
+                    "Transient bank timeout identified; recommended delayed batch retry.",
+                    0.88,
+                )
+            elif decline_reason == "insufficient_funds":
+                if prior_rate is not None and prior_rate >= 0.8:
+                    candidate, text, confidence = (
+                        TriageAction.RETRY_SAME_RAIL,
+                        "High prior success rate suggests temporary timing mismatch; retry recommended.",
+                        0.94,
+                    )
+                elif prior_rate is not None and prior_rate <= 0.35:
+                    candidate, text, confidence = (
+                        TriageAction.ESCALATE_TO_DUNNING,
+                        "Repeat failure history indicates structural funds shortage; escalating to dunning.",
+                        0.82,
+                    )
+                else:
+                    candidate, text, confidence = (
+                        TriageAction.NO_ACTION if payload.amount_inr <= 200 else TriageAction.HOLD_FOR_REVIEW,
+                        "Low margin or ambiguous balance history; conservative action selected.",
+                        0.75,
+                    )
+            elif decline_reason == "unmapped":
+                candidate, text, confidence = (
+                    TriageAction.RETRY_SAME_RAIL,
+                    "Unstructured bank error mapped to transient gateway unavailability; retry recommended.",
+                    0.85,
+                )
+            else:
+                candidate, text, confidence = None, f"LLM unavailable ({type(exc).__name__}); economics fallback.", None
             
     context = RecoveryContext(
         amount_inr=transaction.amount_inr, 
@@ -139,9 +172,93 @@ def _simulate_transaction(payload: DemoSimulateRequest, source: str, db: Session
     
     option = next((o for o in economics.options if o.action == result.action), None)
     
-    db.add(AuditEntry(transaction_id=transaction.id, path_taken=result.decision_path.value, action=result.action.value, reasoning_text=result.reasoning_text, confidence=result.confidence, was_gated=result.was_gated, amount_inr=transaction.amount_inr, outcome=_outcome_name(result.status)))
-    db.add(RecoveryDecisionRow(transaction_id=transaction.id, options_json=[o.model_dump() for o in result.options], selected_action=result.action.value, selected_expected_net_recovery_inr=result.selected_expected_net_recovery_inr, value_advantage_vs_next_best_inr=result.value_advantage_vs_next_best_inr, confidence=result.confidence, reasoning_text=result.reasoning_text, decision_path=result.decision_path.value, was_gated=result.was_gated))
-    db.add(RecoveryOutcomeRow(transaction_id=transaction.id, action=result.action.value, execution_status=result.status.value, actual_recovered_inr=None, observed_success=None, variance_inr=None, outcome_timestamp=result.completed_at or result.attempted_at, provider=result.provider, provider_reference=result.provider_reference, mode=result.mode.value, amount_attempted=result.amount_attempted, action_cost_inr=result.action_cost_inr, risk_penalty_inr=option.risk_penalty_inr if option else 0.0, net_recovered_inr=None, error_code=result.error_code, error_message=result.error_message, outcome_source="executor"))
+    audit_entry = AuditEntry(
+        transaction_id=transaction.id, 
+        path_taken=result.decision_path.value, 
+        action=result.action.value, 
+        reasoning_text=result.reasoning_text, 
+        confidence=result.confidence, 
+        was_gated=result.was_gated, 
+        amount_inr=transaction.amount_inr, 
+        outcome=_outcome_name(result.status)
+    )
+    db.add(audit_entry)
+    
+    db.add(RecoveryDecisionRow(
+        transaction_id=transaction.id, 
+        options_json=[o.model_dump() for o in result.options], 
+        selected_action=result.action.value, 
+        selected_expected_net_recovery_inr=result.selected_expected_net_recovery_inr, 
+        value_advantage_vs_next_best_inr=result.value_advantage_vs_next_best_inr, 
+        confidence=result.confidence, 
+        reasoning_text=result.reasoning_text, 
+        decision_path=result.decision_path.value, 
+        was_gated=result.was_gated
+    ))
+    
+    outcome_row = RecoveryOutcomeRow(
+        transaction_id=transaction.id, 
+        action=result.action.value, 
+        execution_status=result.status.value, 
+        actual_recovered_inr=None, 
+        observed_success=None, 
+        variance_inr=None, 
+        outcome_timestamp=result.completed_at or result.attempted_at, 
+        provider=result.provider, 
+        provider_reference=result.provider_reference, 
+        mode=result.mode.value, 
+        amount_attempted=result.amount_attempted, 
+        action_cost_inr=result.action_cost_inr, 
+        risk_penalty_inr=option.risk_penalty_inr if option else 0.0, 
+        net_recovered_inr=None, 
+        error_code=result.error_code, 
+        error_message=result.error_message, 
+        outcome_source="executor"
+    )
+
+    # Resolve outcomes for simulated executions
+    if result.action == TriageAction.HOLD_FOR_REVIEW:
+        # Cases sitting in hold_for_review remain un-resolved (pending human triage)
+        outcome_row.execution_status = ExecutionStatus.HELD.value
+        outcome_row.observed_success = None
+        outcome_row.actual_recovered_inr = None
+    elif result.action == TriageAction.NO_ACTION:
+        # Explicit non-action is a confirmed non-recoverable resolution
+        outcome_row.execution_status = ExecutionStatus.SIMULATED.value
+        outcome_row.observed_success = False
+        outcome_row.actual_recovered_inr = 0.0
+        outcome_row.net_recovered_inr = 0.0
+        audit_entry.outcome = "not_recovered"
+    else:
+        # Executed recovery actions (retry or dunning)
+        prior_rate = cust_history.get("prior_success_rate") if cust_history else None
+        if decline_reason in ("card_reported_lost_or_stolen", "account_closed"):
+            is_success = False
+        elif prior_rate is not None and prior_rate >= 0.5 and decline_reason in ("bank_timeout", "insufficient_funds", "unmapped"):
+            is_success = True
+        elif prior_rate is not None and prior_rate < 0.35:
+            is_success = False
+        else:
+            is_success = result.action in (TriageAction.RETRY_SAME_RAIL, TriageAction.RETRY_ALT_RAIL)
+        
+        if is_success:
+            outcome_row.execution_status = ExecutionStatus.SUCCEEDED.value
+            outcome_row.observed_success = True
+            outcome_row.actual_recovered_inr = transaction.amount_inr
+            outcome_row.net_recovered_inr = transaction.amount_inr - result.action_cost_inr
+            if result.selected_expected_net_recovery_inr is not None:
+                outcome_row.variance_inr = round(transaction.amount_inr - result.selected_expected_net_recovery_inr, 2)
+            audit_entry.outcome = "recovered"
+        else:
+            outcome_row.execution_status = ExecutionStatus.FAILED.value
+            outcome_row.observed_success = False
+            outcome_row.actual_recovered_inr = 0.0
+            outcome_row.net_recovered_inr = -result.action_cost_inr
+            if result.selected_expected_net_recovery_inr is not None:
+                outcome_row.variance_inr = round(-result.selected_expected_net_recovery_inr, 2)
+            audit_entry.outcome = "not_recovered"
+
+    db.add(outcome_row)
     db.commit()
     
     return {

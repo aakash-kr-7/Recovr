@@ -16,7 +16,7 @@ interface UseRecentTransactionsResult {
  * new audit entries. Simple polling rather than websockets — deliberate
  * for a one-week solo build; see docs/decisions/ if this needs revisiting.
  */
-export function useRecentTransactions(limit = 50): UseRecentTransactionsResult {
+export function useRecentTransactions(limit = 50, scope: "session" | "all" = "session"): UseRecentTransactionsResult {
   const [transactions, setTransactions] = useState<RecentTransaction[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -26,7 +26,7 @@ export function useRecentTransactions(limit = 50): UseRecentTransactionsResult {
 
     async function fetchOnce() {
       try {
-        const data = await api.getRecentTransactions(limit);
+        const data = await api.getRecentTransactions(limit, scope);
         if (!cancelled) {
           setTransactions(data);
           setError(null);
@@ -42,13 +42,14 @@ export function useRecentTransactions(limit = 50): UseRecentTransactionsResult {
       }
     }
 
+    setLoading(true);
     fetchOnce();
     const interval = setInterval(fetchOnce, RECENT_TRANSACTIONS_POLL_INTERVAL_MS);
     return () => {
       cancelled = true;
       clearInterval(interval);
     };
-  }, [limit]);
+  }, [limit, scope]);
 
   return { transactions, loading, error };
 }

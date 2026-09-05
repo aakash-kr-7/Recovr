@@ -28,13 +28,13 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 }
 
 export const api = {
-  getRecentTransactions: (limit = 50) =>
+  getRecentTransactions: (limit = 50, scope = "session") =>
     request<import("@/types/api").RecentTransaction[]>(
-      `/transactions/recent?limit=${limit}`,
+      `/transactions/recent?limit=${limit}&scope=${scope}`,
     ),
-  getRecoveryFunnel: () =>
+  getRecoveryFunnel: (scope = "session") =>
     request<import("@/types/api").RecoveryFunnelSummary>(
-      "/transactions/funnel-summary",
+      `/transactions/funnel-summary?scope=${scope}`,
     ),
   getAuditDetail: (transactionId: string) =>
     request<import("@/types/api").AuditDetail>(

@@ -118,11 +118,18 @@ export interface PublicConfig {
 }
 
 export interface RecoveryFunnelSummary {
+  scope?: "session" | "all";
   attempted_volume_inr: number;
   failed_volume_inr: number;
   recovered_volume_inr: number;
   transaction_count: number;
   recovery_timeline: RecoveryTimelinePoint[];
+  pending_review_count: number;
+  pending_review_volume_inr: number;
+  resolved_count: number;
+  resolved_volume_inr: number;
+  recovery_rate_pct: number | null;
+  expected_recovery_inr: number;
 }
 
 export interface RecoveryTimelinePoint {
