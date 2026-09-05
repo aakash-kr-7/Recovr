@@ -1,4 +1,14 @@
 import { useState } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  ReferenceLine,
+} from "recharts";
 import { useEvaluationReport } from "@/hooks/useEvaluationReport";
 import { money, percent } from "@/lib/operations";
 import type { PolicyMetrics } from "@/types/api";
@@ -191,6 +201,71 @@ export function ResultsPage() {
             </div>
           </dl>
         </section>
+      </section>
+      <section className="panel">
+        <h2>Calibration reliability</h2>
+        <p>Comparing predicted probability against realized recovery rate on the holdout evaluation set. Perfect calibration follows the dotted line.</p>
+        <div style={{ width: "100%", height: 320, marginTop: "1rem" }}>
+          {report.calibration && report.calibration.length > 0 ? (
+            <ResponsiveContainer>
+              <LineChart
+                data={report.calibration}
+                margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" opacity={0.2} vertical={false} />
+                <XAxis
+                  dataKey="expected_probability"
+                  type="number"
+                  domain={[0, 1]}
+                  tickFormatter={(val) => `${(val * 100).toFixed(0)}%`}
+                  stroke="var(--text-secondary)"
+                  tick={{ fill: "var(--text-secondary)" }}
+                  name="Predicted Probability"
+                />
+                <YAxis
+                  dataKey="observed_recovery_rate"
+                  type="number"
+                  domain={[0, 1]}
+                  tickFormatter={(val) => `${(val * 100).toFixed(0)}%`}
+                  stroke="var(--text-secondary)"
+                  tick={{ fill: "var(--text-secondary)" }}
+                  name="Observed Recovery"
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "var(--surface-raised)",
+                    borderColor: "var(--border-subtle)",
+                    color: "var(--text-primary)",
+                    borderRadius: "8px",
+                  }}
+                  formatter={(value: number, name: string) => [
+                    `${(value * 100).toFixed(1)}%`,
+                    name === "observed_recovery_rate" ? "Observed Recovery" : name,
+                  ]}
+                  labelFormatter={(label) => `Expected: ${(Number(label) * 100).toFixed(1)}%`}
+                />
+                <ReferenceLine
+                  segment={[
+                    { x: 0, y: 0 },
+                    { x: 1, y: 1 },
+                  ]}
+                  stroke="var(--text-secondary)"
+                  strokeDasharray="4 4"
+                />
+                <Line
+                  type="monotone"
+                  dataKey="observed_recovery_rate"
+                  stroke="var(--brand-primary)"
+                  strokeWidth={3}
+                  dot={{ fill: "var(--surface-base)", stroke: "var(--brand-primary)", strokeWidth: 2, r: 5 }}
+                  activeDot={{ r: 7 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="state">No calibration data available in the evaluation report.</div>
+          )}
+        </div>
       </section>
       <p className="footnote">
         {report.note} Legacy binary retry diagnostics have deliberately been

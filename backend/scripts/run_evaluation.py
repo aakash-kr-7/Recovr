@@ -66,15 +66,15 @@ def _recovr(txn, llm_insights=None, db=None, **kwargs):
         evidence = None
         
     decision = score_recovery_options(transaction_id=txn.id, permitted_actions=list(TriageAction), context=context, historical_evidence=evidence)
-    expected = next(option.expected_net_recovery_inr for option in decision.options if option.action == decision.selected_action)
-    return decision.selected_action, expected
+    selected_option = next(option for option in decision.options if option.action == decision.selected_action)
+    return decision.selected_action, selected_option.expected_net_recovery_inr, selected_option.estimated_probability
 
 
 def _fixed(txn, **kwargs):
-    return (FAST_PATH_TABLE.get(txn.decline_reason, (TriageAction.RETRY_SAME_RAIL,))[0], None)
+    return (FAST_PATH_TABLE.get(txn.decline_reason, (TriageAction.RETRY_SAME_RAIL,))[0], None, None)
 
 
-def _retry_all(txn, **kwargs): return TriageAction.RETRY_SAME_RAIL, None
+def _retry_all(txn, **kwargs): return TriageAction.RETRY_SAME_RAIL, None, None
 
 POLICY_SELECTORS = {"retry_all_same_rail": _retry_all, "fixed_rule_policy": _fixed, "recovr": _recovr}
 
@@ -83,12 +83,12 @@ def _true_expected(outcome):
     return round(outcome["success_probability"] * outcome["recovery_amount_if_success_inr"] - outcome["action_cost_inr"] - outcome["risk_penalty_inr"], 2)
 
 
-def _record(txn, action, model_expected=None, held=False):
+def _record(txn, action, model_expected=None, held=False, model_prob=None):
     outcomes, selected = txn.action_outcomes, txn.action_outcomes[action.value]
     expected_values = {name: _true_expected(value) for name, value in outcomes.items()}
     best_expected, best_realized = max(expected_values.values()), max(value["net_recovered_inr"] for value in outcomes.values())
     return {"transaction_id": txn.id, "amount_inr": txn.amount_inr, "action": action.value, "held": held,
-        "model_expected_net_inr": model_expected, "true_expected_net_inr": expected_values[action.value],
+        "model_expected_net_inr": model_expected, "model_prob": model_prob, "true_expected_net_inr": expected_values[action.value],
         "true_best_expected_net_inr": best_expected, "expected_regret_inr": round(best_expected - expected_values[action.value], 2),
         "gross_recovered_inr": selected["recovered_amount_inr"], "action_cost_inr": selected["action_cost_inr"],
         "risk_penalty_inr": selected["risk_penalty_inr"], "net_recovered_inr": selected["net_recovered_inr"],
@@ -99,14 +99,14 @@ def _record(txn, action, model_expected=None, held=False):
 def _apply_policy(transactions, policy, constrained, cap, db=None):
     records, spent = [], 0.0
     for txn in transactions:
-        selected, model_expected = POLICY_SELECTORS[policy](txn, db=db)
+        selected, model_expected, model_prob = POLICY_SELECTORS[policy](txn, db=db)
         # Same deterministic action-cost budget for every policy. The cost is
         # known policy semantics, not a hidden outcome; no policy sees outcome.
         planned_cost = ACTION_COSTS[selected.value]
         held = constrained and spent + planned_cost > cap
-        if held: selected, model_expected = TriageAction.HOLD_FOR_REVIEW, None
+        if held: selected, model_expected, model_prob = TriageAction.HOLD_FOR_REVIEW, None, None
         else: spent += planned_cost
-        records.append(_record(txn, selected, model_expected, held))
+        records.append(_record(txn, selected, model_expected, held, model_prob))
     return records
 
 
@@ -126,6 +126,27 @@ def _summary(records):
 
 
 def _view(transactions, constrained, cap, db=None): return {policy: _summary(_apply_policy(transactions, policy, constrained, cap, db)) for policy in POLICIES}
+
+
+def _calibration(records):
+    valid = [r for r in records if r.get("model_prob") is not None]
+    if not valid: return []
+    bins = [[] for _ in range(5)]
+    for r in valid:
+        idx = min(int(r["model_prob"] / 0.2), 4)
+        bins[idx].append(r)
+    stats = []
+    for i, b in enumerate(bins):
+        if not b: continue
+        avg_pred = sum(r["model_prob"] for r in b) / len(b)
+        avg_obs = sum(1 for r in b if r["recovered"]) / len(b)
+        stats.append({
+            "bin": f"[{i*0.2:.2f}, {(i+1)*0.2:.2f})",
+            "count": len(b),
+            "expected_probability": round(avg_pred, 4),
+            "observed_recovery_rate": round(avg_obs, 4)
+        })
+    return stats
 
 
 def _increment(recovr, baseline):
@@ -184,6 +205,7 @@ def run_evaluation():
         "false_positive_transaction_ids": binary["false_positive_transaction_ids"], "false_negative_transaction_ids": binary["false_negative_transaction_ids"],
         "money": {"total_at_risk_inr": recovr["total_amount_at_risk_inr"], "recovered_inr": recovr["gross_recovered_inr"], "missed_recovery_inr": recovr["missed_recovery_value_inr"], "false_positive_cost_inr": recovr["risk_penalty_inr"], "net_recovered_inr": recovr["net_recovery_inr"]},
         "economic_evaluation": {"total_at_risk_inr": recovr["total_amount_at_risk_inr"], "total_expected_recovery_inr": recovr["model_expected_net_value_inr"], "total_actual_recovered_inr": recovr["gross_recovered_inr"], "expected_vs_actual_variance_inr": round(recovr["net_recovery_inr"] - recovr["model_expected_net_value_inr"], 2), "average_expected_value_per_decision_inr": round(recovr["model_expected_net_value_inr"] / len(transactions), 2), "average_realized_value_per_decision_inr": round(recovr["net_recovery_inr"] / len(transactions), 2), "recovery_rate": recovr["recovery_rate_by_inr"], "wasted_retry_cost_inr": recovr["action_cost_inr"], "missed_recovery_inr": recovr["missed_recovery_value_inr"], "amount_band_breakdown": []},
+        "calibration": _calibration(recovr_records),
         "note": "Comparable action-level views are primary; legacy binary fields are secondary."}
     # Assertions catch population, conservation, and constraint drift.
     for view in (unconstrained, constrained):

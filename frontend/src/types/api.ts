@@ -89,5 +89,11 @@ export interface EvaluationReport {
     constrained_execution_quality: PolicyMetrics;
     cap_induced_execution_overrides: number;
   };
+  calibration?: Array<{
+    bin: string;
+    count: number;
+    expected_probability: number;
+    observed_recovery_rate: number;
+  }>;
   note: string;
 }

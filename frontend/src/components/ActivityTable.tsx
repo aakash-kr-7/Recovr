@@ -4,10 +4,14 @@ import { OutcomeBadge, StatusBadge } from "@/components/StatusBadges";
 import { ACTION_LABELS, money } from "@/lib/operations";
 import { useRecentTransactions } from "@/hooks/useRecentTransactions";
 
+import { type RecentTransaction } from "@/types/api";
+
 export function ActivityTable({
   transactions,
+  onHoverTransaction,
 }: {
   transactions: ReturnType<typeof useRecentTransactions>["transactions"];
+  onHoverTransaction?: (tx: RecentTransaction | null) => void;
 }) {
   const location = useLocation();
   const highlightId = location.state?.highlightId;
@@ -45,6 +49,8 @@ export function ActivityTable({
                   ? "bg-brand-subtle transition-colors duration-1000"
                   : "transition-colors duration-1000"
               }
+              onMouseEnter={() => onHoverTransaction?.(item as RecentTransaction)}
+              onMouseLeave={() => onHoverTransaction?.(null)}
             >
               <td>
                 <Link

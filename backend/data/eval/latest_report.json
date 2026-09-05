@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T15:43:31.025599",
+  "generated_at": "2026-09-05T07:39:47.025471",
   "evaluation_version": "comparable_action_economics_v3",
   "canonical_seed": 42,
   "holdout_set_size": 60,
@@ -769,5 +769,25 @@
     "missed_recovery_inr": 93899.09,
     "amount_band_breakdown": []
   },
+  "calibration": [
+    {
+      "bin": "[0.00, 0.20)",
+      "count": 2,
+      "expected_probability": 0.095,
+      "observed_recovery_rate": 0.0
+    },
+    {
+      "bin": "[0.20, 0.40)",
+      "count": 41,
+      "expected_probability": 0.3089,
+      "observed_recovery_rate": 0.3659
+    },
+    {
+      "bin": "[0.40, 0.60)",
+      "count": 17,
+      "expected_probability": 0.4441,
+      "observed_recovery_rate": 0.5294
+    }
+  ],
   "note": "Comparable action-level views are primary; legacy binary fields are secondary."
 }

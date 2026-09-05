@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Bar,
@@ -9,7 +10,7 @@ import {
 } from "recharts";
 import { useRecentTransactions } from "@/hooks/useRecentTransactions";
 import { ACTION_LABELS, money } from "@/lib/operations";
-import type { TriageAction } from "@/types/api";
+import type { RecentTransaction, TriageAction } from "@/types/api";
 import { PageHeader } from "@/components/PageHeader";
 import { KpiCard } from "@/components/KpiCard";
 import { ActivityTable } from "@/components/ActivityTable";
@@ -23,6 +24,7 @@ const actions: TriageAction[] = [
 ];
 
 export function DashboardPage() {
+  const [hoveredTx, setHoveredTx] = useState<RecentTransaction | null>(null);
   const { transactions, loading, error } = useRecentTransactions();
   const atRisk = transactions.reduce(
     (total, item) => total + item.amount_inr,
@@ -108,6 +110,15 @@ export function DashboardPage() {
               detail="Pending outcome or execution"
             />
           </div>
+          <section className="panel">
+            <div className="panel-heading">
+              <div>
+                <h2>Decision pipeline</h2>
+                <p>Hover over a transaction in the live feed to trace its execution path.</p>
+              </div>
+            </div>
+            <PipelineDiagram hoveredTx={hoveredTx} />
+          </section>
           <div className="content-grid content-grid-wide">
             <section className="panel">
               <div className="panel-heading">
@@ -160,10 +171,87 @@ export function DashboardPage() {
                 Open audit trail
               </Link>
             </div>
-            <ActivityTable transactions={transactions.slice(0, 8)} />
+            <ActivityTable 
+              transactions={transactions.slice(0, 8)} 
+              onHoverTransaction={setHoveredTx} 
+            />
           </section>
         </>
       )}
+    </div>
+  );
+}
+
+function PipelineDiagram({ hoveredTx }: { hoveredTx: RecentTransaction | null }) {
+  const isDet = hoveredTx?.path_taken === "deterministic";
+  const isRes = hoveredTx?.path_taken === "reasoning";
+  const isActive = hoveredTx !== null;
+
+  const activeColor = "var(--brand-primary)";
+  const inactiveColor = "var(--border-strong, #9ca3af)";
+  
+  const boxFill = (active: boolean) => active ? "var(--brand-subtle)" : "transparent";
+  const boxStroke = (active: boolean) => active ? activeColor : inactiveColor;
+  const textColor = (active: boolean) => active ? activeColor : "var(--text-secondary)";
+
+  return (
+    <div className="pipeline-diagram-wrapper" style={{ width: "100%", overflowX: "auto", padding: "1rem 0" }}>
+      <svg viewBox="0 0 850 120" style={{ width: "100%", minWidth: "700px", height: "auto" }}>
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill={inactiveColor} />
+          </marker>
+          <marker id="arrow-active" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill={activeColor} />
+          </marker>
+        </defs>
+        
+        {/* Edges */}
+        <path d="M 120 60 L 155 60" stroke={boxStroke(isActive)} strokeWidth={2} fill="none" markerEnd={isActive ? "url(#arrow-active)" : "url(#arrow)"} />
+        <path d="M 240 60 L 270 60 L 270 30 L 285 30" stroke={boxStroke(isDet)} strokeWidth={2} fill="none" markerEnd={isDet ? "url(#arrow-active)" : "url(#arrow)"} />
+        <path d="M 240 60 L 270 60 L 270 90 L 285 90" stroke={boxStroke(isRes)} strokeWidth={2} fill="none" markerEnd={isRes ? "url(#arrow-active)" : "url(#arrow)"} />
+        <path d="M 410 30 L 430 30 L 430 60 L 445 60" stroke={boxStroke(isDet)} strokeWidth={2} fill="none" markerEnd={isDet ? "url(#arrow-active)" : "url(#arrow)"} />
+        <path d="M 410 90 L 430 90 L 430 60 L 445 60" stroke={boxStroke(isRes)} strokeWidth={2} fill="none" markerEnd={isRes ? "url(#arrow-active)" : "url(#arrow)"} />
+        <path d="M 570 60 L 605 60" stroke={boxStroke(isActive)} strokeWidth={2} fill="none" markerEnd={isActive ? "url(#arrow-active)" : "url(#arrow)"} />
+        <path d="M 730 60 L 765 60" stroke={boxStroke(isActive)} strokeWidth={2} fill="none" markerEnd={isActive ? "url(#arrow-active)" : "url(#arrow)"} />
+
+        {/* Nodes */}
+        <g transform="translate(10, 45)">
+          <rect width="110" height="30" rx="4" fill={boxFill(isActive)} stroke={boxStroke(isActive)} strokeWidth={2} />
+          <text x="55" y="19" fontSize="11" fontWeight="600" textAnchor="middle" fill={textColor(isActive)}>Payment Failed</text>
+        </g>
+        
+        <g transform="translate(160, 45)">
+          <rect width="80" height="30" rx="4" fill={boxFill(isActive)} stroke={boxStroke(isActive)} strokeWidth={2} />
+          <text x="40" y="19" fontSize="11" fontWeight="600" textAnchor="middle" fill={textColor(isActive)}>Gate</text>
+        </g>
+
+        <g transform="translate(290, 15)">
+          <rect width="120" height="30" rx="4" fill={boxFill(isDet)} stroke={boxStroke(isDet)} strokeWidth={2} />
+          <text x="60" y="19" fontSize="11" fontWeight="600" textAnchor="middle" fill={textColor(isDet)}>Deterministic Path</text>
+        </g>
+
+        <g transform="translate(290, 75)">
+          <rect width="120" height="30" rx="4" fill={boxFill(isRes)} stroke={boxStroke(isRes)} strokeWidth={2} />
+          <text x="60" y="19" fontSize="11" fontWeight="600" textAnchor="middle" fill={textColor(isRes)}>Reasoning Path</text>
+        </g>
+
+        <g transform="translate(450, 45)">
+          <rect width="120" height="30" rx="4" fill={boxFill(isActive)} stroke={boxStroke(isActive)} strokeWidth={2} />
+          <text x="60" y="19" fontSize="11" fontWeight="600" textAnchor="middle" fill={textColor(isActive)}>Economic Scoring</text>
+        </g>
+
+        <g transform="translate(610, 45)">
+          <rect width="120" height="30" rx="4" fill={boxFill(isActive)} stroke={boxStroke(isActive)} strokeWidth={2} />
+          <text x="60" y="19" fontSize="11" fontWeight="600" textAnchor="middle" fill={textColor(isActive)}>Bounded Executor</text>
+        </g>
+
+        <g transform="translate(770, 45)">
+          <rect width="70" height="30" rx="4" fill={boxFill(isActive)} stroke={boxStroke(isActive)} strokeWidth={2} />
+          <text x="35" y="19" fontSize="11" fontWeight="600" textAnchor="middle" fill={textColor(isActive)}>Outcome</text>
+        </g>
+
+      </svg>
     </div>
   );
 }
