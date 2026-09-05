@@ -6,6 +6,7 @@ import { ResultsPage } from "@/pages/ResultsPage";
 import { RecoveriesPage } from "@/pages/RecoveriesPage";
 import { DecisionPage } from "@/pages/DecisionPage";
 import { TransactionsPage } from "@/pages/TransactionsPage";
+import { SettingsPage } from "@/pages/SettingsPage";
 import { SimulatorPanel } from "@/components/SimulatorPanel";
 
 const links = [
@@ -69,7 +70,13 @@ export function App() {
             >
               Simulate payment failure
             </button>
-            <span className="badge badge-neutral ml-4">TEST MODE</span>
+            <span
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xsmall bg-brand-subtle text-brand border border-brand/20 font-bold text-50 tracking-wider uppercase ml-2"
+              title="Test mode: simulated and bounded recovery actions only"
+            >
+              <span className="w-1.5 h-1.5 rounded-round bg-brand inline-block" />
+              TEST MODE
+            </span>
             <span className="avatar" aria-label="Current operator">
               OP
             </span>
@@ -87,16 +94,7 @@ export function App() {
             <Route path="/decisions" element={<RecoveriesPage />} />
             <Route path="/audit" element={<AuditTrailPage />} />
             <Route path="/results" element={<ResultsPage />} />
-            <Route
-              path="/settings"
-              element={
-                <div className="page-stack">
-                  <div className="state">
-                    Settings are not exposed by the current backend contract.
-                  </div>
-                </div>
-              }
-            />
+            <Route path="/settings" element={<SettingsPage />} />
           </Routes>
         </main>
       </div>

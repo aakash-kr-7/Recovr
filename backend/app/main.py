@@ -8,7 +8,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import evaluation, transactions, webhooks, demo
+from app.api import evaluation, transactions, webhooks, demo, config
 from app.core.logging import configure_logging, get_logger
 from app.db.init_db import init_db
 
@@ -46,6 +46,7 @@ app.include_router(webhooks.router)
 app.include_router(transactions.router)
 app.include_router(evaluation.router)
 app.include_router(demo.router)
+app.include_router(config.router)
 
 
 @app.get("/health")

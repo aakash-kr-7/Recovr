@@ -97,3 +97,20 @@ export interface EvaluationReport {
   }>;
   note: string;
 }
+
+export interface PublicConfig {
+  llm_provider: string;
+  batch_spend_cap_inr: number;
+  min_auto_execute_confidence: number;
+  max_customer_recovery_attempts: number;
+  has_real_razorpay_credentials: boolean;
+  razorpay_mode: "demo_seeded_data" | "real_test_credentials" | string;
+  data_mode_label: string;
+  environment: string;
+  reasoning_model: string;
+  groq_model: string;
+  wasted_retry_cost_inr: number;
+  alternate_rail_cost_inr: number;
+  review_cost_inr: number;
+  dunning_cost_inr: number;
+}

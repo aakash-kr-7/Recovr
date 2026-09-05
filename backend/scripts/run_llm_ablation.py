@@ -25,7 +25,7 @@ def evaluate(transactions, reasoner=None):
     """
     off, on, observations, latencies = [], [], [], []
     for txn in transactions:
-        economic_action, economic_expected = _recovr(txn)
+        economic_action, economic_expected, *_ = _recovr(txn)
         off_row = _record(txn, economic_action, economic_expected)
         start = time.perf_counter()
         recommendation, error = None, None
@@ -39,7 +39,7 @@ def evaluate(transactions, reasoner=None):
                 # metadata and add no value to an ablation result.
                 error = type(exc).__name__
         latencies.append((time.perf_counter() - start) * 1000)
-        informed_action, informed_expected = _recovr(txn, recommendation.insights if recommendation else None)
+        informed_action, informed_expected, *_ = _recovr(txn, recommendation.insights if recommendation else None)
         on_row = _record(txn, informed_action, informed_expected)
         llm_action = recommendation.action.value if recommendation else None
         observations.append({"transaction_id": txn.id, "economic_action": economic_action.value,

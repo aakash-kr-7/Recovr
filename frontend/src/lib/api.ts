@@ -61,4 +61,6 @@ export const api = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     }),
+  getPublicConfig: () =>
+    request<import("@/types/api").PublicConfig>("/config/public"),
 };
