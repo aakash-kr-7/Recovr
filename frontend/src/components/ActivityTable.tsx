@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { OutcomeBadge, StatusBadge } from "@/components/StatusBadges";
 import { ACTION_LABELS, money } from "@/lib/operations";
 import { useRecentTransactions } from "@/hooks/useRecentTransactions";
@@ -8,6 +9,18 @@ export function ActivityTable({
 }: {
   transactions: ReturnType<typeof useRecentTransactions>["transactions"];
 }) {
+  const location = useLocation();
+  const highlightId = location.state?.highlightId;
+  const [flashing, setFlashing] = useState<string | null>(highlightId || null);
+
+  useEffect(() => {
+    if (highlightId) {
+      setFlashing(highlightId);
+      const timer = setTimeout(() => setFlashing(null), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [highlightId]);
+
   return (
     <div className="table-scroll">
       <table className="operations-table">
@@ -25,7 +38,14 @@ export function ActivityTable({
         </thead>
         <tbody>
           {transactions.map((item) => (
-            <tr key={item.transaction_id}>
+            <tr
+              key={item.transaction_id}
+              className={
+                flashing === item.transaction_id
+                  ? "bg-brand-subtle transition-colors duration-1000"
+                  : "transition-colors duration-1000"
+              }
+            >
               <td>
                 <Link
                   className="table-link"

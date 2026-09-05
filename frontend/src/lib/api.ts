@@ -11,11 +11,16 @@ export class ApiError extends Error {
   }
 }
 
-async function request<T>(path: string): Promise<T> {
-  const res = await fetch(`${API_BASE_URL}${path}`);
+async function request<T>(path: string, options?: RequestInit): Promise<T> {
+  const res = await fetch(`${API_BASE_URL}${path}`, options);
   if (!res.ok) {
     const body = await res.text();
-    throw new ApiError(`${res.status} on ${path}: ${body}`, res.status);
+    let errorMessage = body;
+    try {
+      const json = JSON.parse(body);
+      if (json.detail) errorMessage = json.detail;
+    } catch (e) {}
+    throw new ApiError(errorMessage || `Error ${res.status}`, res.status);
   }
   return res.json() as Promise<T>;
 }
@@ -31,4 +36,17 @@ export const api = {
     ),
   getLatestEvaluation: () =>
     request<import("@/types/api").EvaluationReport>("/evaluation/latest"),
+  getDemoPresets: () => request<any[]>("/demo/presets"),
+  simulateDemo: (payload: any) =>
+    request<{
+      status: string;
+      transaction_id: string;
+      execution_status: string;
+      provider_reference: string | null;
+      is_demo_simulated: boolean;
+    }>("/demo/simulate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }),
 };

@@ -1,10 +1,12 @@
-import { NavLink, Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, Route, Routes, useNavigate } from "react-router-dom";
 import { DashboardPage } from "@/pages/DashboardPage";
 import { AuditTrailPage } from "@/pages/AuditTrailPage";
 import { ResultsPage } from "@/pages/ResultsPage";
 import { RecoveriesPage } from "@/pages/RecoveriesPage";
 import { DecisionPage } from "@/pages/DecisionPage";
 import { TransactionsPage } from "@/pages/TransactionsPage";
+import { SimulatorPanel } from "@/components/SimulatorPanel";
 
 const links = [
   { to: "/", label: "Overview", end: true },
@@ -17,6 +19,13 @@ const links = [
 ];
 
 export function App() {
+  const [isSimulatorOpen, setIsSimulatorOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSimulateSuccess = (transactionId: string) => {
+    navigate("/", { state: { highlightId: transactionId }, replace: true });
+  };
+
   return (
     <div className="app-shell">
       <aside className="sidebar">
@@ -54,7 +63,13 @@ export function App() {
             <strong>RECOVR Operations</strong>
           </div>
           <div className="topbar-meta">
-            <span className="badge badge-neutral">TEST MODE</span>
+            <button
+              onClick={() => setIsSimulatorOpen(true)}
+              className="border-none bg-brand hover:bg-brand-light text-white font-semibold text-75 py-2 px-4 rounded-small cursor-pointer transition-colors"
+            >
+              Simulate payment failure
+            </button>
+            <span className="badge badge-neutral ml-4">TEST MODE</span>
             <span className="avatar" aria-label="Current operator">
               OP
             </span>
@@ -85,6 +100,12 @@ export function App() {
           </Routes>
         </main>
       </div>
+
+      <SimulatorPanel
+        isOpen={isSimulatorOpen}
+        onClose={() => setIsSimulatorOpen(false)}
+        onSuccess={handleSimulateSuccess}
+      />
     </div>
   );
 }
