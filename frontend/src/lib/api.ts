@@ -1,4 +1,5 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000";
 
 export class ApiError extends Error {
   constructor(
@@ -25,7 +26,9 @@ export const api = {
       `/transactions/recent?limit=${limit}`,
     ),
   getAuditDetail: (transactionId: string) =>
-    request<import("@/types/api").AuditDetail>(`/transactions/audit/${transactionId}`),
+    request<import("@/types/api").AuditDetail>(
+      `/transactions/audit/${transactionId}`,
+    ),
   getLatestEvaluation: () =>
     request<import("@/types/api").EvaluationReport>("/evaluation/latest"),
 };

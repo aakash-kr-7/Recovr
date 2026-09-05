@@ -4,12 +4,244 @@ import { api } from "@/lib/api";
 import { OutcomeBadge, StatusBadge } from "@/components/StatusBadges";
 import { ACTION_LABELS, money, percent } from "@/lib/operations";
 import type { AuditDetail } from "@/types/api";
+import { PageHeader } from "@/components/PageHeader";
 
 export function DecisionPage() {
   const { transactionId } = useParams();
-  const [detail, setDetail] = useState<AuditDetail | null>(null); const [error, setError] = useState<string | null>(null);
-  useEffect(() => { if (!transactionId) return; api.getAuditDetail(transactionId).then(setDetail).catch((err: unknown) => setError(err instanceof Error ? err.message : "Unable to load decision")); }, [transactionId]);
-  if (error) return <div className="page-stack"><div className="state state-error">{error}</div></div>;
-  if (!detail) return <div className="page-stack"><div className="state">Loading transaction lifecycle…</div></div>;
-  return <div className="page-stack"><section className="page-heading"><div><Link className="back-link" to="/audit">← Audit trail</Link><p className="eyebrow">TRANSACTION LIFECYCLE</p><h1>Payment decision</h1><p>{detail.transaction_id}</p></div><StatusBadge outcome={detail.recovery_outcome} synthetic={detail.is_synthetic} /></section><div className="detail-grid"><section className="panel"><h2>Payment / transaction</h2><dl className="definition-list"><div><dt>Transaction ID</dt><dd>{detail.transaction_id}</dd></div><div><dt>Payment ID</dt><dd>{detail.payment_id ?? "Unavailable"}</dd></div><div><dt>Amount</dt><dd>{money(detail.amount_inr)}</dd></div><div><dt>Failure</dt><dd>{detail.decline_reason_raw}</dd></div><div><dt>Failed at</dt><dd>{new Date(detail.failed_at).toLocaleString()}</dd></div><div><dt>Customer</dt><dd>{detail.customer_id}</dd></div></dl></section><section className="panel"><h2>Execution outcome</h2><div className="outcome-header"><OutcomeBadge outcome={detail.recovery_outcome} /><StatusBadge outcome={detail.recovery_outcome} synthetic={detail.is_synthetic} /></div><dl className="definition-list"><div><dt>Actual recovered</dt><dd>{money(detail.recovery_outcome?.actual_recovered_inr)}</dd></div><div><dt>Expected net</dt><dd>{money(detail.selected_expected_net_recovery_inr)}</dd></div><div><dt>Provider reference</dt><dd>{detail.recovery_outcome?.provider_reference ?? "Unavailable"}</dd></div><div><dt>Outcome timestamp</dt><dd>{detail.recovery_outcome ? new Date(detail.recovery_outcome.outcome_timestamp).toLocaleString() : "Pending"}</dd></div></dl></section></div><section className="panel"><div className="panel-heading"><div><h2>RECOVR decision</h2><p>AI informed. Economics decided. Safety enforced.</p></div><span className="badge badge-neutral">{detail.path_taken.toUpperCase()} PATH</span></div><ol className="timeline"><li><strong>Failure detected</strong><span>{detail.decline_reason}</span></li><li><strong>Diagnosis</strong><span>{detail.reasoning_text}</span></li><li><strong>Probability assessment</strong><span>Candidate actions scored from structured context.</span></li><li><strong>Economic ranking</strong><span>Expected gross minus action cost and risk penalty.</span></li><li><strong>Safety checks</strong><span>{detail.was_gated ? "Held by confidence gate." : "Passed configured safety checks."}</span></li><li><strong>Action</strong><span>{ACTION_LABELS[detail.action]}</span></li><li><strong>Outcome</strong><span>{detail.recovery_outcome?.execution_status ?? "Outcome pending"}</span></li></ol></section><section className="panel"><h2>Action ranking</h2>{detail.recovery_options ? <div className="table-scroll"><table className="operations-table"><thead><tr><th>Action</th><th>Probability</th><th>Expected gross</th><th>Cost</th><th>Risk</th><th>Expected net</th></tr></thead><tbody>{[...detail.recovery_options].sort((a,b) => b.expected_net_recovery_inr-a.expected_net_recovery_inr).map((option) => <tr key={option.action} className={option.action === detail.action ? "selected-row" : ""}><td>{ACTION_LABELS[option.action]} {option.action === detail.action && <span className="badge badge-positive">SELECTED</span>}</td><td>{percent(option.estimated_probability)}</td><td>{money(option.expected_recovery_inr)}</td><td>{money(option.action_cost_inr)}</td><td>{money(option.risk_penalty_inr)}</td><td><strong>{money(option.expected_net_recovery_inr)}</strong></td></tr>)}</tbody></table></div> : <div className="state">Economic ranking unavailable for this legacy decision.</div>}</section><section className="panel"><h2>AI reasoning</h2><div className="reasoning-grid"><div><p className="eyebrow">AI INTERPRETATION</p><p>{detail.reasoning_text}</p></div><div><p className="eyebrow">ECONOMIC DECISION</p><p>Selected {ACTION_LABELS[detail.action]} based on the ranked expected net values above.</p></div><div><p className="eyebrow">SAFETY ENFORCED</p><p>{detail.was_gated ? "This decision was routed for review." : "Execution remained within the allowed action and test-mode boundaries."}</p></div></div></section></div>;
+  const [detail, setDetail] = useState<AuditDetail | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    if (!transactionId) return;
+    api
+      .getAuditDetail(transactionId)
+      .then(setDetail)
+      .catch((err: unknown) =>
+        setError(
+          err instanceof Error ? err.message : "Unable to load decision",
+        ),
+      );
+  }, [transactionId]);
+  if (error)
+    return (
+      <div className="page-stack">
+        <div className="state state-error">{error}</div>
+      </div>
+    );
+  if (!detail)
+    return (
+      <div className="page-stack">
+        <div className="state">Loading transaction lifecycle…</div>
+      </div>
+    );
+  return (
+    <div className="page-stack">
+      <PageHeader
+        backLink={
+          <Link className="back-link" to="/audit">
+            ← Audit trail
+          </Link>
+        }
+        eyebrow="TRANSACTION LIFECYCLE"
+        title="Payment decision"
+        description={detail.transaction_id}
+      >
+        <StatusBadge
+          outcome={detail.recovery_outcome}
+          synthetic={detail.is_synthetic}
+        />
+      </PageHeader>
+      <div className="detail-grid">
+        <section className="panel">
+          <h2>Payment / transaction</h2>
+          <dl className="definition-list">
+            <div>
+              <dt>Transaction ID</dt>
+              <dd>{detail.transaction_id}</dd>
+            </div>
+            <div>
+              <dt>Payment ID</dt>
+              <dd>{detail.payment_id ?? "Unavailable"}</dd>
+            </div>
+            <div>
+              <dt>Amount</dt>
+              <dd>{money(detail.amount_inr)}</dd>
+            </div>
+            <div>
+              <dt>Failure</dt>
+              <dd>{detail.decline_reason_raw}</dd>
+            </div>
+            <div>
+              <dt>Failed at</dt>
+              <dd>{new Date(detail.failed_at).toLocaleString()}</dd>
+            </div>
+            <div>
+              <dt>Customer</dt>
+              <dd>{detail.customer_id}</dd>
+            </div>
+          </dl>
+        </section>
+        <section className="panel">
+          <h2>Execution outcome</h2>
+          <div className="outcome-header">
+            <OutcomeBadge outcome={detail.recovery_outcome} />
+            <StatusBadge
+              outcome={detail.recovery_outcome}
+              synthetic={detail.is_synthetic}
+            />
+          </div>
+          <dl className="definition-list">
+            <div>
+              <dt>Actual recovered</dt>
+              <dd>{money(detail.recovery_outcome?.actual_recovered_inr)}</dd>
+            </div>
+            <div>
+              <dt>Expected net</dt>
+              <dd>{money(detail.selected_expected_net_recovery_inr)}</dd>
+            </div>
+            <div>
+              <dt>Provider reference</dt>
+              <dd>
+                {detail.recovery_outcome?.provider_reference ?? "Unavailable"}
+              </dd>
+            </div>
+            <div>
+              <dt>Outcome timestamp</dt>
+              <dd>
+                {detail.recovery_outcome
+                  ? new Date(
+                      detail.recovery_outcome.outcome_timestamp,
+                    ).toLocaleString()
+                  : "Pending"}
+              </dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+      <section className="panel">
+        <div className="panel-heading">
+          <div>
+            <h2>RECOVR decision</h2>
+            <p>AI informed. Economics decided. Safety enforced.</p>
+          </div>
+          <span className="badge badge-neutral">
+            {detail.path_taken.toUpperCase()} PATH
+          </span>
+        </div>
+        <ol className="timeline">
+          <li>
+            <strong>Failure detected</strong>
+            <span>{detail.decline_reason}</span>
+          </li>
+          <li>
+            <strong>Diagnosis</strong>
+            <span>{detail.reasoning_text}</span>
+          </li>
+          <li>
+            <strong>Probability assessment</strong>
+            <span>Candidate actions scored from structured context.</span>
+          </li>
+          <li>
+            <strong>Economic ranking</strong>
+            <span>Expected gross minus action cost and risk penalty.</span>
+          </li>
+          <li>
+            <strong>Safety checks</strong>
+            <span>
+              {detail.was_gated
+                ? "Held by confidence gate."
+                : "Passed configured safety checks."}
+            </span>
+          </li>
+          <li>
+            <strong>Action</strong>
+            <span>{ACTION_LABELS[detail.action]}</span>
+          </li>
+          <li>
+            <strong>Outcome</strong>
+            <span>
+              {detail.recovery_outcome?.execution_status ?? "Outcome pending"}
+            </span>
+          </li>
+        </ol>
+      </section>
+      <section className="panel">
+        <h2>Action ranking</h2>
+        {detail.recovery_options ? (
+          <div className="table-scroll">
+            <table className="operations-table">
+              <thead>
+                <tr>
+                  <th>Action</th>
+                  <th>Probability</th>
+                  <th>Expected gross</th>
+                  <th>Cost</th>
+                  <th>Risk</th>
+                  <th>Expected net</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[...detail.recovery_options]
+                  .sort(
+                    (a, b) =>
+                      b.expected_net_recovery_inr - a.expected_net_recovery_inr,
+                  )
+                  .map((option) => (
+                    <tr
+                      key={option.action}
+                      className={
+                        option.action === detail.action ? "selected-row" : ""
+                      }
+                    >
+                      <td>
+                        {ACTION_LABELS[option.action]}{" "}
+                        {option.action === detail.action && (
+                          <span className="badge badge-positive">SELECTED</span>
+                        )}
+                      </td>
+                      <td>{percent(option.estimated_probability)}</td>
+                      <td>{money(option.expected_recovery_inr)}</td>
+                      <td>{money(option.action_cost_inr)}</td>
+                      <td>{money(option.risk_penalty_inr)}</td>
+                      <td>
+                        <strong>
+                          {money(option.expected_net_recovery_inr)}
+                        </strong>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="state">
+            Economic ranking unavailable for this legacy decision.
+          </div>
+        )}
+      </section>
+      <section className="panel">
+        <h2>AI reasoning</h2>
+        <div className="reasoning-grid">
+          <div>
+            <p className="eyebrow">AI INTERPRETATION</p>
+            <p>{detail.reasoning_text}</p>
+          </div>
+          <div>
+            <p className="eyebrow">ECONOMIC DECISION</p>
+            <p>
+              Selected {ACTION_LABELS[detail.action]} based on the ranked
+              expected net values above.
+            </p>
+          </div>
+          <div>
+            <p className="eyebrow">SAFETY ENFORCED</p>
+            <p>
+              {detail.was_gated
+                ? "This decision was routed for review."
+                : "Execution remained within the allowed action and test-mode boundaries."}
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }

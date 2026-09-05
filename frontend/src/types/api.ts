@@ -1,6 +1,12 @@
-export type TriageAction = "retry_same_rail" | "retry_alt_rail" | "hold_for_review" | "escalate_to_dunning" | "no_action";
+export type TriageAction =
+  | "retry_same_rail"
+  | "retry_alt_rail"
+  | "hold_for_review"
+  | "escalate_to_dunning"
+  | "no_action";
 export type TriagePath = "deterministic" | "reasoning";
-export type ExecutionStatus = "PENDING" | "SUCCEEDED" | "FAILED" | "HELD" | "SIMULATED";
+export type ExecutionStatus =
+  "PENDING" | "SUCCEEDED" | "FAILED" | "HELD" | "SIMULATED";
 export type ExecutionMode = "REAL_RAZORPAY_ACTION" | "BOUNDED_SIMULATION";
 
 export interface RecoveryOption {
@@ -70,8 +76,14 @@ export interface EvaluationReport {
   generated_at: string;
   evaluation_version: string;
   holdout_set_size: number;
-  unconstrained: Record<"retry_all_same_rail" | "fixed_rule_policy" | "recovr", PolicyMetrics>;
-  constrained: Record<"retry_all_same_rail" | "fixed_rule_policy" | "recovr", PolicyMetrics>;
+  unconstrained: Record<
+    "retry_all_same_rail" | "fixed_rule_policy" | "recovr",
+    PolicyMetrics
+  >;
+  constrained: Record<
+    "retry_all_same_rail" | "fixed_rule_policy" | "recovr",
+    PolicyMetrics
+  >;
   evaluation_views: {
     unconstrained_decision_quality: PolicyMetrics;
     constrained_execution_quality: PolicyMetrics;

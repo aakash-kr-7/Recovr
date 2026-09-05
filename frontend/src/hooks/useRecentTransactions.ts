@@ -33,7 +33,9 @@ export function useRecentTransactions(limit = 50): UseRecentTransactionsResult {
         }
       } catch (e) {
         if (!cancelled) {
-          setError(e instanceof ApiError ? e.message : "Failed to load transactions");
+          setError(
+            e instanceof ApiError ? e.message : "Failed to load transactions",
+          );
         }
       } finally {
         if (!cancelled) setLoading(false);
