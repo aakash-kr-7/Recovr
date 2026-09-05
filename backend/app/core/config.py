@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     # --- Groq API ---
     llm_provider: str = "groq"
     groq_api_key: str = ""
-    groq_model: str = "qwen/qwen3.6-27b"
+    groq_model: str = "openai/gpt-oss-120b"
     llm_max_retries: int = 2
     llm_timeout_seconds: float = 15.0
 

@@ -74,3 +74,14 @@ Thumbs.db
 # Never commit real key material even if accidentally named like this
 razorpay_keys*.json
 secrets.json
+
+# ---- Demo and Scratch files ----
+backend/app/api/demo.py
+backend/scripts/seed_demo_database.py
+backend/scripts/test_recent_endpoint.py
+backend/tests/integration/test_closed_loop.py
+backend/tests/integration/test_demo_simulator.py
+scratch/
+.tmp/
+.temp/
+*.bak

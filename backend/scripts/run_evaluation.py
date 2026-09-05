@@ -54,20 +54,27 @@ def _context(txn):
         recent_retry_count=h.get("recent_retry_count"), failure_hour=txn.failed_at.hour)
 
 
-def _recovr(txn, llm_insights=None):
+def _recovr(txn, llm_insights=None, db=None, **kwargs):
     # LLM prose is not an action input: the existing economics layer selects
     # the executable action. Avoiding provider calls makes evaluation repeatable.
     context = _context(txn).model_copy(update={"llm_insights": llm_insights})
-    decision = score_recovery_options(transaction_id=txn.id, permitted_actions=list(TriageAction), context=context)
+    
+    if db:
+        from app.agent.economics.historical_evidence import query_historical_evidence
+        evidence = query_historical_evidence(db=db, decline_reason=txn.decline_reason, customer_history=txn.customer_history)
+    else:
+        evidence = None
+        
+    decision = score_recovery_options(transaction_id=txn.id, permitted_actions=list(TriageAction), context=context, historical_evidence=evidence)
     expected = next(option.expected_net_recovery_inr for option in decision.options if option.action == decision.selected_action)
     return decision.selected_action, expected
 
 
-def _fixed(txn):
+def _fixed(txn, **kwargs):
     return (FAST_PATH_TABLE.get(txn.decline_reason, (TriageAction.RETRY_SAME_RAIL,))[0], None)
 
 
-def _retry_all(txn): return TriageAction.RETRY_SAME_RAIL, None
+def _retry_all(txn, **kwargs): return TriageAction.RETRY_SAME_RAIL, None
 
 POLICY_SELECTORS = {"retry_all_same_rail": _retry_all, "fixed_rule_policy": _fixed, "recovr": _recovr}
 
@@ -89,10 +96,10 @@ def _record(txn, action, model_expected=None, held=False):
         "recovered": selected["recovered"], "unnecessary_retry": action.value in {"retry_same_rail", "retry_alt_rail"} and not selected["recovered"]}
 
 
-def _apply_policy(transactions, policy, constrained, cap):
+def _apply_policy(transactions, policy, constrained, cap, db=None):
     records, spent = [], 0.0
     for txn in transactions:
-        selected, model_expected = POLICY_SELECTORS[policy](txn)
+        selected, model_expected = POLICY_SELECTORS[policy](txn, db=db)
         # Same deterministic action-cost budget for every policy. The cost is
         # known policy semantics, not a hidden outcome; no policy sees outcome.
         planned_cost = ACTION_COSTS[selected.value]
@@ -118,7 +125,7 @@ def _summary(records):
         "held_count": sum(row["held"] for row in records), "action_distribution": {action.value: sum(row["action"] == action.value for row in records) for action in TriageAction}}
 
 
-def _view(transactions, constrained, cap): return {policy: _summary(_apply_policy(transactions, policy, constrained, cap)) for policy in POLICIES}
+def _view(transactions, constrained, cap, db=None): return {policy: _summary(_apply_policy(transactions, policy, constrained, cap, db)) for policy in POLICIES}
 
 
 def _increment(recovr, baseline):
@@ -137,10 +144,10 @@ def _binary(records):
         "false_positive_transaction_ids": [r["transaction_id"] for r in fp], "false_negative_transaction_ids": [r["transaction_id"] for r in fn]}
 
 
-def _robustness(cap):
+def _robustness(cap, db=None):
     results = {policy: [] for policy in POLICIES}
     for seed in ROBUSTNESS_SEEDS:
-        view = _view(_load_holdout() if seed == CANONICAL_SEED else _seed_holdout(seed), False, cap)
+        view = _view(_load_holdout() if seed == CANONICAL_SEED else _seed_holdout(seed), False, cap, db)
         for policy in POLICIES: results[policy].append(view[policy])
     output = {}
     for policy, rows in results.items():
@@ -155,9 +162,11 @@ def _robustness(cap):
 
 def run_evaluation():
     settings, transactions = get_settings(), _load_holdout()
-    unconstrained, constrained = _view(transactions, False, settings.batch_spend_cap_inr), _view(transactions, True, settings.batch_spend_cap_inr)
-    robustness, consistency = _robustness(settings.batch_spend_cap_inr)
-    recovr_records = _apply_policy(transactions, "recovr", True, settings.batch_spend_cap_inr)
+    from app.db.session import SessionLocal
+    with SessionLocal() as db:
+        unconstrained, constrained = _view(transactions, False, settings.batch_spend_cap_inr, db), _view(transactions, True, settings.batch_spend_cap_inr, db)
+        robustness, consistency = _robustness(settings.batch_spend_cap_inr, db)
+        recovr_records = _apply_policy(transactions, "recovr", True, settings.batch_spend_cap_inr, db)
     binary = _binary(recovr_records)
     recovr = constrained["recovr"]
     report = {"generated_at": datetime.utcnow().isoformat(), "evaluation_version": "comparable_action_economics_v3", "canonical_seed": CANONICAL_SEED,

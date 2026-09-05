@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from app.agent.executor import BatchSpendTracker, ExecutionStatus, execute
 from app.agent.gate import route
 from app.agent.reasoning import get_triage_decision
+from app.agent.economics.historical_evidence import query_historical_evidence
 from app.agent.economics.scoring import score_recovery_options
 from app.core.config import get_settings
 from app.core.logging import get_logger
@@ -73,7 +74,7 @@ async def handle_razorpay_webhook(request: Request, x_razorpay_signature: str = 
     customer_id = entity.get("contact") or entity.get("email") or "unknown"
     transaction = Transaction(id=str(uuid.uuid4()), razorpay_payment_id=payment_id, amount_inr=paise_to_inr(entity["amount"]),
         decline_reason_raw=entity.get("error_description", "unknown"), decline_reason=_normalize_decline_reason(entity.get("error_code")),
-        customer_id=customer_id, customer_history=get_customer_history(customer_id), failed_at=datetime.utcfromtimestamp(entity["created_at"]), is_synthetic=False, data_split="production")
+        customer_id=customer_id, customer_history=get_customer_history(db, customer_id), failed_at=datetime.utcfromtimestamp(entity["created_at"]), is_synthetic=False, data_split="production")
     db.add(transaction)
     try: db.commit()
     except IntegrityError:
@@ -91,7 +92,9 @@ async def handle_razorpay_webhook(request: Request, x_razorpay_signature: str = 
         customer_prior_success_rate=transaction.customer_history.get("prior_success_rate", transaction.customer_history.get("success_rate")),
         customer_account_age_days=transaction.customer_history.get("account_age_days"), recent_retry_count=transaction.customer_history.get("recent_retry_count"), failure_hour=transaction.failed_at.hour,
         llm_insights=llm.insights if 'llm' in locals() else None)
-    economics = score_recovery_options(transaction_id=transaction.id, permitted_actions=list(TriageAction), context=context)
+    
+    evidence = query_historical_evidence(db=db, decline_reason=transaction.decline_reason, customer_history=transaction.customer_history)
+    economics = score_recovery_options(transaction_id=transaction.id, permitted_actions=list(TriageAction), context=context, historical_evidence=evidence)
     selected_action = economics.selected_action
     if candidate is None and gate.path == TriagePath.REASONING:
         # The economics result remains recorded in RecoveryDecisionRow, but
