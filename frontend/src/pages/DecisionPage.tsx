@@ -5,6 +5,7 @@ import { OutcomeBadge, StatusBadge } from "@/components/StatusBadges";
 import { ACTION_LABELS, money, percent } from "@/lib/operations";
 import type { AuditDetail } from "@/types/api";
 import { PageHeader } from "@/components/PageHeader";
+import { PageContext } from "@/components/PageContext";
 
 export function DecisionPage() {
   const { transactionId } = useParams();
@@ -417,6 +418,10 @@ export function DecisionPage() {
           </div>
         </dl>
       </section>
+
+      <PageContext>
+        This view exposes the complete transparent decision trail for a single failed payment — comparing expected economic value across all candidate actions, showing verbatim LLM reasoning, and recording the eventual recovery outcome.
+      </PageContext>
     </div>
   );
 }
