@@ -7,10 +7,16 @@ export function TransactionsPage() {
   return (
     <div className="page-stack">
       <PageHeader
-        eyebrow="PAYMENT FAILURE LEDGER"
+        eyebrow="ALL HISTORICAL TRANSACTIONS · RAW LEDGER"
         title="Transactions"
-        description="All failed-payment records currently available through the operations API."
-      />
+        description="Complete immutable ledger of all failed payments across every lifecycle status (open, held, resolved, escalated) — distinct from the active Recoveries worklist."
+      >
+        {transactions.length > 0 && (
+          <span className="badge badge-neutral">
+            {transactions.length} total records
+          </span>
+        )}
+      </PageHeader>
       {loading && !transactions.length ? (
         <div className="state">Loading transactions…</div>
       ) : error ? (

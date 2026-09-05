@@ -39,7 +39,11 @@ def check_real_groq_credentials(api_key: str | None) -> bool:
     return len(value) >= 20
 
 
-@router.get("/public", response_model=PublicConfigResponse)
+@router.get(
+    "/public",
+    response_model=PublicConfigResponse,
+    response_model_exclude_none=True,
+)
 def get_public_config() -> PublicConfigResponse:
     """Return read-only, non-secret operational configuration.
 
@@ -59,6 +63,14 @@ def get_public_config() -> PublicConfigResponse:
         else "Demo / seeded data only (no live test credentials)"
     )
 
+    # Surfacing an unused provider's config as if active is a real accuracy
+    # bug, not a formatting choice. When llm_provider is "groq", including
+    # reasoning_model (the Anthropic model name) misleadingly implies that
+    # Anthropic is active or in the triage path when no Anthropic key is configured.
+    # We strictly surface only the active provider's model and omit dead provider config.
+    is_groq = (settings.llm_provider or "").strip().lower() == "groq"
+    active_model = settings.groq_model if is_groq else settings.reasoning_model
+
     return PublicConfigResponse(
         llm_provider=settings.llm_provider,
         batch_spend_cap_inr=settings.batch_spend_cap_inr,
@@ -69,8 +81,9 @@ def get_public_config() -> PublicConfigResponse:
         razorpay_mode=mode,
         data_mode_label=mode_label,
         environment=settings.environment,
-        reasoning_model=settings.reasoning_model,
-        groq_model=settings.groq_model,
+        active_model=active_model,
+        groq_model=settings.groq_model if is_groq else None,
+        reasoning_model=settings.reasoning_model if not is_groq else None,
         wasted_retry_cost_inr=settings.wasted_retry_cost_inr,
         alternate_rail_cost_inr=settings.alternate_rail_cost_inr,
         review_cost_inr=settings.review_cost_inr,

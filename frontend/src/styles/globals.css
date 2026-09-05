@@ -529,6 +529,9 @@ main {
 .operations-table tbody tr:hover {
   background: #fafbfc;
 }
+.clickable-row {
+  cursor: pointer;
+}
 .selected-row {
   background: #f1f6ff !important;
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { PageHeader } from "@/components/PageHeader";
+import { HowItWorks } from "@/components/HowItWorks";
 import { api } from "@/lib/api";
 import { money, percent } from "@/lib/operations";
 import type { PublicConfig } from "@/types/api";
@@ -28,8 +29,8 @@ export function SettingsPage() {
     return (
       <div className="page-stack">
         <PageHeader
-          eyebrow="SYSTEM CONFIGURATION"
-          title="Settings"
+          eyebrow="SYSTEM ARCHITECTURE & CONFIGURATION"
+          title="About & Configuration"
           description="Read-only operational configuration and safety bounds for evaluation."
         />
         <div className="state">Loading operational configuration…</div>
@@ -41,8 +42,8 @@ export function SettingsPage() {
     return (
       <div className="page-stack">
         <PageHeader
-          eyebrow="SYSTEM CONFIGURATION"
-          title="Settings"
+          eyebrow="SYSTEM ARCHITECTURE & CONFIGURATION"
+          title="About & Configuration"
           description="Read-only operational configuration and safety bounds for evaluation."
         />
         <div className="state state-error">
@@ -55,39 +56,43 @@ export function SettingsPage() {
   return (
     <div className="page-stack">
       <PageHeader
-        eyebrow="SYSTEM CONFIGURATION"
-        title="Settings"
-        description="Read-only operational parameters and bounded execution limits exposed via GET /config/public. Secrets and private credentials are never exposed."
+        eyebrow="SYSTEM ARCHITECTURE & CONFIGURATION"
+        title="About & Configuration"
+        description="System pipeline overview, operational parameters, and safety bounds exposed via GET /config/public. Secrets and private credentials are never exposed."
       />
 
+      {/* a. How RECOVR works - short, plain-English explainer of the actual pipeline */}
+      <HowItWorks />
+
+      {/* Operational configuration & Provider safety */}
       <div className="content-grid">
+        {/* b. Operational configuration - existing real, non-misleading fields only */}
         <section className="panel">
-          <h2>Operational parameters</h2>
+          <div className="panel-heading">
+            <div>
+              <h2>Operational configuration</h2>
+              <p>Active runtime parameters and bounded executor thresholds</p>
+            </div>
+          </div>
           <dl className="definition-list">
             <div>
               <dt>LLM Provider</dt>
               <dd>
-                <code className="font-mono text-75 font-semibold text-slate-800 bg-slate-100 px-1.5 py-0.5 rounded-2xsmall">
+                <code className="font-mono text-75 font-semibold text-slate-800 dark:text-bladeDark-text bg-slate-100 dark:bg-bladeDark-surface px-1.5 py-0.5 rounded-2xsmall">
                   {config.llm_provider}
                 </code>
               </dd>
             </div>
-            <div>
-              <dt>Groq model</dt>
-              <dd>
-                <code className="font-mono text-75 text-slate-700">
-                  {config.groq_model}
-                </code>
-              </dd>
-            </div>
-            <div>
-              <dt>Reasoning model</dt>
-              <dd>
-                <code className="font-mono text-75 text-slate-700">
-                  {config.reasoning_model}
-                </code>
-              </dd>
-            </div>
+            {config.active_model && (
+              <div>
+                <dt>Active model</dt>
+                <dd>
+                  <code className="font-mono text-75 text-slate-700 dark:text-bladeDark-textSubtle">
+                    {config.active_model}
+                  </code>
+                </dd>
+              </div>
+            )}
             <div>
               <dt>Batch spend cap</dt>
               <dd>{money(config.batch_spend_cap_inr)}</dd>
@@ -107,8 +112,14 @@ export function SettingsPage() {
           </dl>
         </section>
 
+        {/* c. Provider & credential safety - section stays as-is */}
         <section className="panel">
-          <h2>Provider & credential safety</h2>
+          <div className="panel-heading">
+            <div>
+              <h2>Provider & credential safety</h2>
+              <p>Security guarantees, sandboxing, and isolation</p>
+            </div>
+          </div>
           <dl className="definition-list">
             <div>
               <dt>Execution mode</dt>
@@ -139,7 +150,7 @@ export function SettingsPage() {
               <dt>Public contract</dt>
               <dd>
                 Exposed via{" "}
-                <code className="font-mono text-75 text-slate-700">
+                <code className="font-mono text-75 text-slate-700 dark:text-bladeDark-textSubtle">
                   GET /config/public
                 </code>
                 .
@@ -156,8 +167,19 @@ export function SettingsPage() {
         </section>
       </div>
 
+      {/* d. Economic cost baseline (ADR 0004) - framed as "why these numbers" */}
       <section className="panel">
-        <h2>Economic cost baseline (ADR 0004)</h2>
+        <div className="panel-heading">
+          <div>
+            <h2>Economic cost baseline (ADR 0004)</h2>
+            <p>
+              Why these numbers: each recovery action is scored by expected net
+              rupee value (expected recovery minus execution cost). These
+              baseline constants calibrate the optimizer so it never recommends
+              a recovery action that costs more than it recovers.
+            </p>
+          </div>
+        </div>
         <dl className="definition-list">
           <div>
             <dt>Wasted retry cost</dt>

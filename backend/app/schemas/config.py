@@ -33,8 +33,17 @@ class PublicConfigResponse(BaseModel):
         description="Human-readable description of current credential/data mode"
     )
     environment: str = Field(description="Current application environment")
-    reasoning_model: str = Field(description="Configured reasoning model")
-    groq_model: str = Field(description="Configured Groq model")
+    active_model: str = Field(
+        description="Active model name used by the currently active LLM provider"
+    )
+    groq_model: str | None = Field(
+        default=None,
+        description="Configured Groq model (only present when Groq is the active provider)",
+    )
+    reasoning_model: str | None = Field(
+        default=None,
+        description="Configured Anthropic reasoning model (only present when Anthropic is the active provider)",
+    )
     wasted_retry_cost_inr: float = Field(
         description="Model cost constant: wasted retry"
     )

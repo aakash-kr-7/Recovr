@@ -29,10 +29,10 @@ const steps: TourStep[] = [
     body: "The flow makes the control boundary explicit: contextual reasoning can inform a decision, but economic scoring and safety checks remain authoritative before execution.",
   },
   {
-    target: "[data-tour='live-decision-feed']",
-    route: "/",
-    title: "Follow decisions as operations happen",
-    body: "The live feed connects a payment failure to its selected action, expected value and outcome. It gives an operator a traceable operational view instead of a generic AI response.",
+    target: "[data-tour='recoveries-table']",
+    route: "/recoveries",
+    title: "Drill into decision details",
+    body: "Click any recovery case row in the operational worklist to drill into its full decision detail: normalized and raw decline diagnoses, customer history, complete candidate options comparison, AI reasoning, and gate execution.",
   },
   {
     target: "[data-tour='calibration-chart']",

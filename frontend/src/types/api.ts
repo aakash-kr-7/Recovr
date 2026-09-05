@@ -104,11 +104,13 @@ export interface PublicConfig {
   min_auto_execute_confidence: number;
   max_customer_recovery_attempts: number;
   has_real_razorpay_credentials: boolean;
+  has_real_groq_credentials?: boolean;
   razorpay_mode: "demo_seeded_data" | "real_test_credentials" | string;
   data_mode_label: string;
   environment: string;
-  reasoning_model: string;
-  groq_model: string;
+  active_model?: string;
+  reasoning_model?: string;
+  groq_model?: string;
   wasted_retry_cost_inr: number;
   alternate_rail_cost_inr: number;
   review_cost_inr: number;

@@ -31,6 +31,13 @@ def test_public_config_endpoint_success_and_safety():
     assert "data_mode_label" in data
     assert isinstance(data["has_real_razorpay_credentials"], bool)
 
+    # Verify active provider model is present while inactive provider models are strictly omitted
+    assert "active_model" in data
+    assert "groq_model" in data
+    assert (
+        "reasoning_model" not in data
+    ), "Inactive Anthropic reasoning_model leaked in /config/public for groq provider!"
+
     # Explicitly check that no secrets are leaked
     for secret_field in FORBIDDEN_SECRET_FIELDS:
         assert secret_field not in data, f"Secret field {secret_field} leaked in /config/public!"

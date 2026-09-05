@@ -28,9 +28,9 @@ export function RecoveriesPage() {
   return (
     <div className="page-stack">
       <PageHeader
-        eyebrow="ACTIVE RECOVERY CASES"
+        eyebrow="OPERATIONAL WORKLIST · OPEN & ACTIONABLE CASES"
         title="Recoveries"
-        description="Prioritize open payment failures without blurring simulated and provider execution."
+        description="Prioritize open and actionable recovery cases. Filter by action, decision path, or execution mode — click any row to inspect its full decision lifecycle."
       />
       <div className="filter-bar">
         <label>
@@ -81,7 +81,7 @@ export function RecoveriesPage() {
       ) : !filtered.length ? (
         <div className="state">No recoveries match these filters.</div>
       ) : (
-        <section className="panel">
+        <section className="panel" data-tour="recoveries-table">
           <ActivityTable transactions={filtered} />
         </section>
       )}

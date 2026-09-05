@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, NavLink, Route, Routes, useNavigate } from "react-router-dom";
 import { DashboardPage } from "@/pages/DashboardPage";
 import { AuditTrailPage } from "@/pages/AuditTrailPage";
 import { ResultsPage } from "@/pages/ResultsPage";
@@ -17,10 +17,9 @@ const links = [
   { to: "/", label: "Overview", end: true },
   { to: "/recoveries", label: "Recoveries" },
   { to: "/transactions", label: "Transactions" },
-  { to: "/decisions", label: "Decisions" },
   { to: "/audit", label: "Audit trail" },
   { to: "/results", label: "Evaluation" },
-  { to: "/settings", label: "Settings" },
+  { to: "/settings", label: "About & Configuration" },
 ];
 
 export function App() {
@@ -166,7 +165,7 @@ export function App() {
               path="/decisions/:transactionId"
               element={<DecisionPage />}
             />
-            <Route path="/decisions" element={<RecoveriesPage />} />
+            <Route path="/decisions" element={<Navigate to="/recoveries" replace />} />
             <Route path="/audit" element={<AuditTrailPage />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/settings" element={<SettingsPage />} />

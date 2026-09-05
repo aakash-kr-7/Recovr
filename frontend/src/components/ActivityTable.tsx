@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { OutcomeBadge, StatusBadge } from "@/components/StatusBadges";
 import { ACTION_LABELS, money } from "@/lib/operations";
 import { useRecentTransactions } from "@/hooks/useRecentTransactions";
@@ -13,6 +13,7 @@ export function ActivityTable({
   transactions: ReturnType<typeof useRecentTransactions>["transactions"];
   onHoverTransaction?: (tx: RecentTransaction | null) => void;
 }) {
+  const navigate = useNavigate();
   const location = useLocation();
   const highlightId = location.state?.highlightId;
   const [flashing, setFlashing] = useState<string | null>(highlightId || null);
@@ -44,11 +45,24 @@ export function ActivityTable({
           {transactions.map((item) => (
             <tr
               key={item.transaction_id}
-              className={
+              className={`clickable-row ${
                 flashing === item.transaction_id
                   ? "bg-brand-subtle transition-colors duration-1000"
                   : "transition-colors duration-1000"
-              }
+              }`}
+              onClick={(e) => {
+                if ((e.target as HTMLElement).closest("a, button")) return;
+                navigate(`/decisions/${item.transaction_id}`);
+              }}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  navigate(`/decisions/${item.transaction_id}`);
+                }
+              }}
+              title="Click to view decision detail"
               onMouseEnter={() => onHoverTransaction?.(item as RecentTransaction)}
               onMouseLeave={() => onHoverTransaction?.(null)}
             >
@@ -56,6 +70,7 @@ export function ActivityTable({
                 <Link
                   className="table-link"
                   to={`/decisions/${item.transaction_id}`}
+                  onClick={(e) => e.stopPropagation()}
                 >
                   {item.transaction_id.slice(0, 12)}…
                 </Link>

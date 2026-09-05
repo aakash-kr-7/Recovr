@@ -27,6 +27,7 @@ import { ActivityTable } from "@/components/ActivityTable";
 import { RecoveryFunnel } from "@/components/RecoveryFunnel";
 import { RecoveryChart } from "@/components/RecoveryChart";
 import { useRecoveryFunnel } from "@/hooks/useRecoveryFunnel";
+import { HOW_RECOVR_WORKS } from "@/content/explainer";
 
 const actions: TriageAction[] = [
   "retry_same_rail",
@@ -133,7 +134,7 @@ export function DashboardPage() {
               detail="Pending outcome or execution"
             />
           </div>
-          <section className="panel" data-tour="decision-flow">
+          <section className="panel" data-tour="decision-flow" title={HOW_RECOVR_WORKS.summary}>
             <div className="panel-heading">
               <div>
                 <h2>Decision pipeline</h2>
