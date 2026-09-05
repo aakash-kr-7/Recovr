@@ -7,6 +7,7 @@ backend evidence, an interactive failure simulator, and safe operational setting
 
 The frontend is styled using Razorpay's real published design tokens extracted directly from the Blade design system source:
 - **Brand Palette**: Intense brand blue (`hsla(218, 89%, 51%, 1)`), brand light (`hsla(218, 100%, 63%, 1)`), and subtle background tint (`hsla(218, 89%, 51%, 0.09)`).
+- **Dark Palette**: The in-memory toggle uses Blade's published dark CSS tokens (not an inverted light palette): canvas `hsla(210, 5%, 8%, 1)` (`--surface-background-gray-moderate`), raised surface `hsla(210, 6%, 13%, 1)` (`--surface-background-gray-intense`), subtle surface `hsla(210, 4%, 11%, 1)`, border `hsla(216, 4%, 24%, 1)`, normal text `hsla(0, 0%, 100%, 1)`, and interactive primary `hsla(218, 100%, 63%, 1)`. Source: [packages/blade-core/src/tokens/theme.css Dark Mode block](https://github.com/razorpay/blade/blob/master/packages/blade-core/src/tokens/theme.css#L590-L733).
 - **Blade Scales**: Exact typography font scale (`text-25` through `text-1100`), spacing scale (`0` through `11`), and border radius tokens (`xsmall` through `round`).
 - **Persistent Header Badge**: Calm, clear "TEST MODE" badge in the top bar (`App.tsx`) communicating that no real money is at risk.
 - **Brand Integrity**: Deliberately avoids inserting third-party trademarked logos, wordmarks, or proprietary assets.
@@ -42,4 +43,3 @@ npm run typecheck
 npm run lint
 npm run build
 ```
-

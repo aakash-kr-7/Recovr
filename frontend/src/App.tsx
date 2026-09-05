@@ -10,6 +10,7 @@ import { SettingsPage } from "@/pages/SettingsPage";
 import { SimulatorPanel } from "@/components/SimulatorPanel";
 import { GuidedTour } from "@/components/GuidedTour";
 import { api } from "@/lib/api";
+import { useTheme } from "@/context/useTheme";
 import type { LiveModeStatus } from "@/types/api";
 
 const links = [
@@ -23,6 +24,7 @@ const links = [
 ];
 
 export function App() {
+  const { theme, toggleTheme } = useTheme();
   const [isSimulatorOpen, setIsSimulatorOpen] = useState(false);
   const [isTourOpen, setIsTourOpen] = useState(false);
   const [liveMode, setLiveMode] = useState<LiveModeStatus | null>(null);
@@ -112,6 +114,14 @@ export function App() {
             <strong>RECOVR Operations</strong>
           </div>
           <div className="topbar-meta">
+            <button
+              onClick={toggleTheme}
+              className="theme-toggle"
+              aria-pressed={theme === "dark"}
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+            >
+              {theme === "dark" ? "Light theme" : "Dark theme"}
+            </button>
             <div className="live-mode-control" data-tour="simulation-controls">
               <button
                 onClick={() => void toggleLiveMode()}

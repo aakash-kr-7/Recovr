@@ -12,16 +12,16 @@ export function KpiCard({
   positive = false,
 }: KpiCardProps) {
   return (
-    <section className="min-h-[112px] rounded-xsmall border border-slate-200 bg-white p-4">
-      <p className="m-0 mb-2 text-slate-500 text-50 font-semibold">{label}</p>
+    <section className="min-h-[112px] rounded-xsmall border border-slate-200 dark:border-bladeDark-border bg-white dark:bg-bladeDark-surface p-4">
+      <p className="m-0 mb-2 text-slate-500 dark:text-bladeDark-textSubtle text-50 font-semibold">{label}</p>
       <strong
         className={`block text-300 tracking-tight ${
-          positive ? "text-emerald-700" : "text-slate-900"
+          positive ? "text-emerald-700 dark:text-bladeDark-chartGreen" : "text-slate-900 dark:text-bladeDark-text"
         }`}
       >
         {value}
       </strong>
-      <small className="block mt-2 text-slate-400 text-25">{detail}</small>
+      <small className="block mt-2 text-slate-400 dark:text-bladeDark-textMuted text-25">{detail}</small>
     </section>
   );
 }

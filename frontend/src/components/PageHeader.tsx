@@ -20,15 +20,15 @@ export function PageHeader({
       <div>
         {backLink && <div className="mb-2">{backLink}</div>}
         {eyebrow && (
-          <p className="m-0 text-slate-500 text-25 font-bold uppercase tracking-widest">
+          <p className="m-0 text-slate-500 dark:text-bladeDark-textSubtle text-25 font-bold uppercase tracking-widest">
             {eyebrow}
           </p>
         )}
-        <h1 className="m-0 my-1 text-slate-900 text-500 tracking-tight">
+        <h1 className="m-0 my-1 text-slate-900 dark:text-bladeDark-text text-500 tracking-tight">
           {title}
         </h1>
         {description && (
-          <p className="m-0 max-w-2xl text-slate-600 text-100">
+          <p className="m-0 max-w-2xl text-slate-600 dark:text-bladeDark-textSubtle text-100">
             {description}
           </p>
         )}

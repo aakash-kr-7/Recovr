@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
+  CartesianGrid,
   Line,
   LineChart,
   ResponsiveContainer,
@@ -7,6 +8,14 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import {
+  chartAxis,
+  chartGrid,
+  chartTickSmall,
+  chartTooltipItemStyle,
+  chartTooltipLabelStyle,
+  chartTooltipStyle,
+} from "@/lib/chartTheme";
 import { money } from "@/lib/operations";
 import type { RecoveryFunnelSummary } from "@/types/api";
 
@@ -69,10 +78,11 @@ export function RecoveryChart({ summary, loading, error }: RecoveryChartProps) {
         ) : (
           <ResponsiveContainer width="100%" height={176}>
             <LineChart data={chartData} margin={{ top: 14, right: 16, bottom: 2, left: 4 }}>
-              <XAxis dataKey="time" tick={{ fontSize: 10, fill: "#758096" }} minTickGap={28} />
-              <YAxis tickFormatter={(value: number) => `₹${value}`} tick={{ fontSize: 10, fill: "#758096" }} width={54} />
-              <Tooltip formatter={(value: number) => money(value)} labelFormatter={(label) => `Time ${label}`} />
-              <Line type="stepAfter" dataKey="cumulative_recovered_inr" name="Recovered" stroke="#13825f" strokeWidth={2.5} dot={{ r: 3, fill: "#13825f" }} activeDot={{ r: 5 }} />
+              <CartesianGrid stroke={chartGrid} strokeDasharray="3 3" vertical={false} />
+              <XAxis dataKey="time" axisLine={chartAxis} tickLine={chartAxis} tick={chartTickSmall} minTickGap={28} />
+              <YAxis axisLine={chartAxis} tickLine={chartAxis} tickFormatter={(value: number) => `₹${value}`} tick={chartTickSmall} width={54} />
+              <Tooltip contentStyle={chartTooltipStyle} labelStyle={chartTooltipLabelStyle} itemStyle={chartTooltipItemStyle} formatter={(value: number) => money(value)} labelFormatter={(label) => `Time ${label}`} />
+              <Line type="stepAfter" dataKey="cumulative_recovered_inr" name="Recovered" stroke="var(--chart-positive)" strokeWidth={2.5} dot={{ r: 3, fill: "var(--chart-positive)" }} activeDot={{ r: 5 }} />
             </LineChart>
           </ResponsiveContainer>
         )}

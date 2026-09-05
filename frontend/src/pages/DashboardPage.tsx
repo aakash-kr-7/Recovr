@@ -3,11 +3,21 @@ import { Link } from "react-router-dom";
 import {
   Bar,
   BarChart,
+  CartesianGrid,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
+import {
+  chartAxis,
+  chartCursor,
+  chartGrid,
+  chartTick,
+  chartTooltipItemStyle,
+  chartTooltipLabelStyle,
+  chartTooltipStyle,
+} from "@/lib/chartTheme";
 import { useRecentTransactions } from "@/hooks/useRecentTransactions";
 import { ACTION_LABELS, money } from "@/lib/operations";
 import type { RecentTransaction, TriageAction } from "@/types/api";
@@ -144,13 +154,14 @@ export function DashboardPage() {
               <div className="chart-wrap">
                 <ResponsiveContainer width="100%" height={250}>
                   <BarChart data={breakdown}>
-                    <XAxis dataKey="action" tick={{ fontSize: 11 }} />
-                    <YAxis allowDecimals={false} tick={{ fontSize: 11 }} />
-                    <Tooltip />
+                    <CartesianGrid stroke={chartGrid} strokeDasharray="3 3" vertical={false} />
+                    <XAxis dataKey="action" axisLine={chartAxis} tickLine={chartAxis} tick={chartTick} />
+                    <YAxis allowDecimals={false} axisLine={chartAxis} tickLine={chartAxis} tick={chartTick} />
+                    <Tooltip contentStyle={chartTooltipStyle} labelStyle={chartTooltipLabelStyle} itemStyle={chartTooltipItemStyle} cursor={chartCursor} />
                     <Bar
                       dataKey="count"
                       name="Decisions"
-                      fill="#3158c8"
+                      fill="var(--chart-primary)"
                       radius={[2, 2, 0, 0]}
                     />
                   </BarChart>

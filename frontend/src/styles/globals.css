@@ -3,6 +3,23 @@
 @tailwind utilities;
 
 :root {
+  /* Blade onLight role aliases used by the application and its SVG charts. */
+  --surface-base: #f6f7f9;
+  --surface-raised: #fff;
+  --text-primary: #172133;
+  --text-secondary: #687488;
+  --border-subtle: #e0e5ec;
+  --border-strong: #9ca3af;
+  --brand-primary: hsla(218, 89%, 51%, 1);
+  --brand-subtle: hsla(218, 89%, 51%, 0.09);
+  --chart-primary: #3158c8;
+  --chart-positive: #13825f;
+  --chart-notice: #9a6b25;
+  --chart-text: #58657a;
+  --chart-label: #435168;
+  --chart-axis: #cfd6df;
+  --chart-grid: #dfe5ec;
+  --chart-cursor: #f6f8fb;
   color: #172133;
   background: #f6f7f9;
   font-family:
@@ -772,4 +789,159 @@ main {
     grid-template-columns: 1fr;
     gap: 4px;
   }
+}
+
+/*
+ * Razorpay Blade published dark tokens from
+ * https://github.com/razorpay/blade/blob/master/packages/blade-core/src/tokens/theme.css
+ * Dark Mode block: surface 602–633, feedback 655–685, interactive primary 729–733,
+ * data categorical 899–904. Theme state is memory-only; data-theme resets on reload.
+ */
+:root[data-theme="dark"] {
+  --surface-base: hsla(210, 5%, 8%, 1); /* surface.background.gray.moderate */
+  --surface-raised: hsla(210, 6%, 13%, 1); /* surface.background.gray.intense */
+  --surface-subtle: hsla(210, 4%, 11%, 1); /* surface.background.gray.subtle */
+  --text-primary: hsla(0, 0%, 100%, 1); /* surface.text.gray.normal */
+  --text-secondary: hsla(210, 3%, 69%, 1); /* surface.text.gray.subtle */
+  --text-muted: hsla(207, 4%, 52%, 1); /* surface.text.gray.muted */
+  --border-subtle: hsla(216, 4%, 24%, 1); /* surface.border.gray.subtle */
+  --border-strong: hsla(210, 4%, 47%, 1); /* surface.border.gray.normal */
+  --brand-primary: hsla(218, 100%, 63%, 1); /* interactive.background.primary.default */
+  --brand-subtle: hsla(218, 89%, 51%, 0.32); /* surface.background.primary.subtle */
+  --chart-primary: hsla(218, 100%, 63%, 1); /* data.background.categorical.blue.strong */
+  --chart-positive: hsla(150, 48%, 44%, 1); /* data.background.categorical.green.strong */
+  --chart-notice: hsla(22, 100%, 63%, 1); /* data.background.categorical.orange.strong */
+  --chart-text: hsla(210, 3%, 69%, 1);
+  --chart-label: hsla(0, 0%, 100%, 1);
+  --chart-axis: hsla(210, 4%, 47%, 1); /* --surface-border-gray-normal */
+  --chart-grid: hsla(210, 4%, 47%, 1); /* --surface-border-gray-normal */
+  --chart-cursor: hsla(207, 4%, 52%, 0.12);
+  color: var(--text-primary);
+  background: var(--surface-base);
+}
+
+:root[data-theme="dark"] body,
+:root[data-theme="dark"] .app-shell {
+  background: var(--surface-base);
+  color: var(--text-primary);
+}
+:root[data-theme="dark"] .sidebar,
+:root[data-theme="dark"] .topbar,
+:root[data-theme="dark"] .panel,
+:root[data-theme="dark"] .kpi,
+:root[data-theme="dark"] .state,
+:root[data-theme="dark"] .filter-bar select,
+:root[data-theme="dark"] .segmented button,
+:root[data-theme="dark"] .live-mode-button,
+:root[data-theme="dark"] .tour-button,
+:root[data-theme="dark"] .guided-tour-card {
+  background: var(--surface-raised);
+  border-color: var(--border-subtle);
+}
+:root[data-theme="dark"] .sidebar,
+:root[data-theme="dark"] .topbar {
+  border-color: var(--border-subtle);
+}
+:root[data-theme="dark"] .brand,
+:root[data-theme="dark"] .topbar strong,
+:root[data-theme="dark"] .page-heading h1,
+:root[data-theme="dark"] .panel h2,
+:root[data-theme="dark"] .kpi strong,
+:root[data-theme="dark"] .recovered-counter-copy h2,
+:root[data-theme="dark"] .health-list strong,
+:root[data-theme="dark"] .definition-list dd,
+:root[data-theme="dark"] .timeline strong,
+:root[data-theme="dark"] .operations-table td {
+  color: var(--text-primary);
+}
+:root[data-theme="dark"] .brand small,
+:root[data-theme="dark"] .merchant-label,
+:root[data-theme="dark"] .page-heading p:not(.eyebrow),
+:root[data-theme="dark"] .panel-heading p,
+:root[data-theme="dark"] .eyebrow,
+:root[data-theme="dark"] .recovered-counter-copy p:not(.eyebrow),
+:root[data-theme="dark"] .recovered-counter-loading,
+:root[data-theme="dark"] .recovered-line-heading,
+:root[data-theme="dark"] .health-list div,
+:root[data-theme="dark"] .table-note,
+:root[data-theme="dark"] .footnote,
+:root[data-theme="dark"] .filter-bar label,
+:root[data-theme="dark"] .definition-list dt,
+:root[data-theme="dark"] .timeline li,
+:root[data-theme="dark"] .reasoning-grid p:last-child,
+:root[data-theme="dark"] .state,
+:root[data-theme="dark"] .live-mode-status,
+:root[data-theme="dark"] .sidebar-footer {
+  color: var(--text-secondary);
+}
+:root[data-theme="dark"] .nav-link,
+:root[data-theme="dark"] .tour-button,
+:root[data-theme="dark"] .live-mode-button,
+:root[data-theme="dark"] .filter-bar select,
+:root[data-theme="dark"] .segmented button {
+  color: var(--text-secondary);
+}
+:root[data-theme="dark"] .nav-link:hover,
+:root[data-theme="dark"] .operations-table tbody tr:hover,
+:root[data-theme="dark"] .recovery-chart-empty {
+  background: var(--surface-subtle);
+  color: var(--text-primary);
+}
+:root[data-theme="dark"] .nav-link.active,
+:root[data-theme="dark"] .segmented button.active,
+:root[data-theme="dark"] .selected-row {
+  background: var(--brand-subtle) !important;
+  color: var(--brand-primary);
+}
+:root[data-theme="dark"] .operations-table th,
+:root[data-theme="dark"] .operations-table td,
+:root[data-theme="dark"] .health-list div,
+:root[data-theme="dark"] .sidebar-footer,
+:root[data-theme="dark"] .recovered-counter-copy {
+  border-color: var(--border-subtle);
+}
+:root[data-theme="dark"] .timeline li:after { background: var(--border-subtle); }
+:root[data-theme="dark"] .operations-table th,
+:root[data-theme="dark"] .demo-label,
+:root[data-theme="dark"] .recovery-chart-empty {
+  color: var(--text-secondary);
+}
+:root[data-theme="dark"] .avatar,
+:root[data-theme="dark"] .badge-neutral {
+  background: hsla(207, 4%, 52%, 0.12);
+  color: var(--text-primary);
+}
+:root[data-theme="dark"] .badge-provider { background: hsla(200, 100%, 41%, 0.18); color: hsla(199, 83%, 58%, 1); }
+:root[data-theme="dark"] .badge-sim { background: hsla(25, 100%, 44%, 0.18); color: hsla(22, 100%, 63%, 1); }
+:root[data-theme="dark"] .badge-positive { background: hsla(150, 100%, 28%, 0.18); color: hsla(150, 48%, 44%, 1); }
+:root[data-theme="dark"] .badge-negative,
+:root[data-theme="dark"] .badge-error { background: hsla(4, 85%, 44%, 0.18); color: hsla(5, 76%, 63%, 1); }
+:root[data-theme="dark"] .theme-toggle {
+  border-color: var(--border-strong);
+  background: var(--surface-subtle);
+  color: var(--text-primary);
+}
+:root[data-theme="dark"] .positive-text,
+:root[data-theme="dark"] .recovered-counter-value {
+  color: var(--chart-positive) !important;
+}
+:root[data-theme="dark"] .recharts-cartesian-axis-tick-value {
+  fill: var(--chart-text);
+}
+:root[data-theme="dark"] .recharts-default-tooltip {
+  background: var(--surface-raised) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--text-primary) !important;
+}
+
+.theme-toggle {
+  border: 1px solid #d3dbe7;
+  border-radius: 4px;
+  background: #fff;
+  padding: 7px 9px;
+  color: #46546a;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
 }

@@ -68,19 +68,19 @@ export function SimulatorPanel({
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-slate-900/40 backdrop-blur-sm">
-      <div className="w-[400px] h-full bg-white shadow-xl flex flex-col animate-in slide-in-from-right duration-200">
-        <div className="flex items-center justify-between px-6 py-5 border-b border-slate-200">
+      <div className="w-[400px] h-full bg-white dark:bg-bladeDark-surface shadow-xl flex flex-col animate-in slide-in-from-right duration-200">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-slate-200 dark:border-bladeDark-border">
           <div>
-            <h2 className="text-200 font-semibold text-slate-900 m-0">
+            <h2 className="text-200 font-semibold text-slate-900 dark:text-bladeDark-text m-0">
               Simulate failure
             </h2>
-            <p className="text-75 text-slate-500 m-0 mt-1">
+            <p className="text-75 text-slate-500 dark:text-bladeDark-textSubtle m-0 mt-1">
               Test RECOVR with synthetic failed payments.
             </p>
           </div>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-600 border-none bg-transparent cursor-pointer p-2"
+            className="text-slate-400 dark:text-bladeDark-textSubtle hover:text-slate-600 dark:hover:text-bladeDark-text border-none bg-transparent cursor-pointer p-2"
             aria-label="Close panel"
           >
             ✕
@@ -99,12 +99,12 @@ export function SimulatorPanel({
                   key={i}
                   onClick={() => handleSimulate(preset)}
                   disabled={!!simulating}
-                  className="text-left border border-slate-200 rounded-md p-4 bg-white hover:border-brand hover:shadow-sm transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="text-left border border-slate-200 dark:border-bladeDark-border rounded-md p-4 bg-white dark:bg-bladeDark-subtle hover:border-brand hover:shadow-sm transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <strong className="block text-100 text-slate-900 mb-1">
+                  <strong className="block text-100 text-slate-900 dark:text-bladeDark-text mb-1">
                     {preset.name}
                   </strong>
-                  <span className="block text-75 text-slate-500">
+                  <span className="block text-75 text-slate-500 dark:text-bladeDark-textSubtle">
                     ₹{preset.payload.amount_inr} •{" "}
                     {preset.payload.decline_reason.replace(/_/g, " ")}
                   </span>

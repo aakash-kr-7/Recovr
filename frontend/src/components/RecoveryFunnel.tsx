@@ -8,6 +8,13 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import {
+  chartCursor,
+  chartTick,
+  chartTooltipItemStyle,
+  chartTooltipLabelStyle,
+  chartTooltipStyle,
+} from "@/lib/chartTheme";
 import { money } from "@/lib/operations";
 import type { RecoveryFunnelSummary } from "@/types/api";
 
@@ -23,9 +30,9 @@ export function RecoveryFunnel({ summary, loading, error }: RecoveryFunnelProps)
 
   const data = summary
     ? [
-        { stage: "Total attempted", volume: summary.attempted_volume_inr, color: "#3158c8" },
-        { stage: "Failed / unresolved", volume: summary.failed_volume_inr, color: "#9a6b25" },
-        { stage: "Recovered", volume: summary.recovered_volume_inr, color: "#13825f" },
+        { stage: "Total attempted", volume: summary.attempted_volume_inr, color: "var(--chart-primary)" },
+        { stage: "Failed / unresolved", volume: summary.failed_volume_inr, color: "var(--chart-notice)" },
+        { stage: "Recovered", volume: summary.recovered_volume_inr, color: "var(--chart-positive)" },
       ]
     : [];
 
@@ -42,11 +49,11 @@ export function RecoveryFunnel({ summary, loading, error }: RecoveryFunnelProps)
         <ResponsiveContainer width="100%" height={190}>
           <BarChart data={data} layout="vertical" margin={{ top: 0, right: 84, bottom: 0, left: 18 }}>
             <XAxis type="number" hide />
-            <YAxis dataKey="stage" type="category" width={132} tick={{ fontSize: 11, fill: "#58657a" }} />
-            <Tooltip formatter={(value: number) => money(value)} cursor={{ fill: "#f6f8fb" }} />
+            <YAxis dataKey="stage" type="category" width={132} axisLine={false} tickLine={false} tick={chartTick} />
+            <Tooltip contentStyle={chartTooltipStyle} labelStyle={chartTooltipLabelStyle} itemStyle={chartTooltipItemStyle} formatter={(value: number) => money(value)} cursor={chartCursor} />
             <Bar dataKey="volume" name="Volume" radius={[0, 3, 3, 0]}>
               {data.map((entry) => <Cell key={entry.stage} fill={entry.color} />)}
-              <LabelList dataKey="volume" position="right" formatter={(value: number) => money(value)} fill="#435168" fontSize={11} />
+              <LabelList dataKey="volume" position="right" formatter={(value: number) => money(value)} fill="var(--chart-label)" fontSize={11} />
             </Bar>
           </BarChart>
         </ResponsiveContainer>

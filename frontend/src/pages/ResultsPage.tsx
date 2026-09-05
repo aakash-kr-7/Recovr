@@ -9,6 +9,14 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
+import {
+  chartAxis,
+  chartGrid,
+  chartTick,
+  chartTooltipItemStyle,
+  chartTooltipLabelStyle,
+  chartTooltipStyle,
+} from "@/lib/chartTheme";
 import { useEvaluationReport } from "@/hooks/useEvaluationReport";
 import { money, percent } from "@/lib/operations";
 import type { PolicyMetrics } from "@/types/api";
@@ -212,14 +220,16 @@ export function ResultsPage() {
                 data={report.calibration}
                 margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
               >
-                <CartesianGrid strokeDasharray="3 3" opacity={0.2} vertical={false} />
+                <CartesianGrid stroke={chartGrid} strokeDasharray="3 3" vertical={false} />
                 <XAxis
                   dataKey="expected_probability"
                   type="number"
                   domain={[0, 1]}
                   tickFormatter={(val) => `${(val * 100).toFixed(0)}%`}
-                  stroke="var(--text-secondary)"
-                  tick={{ fill: "var(--text-secondary)" }}
+                  stroke="var(--chart-axis)"
+                  axisLine={chartAxis}
+                  tickLine={chartAxis}
+                  tick={chartTick}
                   name="Predicted Probability"
                 />
                 <YAxis
@@ -227,17 +237,16 @@ export function ResultsPage() {
                   type="number"
                   domain={[0, 1]}
                   tickFormatter={(val) => `${(val * 100).toFixed(0)}%`}
-                  stroke="var(--text-secondary)"
-                  tick={{ fill: "var(--text-secondary)" }}
+                  stroke="var(--chart-axis)"
+                  axisLine={chartAxis}
+                  tickLine={chartAxis}
+                  tick={chartTick}
                   name="Observed Recovery"
                 />
                 <Tooltip
-                  contentStyle={{
-                    backgroundColor: "var(--surface-raised)",
-                    borderColor: "var(--border-subtle)",
-                    color: "var(--text-primary)",
-                    borderRadius: "8px",
-                  }}
+                  contentStyle={chartTooltipStyle}
+                  labelStyle={chartTooltipLabelStyle}
+                  itemStyle={chartTooltipItemStyle}
                   formatter={(value: number, name: string) => [
                     `${(value * 100).toFixed(1)}%`,
                     name === "observed_recovery_rate" ? "Observed Recovery" : name,
@@ -249,15 +258,15 @@ export function ResultsPage() {
                     { x: 0, y: 0 },
                     { x: 1, y: 1 },
                   ]}
-                  stroke="var(--text-secondary)"
+                  stroke="var(--chart-grid)"
                   strokeDasharray="4 4"
                 />
                 <Line
                   type="monotone"
                   dataKey="observed_recovery_rate"
-                  stroke="var(--brand-primary)"
+                  stroke="var(--chart-primary)"
                   strokeWidth={3}
-                  dot={{ fill: "var(--surface-base)", stroke: "var(--brand-primary)", strokeWidth: 2, r: 5 }}
+                  dot={{ fill: "var(--surface-base)", stroke: "var(--chart-primary)", strokeWidth: 2, r: 5 }}
                   activeDot={{ r: 7 }}
                 />
               </LineChart>
